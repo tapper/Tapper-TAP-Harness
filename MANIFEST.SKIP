@@ -1,0 +1,7 @@
+Artemis-TAP-Harness-*.*.tar.gz
+^Artemis-TAP-Harness-*.*$
+_build
+blib
+^Build$
+MANIFEST.bak
+
