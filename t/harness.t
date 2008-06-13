@@ -12,13 +12,11 @@ my $tap = slurp ("t/tap_archive_artemis.tap");
 
 # ============================================================
 
-plan tests => 19;
+plan tests => 20;
 
 my $harness = new Artemis::TAP::Harness( tap => $tap );
 
-$harness->parse_tap_into_sections();
-$harness->aggregate_sections();
-$harness->process_meta_information();
+$harness->evaluate_report();
 
 is(scalar @{$harness->parsed_report->{tap_sections}}, 10, "count sections");
 
@@ -42,4 +40,6 @@ is($harness->parsed_report->{db_meta}->{'cpuinfo'}, '2 cores [AMD Athlon(tm) 64 
 is($harness->parsed_report->{db_meta}->{'ram'}, '1887MB',                                                                                "db meta ram");
 is($harness->parsed_report->{db_meta}->{'starttime_test_program'}, 'Fri Jun 13 11:16:35 CEST 2008',                                      "db meta starttime test program");
 
-
+$harness = new Artemis::TAP::Harness( tap => $tap );
+my $html = $harness->generate_html;
+is(scalar @{$harness->parsed_report->{tap_sections}}, 10, "count sections"); # check to trigger preparation errors

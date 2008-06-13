@@ -5,8 +5,10 @@ use 5.010;
 use strict;
 use warnings;
 
+use TAP::Harness;
 use TAP::Parser;
 use TAP::Parser::Aggregator;
+use Directory::Scratch;
 
 our $VERSION = '2.01';
 
@@ -17,7 +19,7 @@ has parsed_report => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
 
 # return sections
-sub parse_tap_into_sections
+sub _parse_tap_into_sections
 {
         my ($self) = @_;
 
@@ -101,7 +103,7 @@ sub parse_tap_into_sections
         }
 }
 
-sub aggregate_sections
+sub _aggregate_sections
 {
         my ($self) = shift;
 
@@ -119,7 +121,7 @@ sub aggregate_sections
         $self->parsed_report->{successgrade} = $aggregator->get_status;
 }
 
-sub process_meta_information
+sub _process_meta_information
 {
         my ($self) = shift;
 
@@ -155,16 +157,52 @@ sub evaluate_report
 {
         my ($self) = shift;
 
-        $self->parse_tap_into_sections();
-        $self->aggregate_sections();
-        $self->process_meta_information();
+        $self->_parse_tap_into_sections();
+        $self->_aggregate_sections();
+        $self->_process_meta_information();
+}
+
+sub generate_html
+{
+        my ($self) = shift;
+
+        $self->_parse_tap_into_sections();
+        $self->_aggregate_sections();
+        $self->_process_meta_information();
+
+        my $temp = new Directory::Scratch;
+        my $dir  = $temp->mkdir("section");
+
+        my @files = map {
+                         my $fname          = "section/".$_->{section_name};
+                         my $script_content = "#! /usr/bin/env perl
+print q{
+".$_->{raw}."
+};
+";
+                         my $file = $temp->touch($fname, $script_content);
+                         
+                         [ "$temp/$fname" => $_->{section_name} ];
+                        } @{$self->parsed_report->{tap_sections}};
+
+        my $result_file = $temp->openfile('result.html');
+        my $harness = TAP::Harness->new({ formatter_class => 'TAP::Formatter::HTML',
+                                          merge           => 1,
+                                          stdout          => $result_file,
+                                        });
+
+        $harness->runtests( @files );
+
+        my $html = $temp->read( 'result.html' );
+        $html =~ s/^.*<body>//msg; # cut start
+        return $html;
 }
 
 1;
 
 =head1 NAME
 
-Artemis::TAP::Harness - All around our specific TAP handling!
+Artemis::TAP::Harness - Artemis specific TAP handling
 
 =head1 SYNOPSIS
 

@@ -15,6 +15,7 @@ my $builder = Module::Build->new
      requires => {
                   'TAP::Parser'             => 0,
                   'TAP::Parser::Aggregator' => 0,
+                  'Directory::Scratch'      => 0,
                  },
      add_to_cleanup      => [ 'Artemis-TAP-Harness-*' ],
      create_makefile_pl  => 'traditional',
