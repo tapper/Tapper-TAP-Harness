@@ -5,7 +5,6 @@ use 5.010;
 use strict;
 use warnings;
 
-use TAP::Harness;
 use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
@@ -76,7 +75,7 @@ sub _parse_tap_into_sections
                 # looks like filename line from "prove"
                 if ( $is_unknown and $raw =~ $re_prove_section )
                 {
-                        $section{section_name} //= $2;
+                        $section{section_name} //= $1;
                 }
 
                 # looks like artemis meta line
@@ -105,7 +104,7 @@ sub _parse_tap_into_sections
 
 sub _aggregate_sections
 {
-        my ($self) = shift;
+        my ($self) = @_;
 
         my $aggregator = new TAP::Parser::Aggregator;
 
@@ -119,11 +118,12 @@ sub _aggregate_sections
         $aggregator->stop;
 
         $self->parsed_report->{successgrade} = $aggregator->get_status;
+        print STDERR "*** harness successgrade: ". $self->parsed_report->{successgrade},"\n";
 }
 
 sub _process_meta_information
 {
-        my ($self) = shift;
+        my ($self) = @_;
 
         my @allowed_keys = qw(
                                      machine-name
@@ -148,23 +148,24 @@ sub _process_meta_information
         {
                 my $value = $self->parsed_report->{report_meta}{$key};
                 my $accessor = $key;
-                $accessor =~ s/-/_/g;
+                $accessor =~ s/-/_/g; # TODO: use tr?
                 $self->parsed_report->{db_meta}{$accessor} = $value if defined $value;
         }
 }
 
 sub evaluate_report
 {
-        my ($self) = shift;
+        my ($self) = @_;
 
         $self->_parse_tap_into_sections();
         $self->_aggregate_sections();
         $self->_process_meta_information();
+
 }
 
 sub generate_html
 {
-        my ($self) = shift;
+        my ($self) = @_;
 
         $self->_parse_tap_into_sections();
         $self->_aggregate_sections();
@@ -176,24 +177,23 @@ sub generate_html
         my @files = map {
                          my $fname          = "section/".$_->{section_name};
                          my $script_content = "#! /usr/bin/env perl
-print q{
+print <<EOTAP
 ".$_->{raw}."
-};
+EOTAP
+;
 ";
                          my $file = $temp->touch($fname, $script_content);
-                         
+
                          [ "$temp/$fname" => $_->{section_name} ];
+                         #"$temp/$fname";
                         } @{$self->parsed_report->{tap_sections}};
 
-        my $result_file = $temp->openfile('result.html');
-        my $harness = TAP::Harness->new({ formatter_class => 'TAP::Formatter::HTML',
-                                          merge           => 1,
-                                          stdout          => $result_file,
-                                        });
+        # Currently a TAP::Formatter::* is only usable via the
+        # TAP::Harness which in turn is easiest to use externally on
+        # unix shell level
 
-        $harness->runtests( @files );
+        my $html = qx( cd $temp/section ; prove -vm --formatter=TAP::Formatter::HTML t/* );
 
-        my $html = $temp->read( 'result.html' );
         $html =~ s/^.*<body>//msg; # cut start
         return $html;
 }
