@@ -117,8 +117,25 @@ sub _aggregate_sections
         }
         $aggregator->stop;
 
-        $self->parsed_report->{successgrade} = $aggregator->get_status;
-        print STDERR "*** harness successgrade: ". $self->parsed_report->{successgrade},"\n";
+        foreach (qw(total
+                    passed
+                    parse_errors
+                    skipped
+                    todo
+                    todo_passed
+                    wait
+                    exit
+                    failed
+                    todo_passed
+                  ))
+        {
+                no strict 'refs';
+                $self->parsed_report->{stats}{total} = $aggregator->$_;
+        }
+        $self->parsed_report->{stats}{successgrade}  = $aggregator->get_status;
+        $self->parsed_report->{stats}{success_ratio} = sprintf("%02.2f",
+                                                               ($aggregator->passed / $aggregator->total * 100)
+                                                              );
 }
 
 sub _process_meta_information
