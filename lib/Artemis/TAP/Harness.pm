@@ -209,7 +209,7 @@ EOTAP
         # TAP::Harness which in turn is easiest to use externally on
         # unix shell level
 
-        my $html = qx( cd $temp/section ; prove -vm --formatter=TAP::Formatter::HTML t/* );
+        my $html = qx( cd $temp/section ; prove -vm --formatter=TAP::Formatter::HTML `find -type f` );
 
         $html =~ s/^.*<body>//msg; # cut start
         return $html;
