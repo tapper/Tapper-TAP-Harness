@@ -59,7 +59,7 @@ sub _parse_tap_into_sections
                    )
                 {
                         if (keys %section) {
-                                push @{$self->parsed_report->{tap_sections}}, { %section };
+                                push @{$self->parsed_report->{tap_sections}}, { %section }; # not \%section for a reason, why?
                         }
                         %section = ();
                 }
@@ -85,8 +85,10 @@ sub _parse_tap_into_sections
                         my $val = $3;
                         $val =~ s/^\s+//;
                         $val =~ s/\s+$//;
-                        $self->parsed_report->{report_meta}{$key} = $val;
                         $section{section_name} //= $val if $raw =~ $re_artemis_meta_section;
+
+                        $section{section_meta}{$key} = $val;              # section keys
+                        $self->parsed_report->{report_meta}{$key} = $val; # also global keys, later entries win
                 }
 
                 $i++;
@@ -138,36 +140,66 @@ sub _aggregate_sections
                                                               );
 }
 
+sub _process_suite_meta_information
+{
+        my ($self) = @_;
+
+        # suite meta
+
+        my @suite_keys = qw(suite-version
+                            machine-name
+                            machine-description
+                            starttime-test-program
+                          );
+        foreach my $key (@suite_keys)
+        {
+                my $value = $self->parsed_report->{report_meta}{$key};
+                my $accessor = $key;
+                $accessor =~ s/-/_/g;
+                $self->parsed_report->{db_report_meta}{$accessor} = $value if defined $value;
+        }
+
+}
+
+sub _process_section_meta_information
+{
+        my ($self) = @_;
+
+        # section meta
+
+        my @section_keys = qw(
+                              ram
+                              cpuinfo
+                              lspci
+                              uname
+                              osname
+                              language-description
+                              xen-changeset
+                              xen-dom0-kernel
+                              xen-base-os-description
+                              xen-guests-description
+                              flags
+                              reportcomment
+                            );
+        foreach my $section ( @{$self->parsed_report->{tap_sections}} ) {
+                foreach my $key (@section_keys)
+                {
+                        my $section_name = $section->{section_name};
+                        my $value = $section->{section_meta}{$key};
+                        my $accessor = $key;
+                        $accessor =~ s/-/_/g;
+                        $section->{db_section_meta}{$accessor} = $value if defined $value;
+                }
+        }
+}
+
 sub _process_meta_information
 {
         my ($self) = @_;
 
-        my @allowed_keys = qw(
-                                     machine-name
-                                     machine-description
-                                     suite-version
-                                     ram
-                                     cpuinfo
-                                     lspci
-                                     uname
-                                     osname
-                                     language-description
-                                     xen-changeset
-                                     starttime-test-program
-                                     duration
-                                     xen-dom0-kernel
-                                     xen-base-os-description
-                                     xen-guests-description
-                                     flags
-                                     reportcomment
-                            );
-        foreach my $key (@allowed_keys)
-        {
-                my $value = $self->parsed_report->{report_meta}{$key};
-                my $accessor = $key;
-                $accessor =~ s/-/_/g; # TODO: use tr?
-                $self->parsed_report->{db_meta}{$accessor} = $value if defined $value;
-        }
+        $self->_process_suite_meta_information;
+        $self->_process_section_meta_information;
+
 }
 
 sub evaluate_report
@@ -209,7 +241,7 @@ EOTAP
         # TAP::Harness which in turn is easiest to use externally on
         # unix shell level
 
-        my $html = qx( cd $temp/section ; prove -vm --formatter=TAP::Formatter::HTML `find -type f` );
+        my $html = qx( cd $temp/section ; prove -vm --formatter=TAP::Formatter::HTML `find -type f | sort` );
 
         $html =~ s/^.*<body>//msg; # cut start
         return $html;

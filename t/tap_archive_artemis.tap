@@ -3,9 +3,9 @@ t/00-artemis-meta.t...................
 ok 1 - artemis-test-meta
 # Artemis-Suite-Name:              Artemis
 # Artemis-Suite-Version:           2.010004
-# Artemis-Suite-Type:              library
-# Artemis-Language-Description:    Perl 5.010000, /2home/ss5/perl510/bin/perl
+# Artemis-Suite-Type:              software
 # Artemis-Machine-Name:            bascha
+# Artemis-Language-Description:    Perl 5.010000, /2home/ss5/perl510/bin/perl
 # Artemis-uname:                   Linux bascha 2.6.24-18-generic #1 SMP Wed May 28 19:28:38 UTC 2008 x86_64 GNU/Linux
 # Artemis-osname:                  Ubuntu 8.04
 # Artemis-cpuinfo:                 2 cores [AMD Athlon(tm) 64 X2 Dual Core Processor 6000+]
