@@ -18,7 +18,6 @@ my $builder = Module::Build->new
                   'Directory::Scratch'      => 0,
                  },
      add_to_cleanup      => [ 'Artemis-TAP-Harness-*' ],
-     create_makefile_pl  => 'traditional',
     );
 
 $builder->create_build_script();
