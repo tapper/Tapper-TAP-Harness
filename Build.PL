@@ -16,6 +16,7 @@ my $builder = Module::Build->new
                   'TAP::Parser'             => 0,
                   'TAP::Parser::Aggregator' => 0,
                   'Directory::Scratch'      => 0,
+                  'TAP::Formatter::HTML'    => '0.04',
                  },
      add_to_cleanup      => [ 'Artemis-TAP-Harness-*' ],
     );
