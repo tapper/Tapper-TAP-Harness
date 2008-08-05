@@ -12,7 +12,7 @@ my $tap = slurp ("t/tap_archive_artemis.tap");
 
 # ============================================================
 
-plan tests => 21;
+plan tests => 22;
 
 my $harness = new Artemis::TAP::Harness( tap => $tap );
 
@@ -51,3 +51,5 @@ is($first_section->{db_section_meta}{'ram'},                    '1887MB',       
 $harness = new Artemis::TAP::Harness( tap => $tap );
 my $html = $harness->generate_html;
 is(scalar @{$harness->parsed_report->{tap_sections}}, 10, "count sections"); # check to trigger preparation errors
+
+like($harness->_get_prove, qr|/.*bin.*/prove|, 'looks like prove command');
