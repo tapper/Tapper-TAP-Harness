@@ -9,7 +9,7 @@ use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
 
-our $VERSION = '2.010006';
+our $VERSION = '2.010007';
 
 use Moose;
 
@@ -156,6 +156,7 @@ sub _process_suite_meta_information
                             machine-name
                             machine-description
                             starttime-test-program
+                            endtime-test-program
                           );
         foreach my $key (@suite_keys)
         {
