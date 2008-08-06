@@ -166,6 +166,17 @@ sub _process_suite_meta_information
                 $self->parsed_report->{db_report_meta}{$accessor} = $value if defined $value;
         }
 
+        my @suite_date_keys = qw(
+                                        starttime-test-program
+                                        endtime-test-program
+                               );
+        foreach my $key (@suite_date_keys)
+        {
+                my $value = $self->parsed_report->{report_meta}{$key};
+                my $accessor = $key;
+                $accessor =~ s/-/_/g;
+                $self->parsed_report->{db_report_date_meta}{$accessor} = $value if defined $value;
+        }
 }
 
 sub _process_section_meta_information
