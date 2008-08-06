@@ -34,7 +34,7 @@ sub _parse_tap_into_sections
         my $i = 0;
         my %section;
         my $looks_like_prove_output = 0;
-        my $re_prove_section = qr/^([-_\d\w\/.]*\w)\.+$/;
+        my $re_prove_section = qr/^([-_\d\w\/.]*\w)\.{2,}$/;
         my $re_artemis_meta  = qr/^#\s*(Artemis-)([-\w]+):(.+)$/i;
         my $re_artemis_meta_section  = qr/^#\s*(Artemis-Section:)\s*(.+)$/i;
         $self->parsed_report->{report_meta} = {
@@ -64,7 +64,8 @@ sub _parse_tap_into_sections
                    )
                 {
                         if (keys %section) {
-                                push @{$self->parsed_report->{tap_sections}}, { %section }; # not \%section for a reason, why?
+                                # Store a copy (ie., not \%section) so it doesn't get overwritten in next loop
+                                push @{$self->parsed_report->{tap_sections}}, { %section };
                         }
                         %section = ();
                 }
