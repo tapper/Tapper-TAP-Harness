@@ -7,6 +7,7 @@ use Test::More;
 
 use Artemis::TAP::Harness;
 use File::Slurp 'slurp';
+use Data::Dumper;
 
 my $tap = slurp ("t/tap_archive_much_whitespace.tap");
 
@@ -21,6 +22,7 @@ $harness->evaluate_report();
 is(scalar @{$harness->parsed_report->{tap_sections}}, 11, "count sections");
 
 my $first_section = $harness->parsed_report->{tap_sections}->[0];
+print STDERR Dumper($harness);
 
 is($harness->parsed_report->{report_meta}{'suite-name'},    'Artemis-CTCS',             "report meta suite name");
 is($harness->parsed_report->{report_meta}{'suite-version'}, '0.2',                      "report meta suite version");
@@ -29,6 +31,6 @@ is($harness->parsed_report->{report_meta}{'starttime-test-program'}, '20081028T1
 
 is($first_section->{section_name},'artemis-meta-information', "first section name");
 
-is($first_section->{section_meta}{'suite-name'},             'Artemis-CTCS',                                                            "report meta suite name");
-is($first_section->{section_meta}{'suite-version'},          '0.2',                                                           "report meta suite version");
+is($first_section->{section_meta}{'suite-name'},             'Artemis-CTCS', "report meta suite name");
+is($first_section->{section_meta}{'suite-version'},          '0.2',          "report meta suite version");
 
