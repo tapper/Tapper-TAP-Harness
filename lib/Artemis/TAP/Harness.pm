@@ -9,7 +9,7 @@ use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
 
-our $VERSION = '2.010009';
+our $VERSION = '2.010010';
 
 use Moose;
 
@@ -107,6 +107,12 @@ sub _parse_tap_into_sections
         for (my $i = 0; $i < @{$self->parsed_report->{tap_sections}}; $i++)
         {
                 $self->parsed_report->{tap_sections}->[$i]->{section_name} //= sprintf("section-%03d", $i);
+        }
+
+        # delete whitespace from section names
+        for (my $i = 0; $i < @{$self->parsed_report->{tap_sections}}; $i++)
+        {
+                $self->parsed_report->{tap_sections}->[$i]->{section_name} =~ s/\s/-/g;
         }
 }
 
