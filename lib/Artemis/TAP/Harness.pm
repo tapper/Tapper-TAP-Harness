@@ -9,7 +9,7 @@ use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
 
-our $VERSION = '2.010010';
+our $VERSION = '2.010012';
 
 use Moose;
 
@@ -163,8 +163,6 @@ sub _process_suite_meta_information
                             machine-description
                             starttime-test-program
                             endtime-test-program
-                            reportgroup-arbitrary
-                            reportgroup-testrun
                           );
         foreach my $key (@suite_keys)
         {
@@ -184,6 +182,18 @@ sub _process_suite_meta_information
                 my $accessor = $key;
                 $accessor =~ s/-/_/g;
                 $self->parsed_report->{db_report_date_meta}{$accessor} = $value if defined $value;
+        }
+
+        my @suite_reportgroup_keys = qw(
+                                               reportgroup-arbitrary
+                                               reportgroup-testrun
+                                      );
+        foreach my $key (@suite_reportgroup_keys)
+        {
+                my $value = $self->parsed_report->{report_meta}{$key};
+                my $accessor = $key;
+                $accessor =~ s/-/_/g;
+                $self->parsed_report->{db_report_reportgroup_meta}{$accessor} = $value if defined $value;
         }
 }
 
