@@ -12,7 +12,7 @@ my $tap = slurp ("t/tap_archive_artemis.tap");
 
 # ============================================================
 
-plan tests => 22;
+plan tests => 24;
 
 my $harness = new Artemis::TAP::Harness( tap => $tap );
 
@@ -25,11 +25,13 @@ my $first_section = $harness->parsed_report->{tap_sections}->[0];
 # use Data::Dumper;
 # diag(Dumper($first_section));
 
-is($harness->parsed_report->{report_meta}{'suite-name'},    'Artemis',  "report meta suite name");
-is($harness->parsed_report->{report_meta}{'suite-version'}, '2.010004', "report meta suite version");
-is($harness->parsed_report->{report_meta}{'suite-type'},    'software', "report meta suite type");
-is($harness->parsed_report->{report_meta}{'machine-name'},  'bascha',   "report meta machine name");
-is($harness->parsed_report->{report_meta}{'starttime-test-program'}, 'Fri Jun 13 11:16:35 CEST 2008',                                      "report meta starttime test program");
+is($harness->parsed_report->{report_meta}{'suite-name'},    'Artemis',       "report meta suite name");
+is($harness->parsed_report->{report_meta}{'suite-version'}, '2.010004',      "report meta suite version");
+is($harness->parsed_report->{report_meta}{'suite-type'},    'software',      "report meta suite type");
+is($harness->parsed_report->{report_meta}{'machine-name'},  'bascha',        "report meta machine name");
+is($harness->parsed_report->{report_meta}{'starttime-test-program'}, 'Fri Jun 13 11:16:35 CEST 2008', "report meta starttime test program");
+is($harness->parsed_report->{report_meta}{'reportgroup-arbitrary'}, '29365', "report meta reportgroup arbitrary");
+is($harness->parsed_report->{report_meta}{'reportgroup-testrun'}, '478',     "report meta reportgroup testrun");
 
 is($first_section->{section_name},'t/00-artemis-meta.t', "first section name");
 

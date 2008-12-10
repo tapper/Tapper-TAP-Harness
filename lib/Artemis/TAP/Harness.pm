@@ -163,6 +163,8 @@ sub _process_suite_meta_information
                             machine-description
                             starttime-test-program
                             endtime-test-program
+                            reportgroup-arbitrary
+                            reportgroup-testrun
                           );
         foreach my $key (@suite_keys)
         {
