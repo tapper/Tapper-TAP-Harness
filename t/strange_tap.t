@@ -22,7 +22,7 @@ $harness->evaluate_report();
 is(scalar @{$harness->parsed_report->{tap_sections}}, 11, "count sections");
 
 my $first_section = $harness->parsed_report->{tap_sections}->[0];
-print STDERR Dumper($harness);
+#print STDERR Dumper($harness);
 
 is($harness->parsed_report->{report_meta}{'suite-name'},    'Artemis-CTCS',             "report meta suite name");
 is($harness->parsed_report->{report_meta}{'suite-version'}, '0.2',                      "report meta suite version");
@@ -42,7 +42,7 @@ $harness->evaluate_report();
 
 is(scalar @{$harness->parsed_report->{tap_sections}}, 11, "count sections");
 
-print STDERR Dumper([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}]);
+#print STDERR Dumper([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}]);
 
 my $ctcs_section = $harness->parsed_report->{tap_sections}->[7];
 is ($ctcs_section->{section_name}, 'CTCS-results', "ensure whitespace to dash in section name");
