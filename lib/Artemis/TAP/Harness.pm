@@ -8,9 +8,8 @@ use warnings;
 use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
-use Data::Dumper;
 
-our $VERSION = '2.010012';
+our $VERSION = '2.010014';
 
 use Moose;
 
@@ -40,8 +39,6 @@ sub _unique_section_name
                 $section_name =~ s/\d+$/$trail_number/;
         }
         $self->section_names->{$section_name} = 1;
-        say STDERR "A: $section_name";
-        #say STDERR Dumper($self->section_names);
         return $section_name;
 }
 
