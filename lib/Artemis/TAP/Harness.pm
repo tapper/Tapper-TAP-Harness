@@ -8,6 +8,7 @@ use warnings;
 use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
+use Data::Dumper;
 
 our $VERSION = '2.010012';
 
@@ -15,11 +16,33 @@ use Moose;
 
 has tap           => ( is => 'rw', isa => 'Str'     );
 has parsed_report => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
+has section_names => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
 sub _get_prove {
         my $prove = $^X;
         $prove =~ s/perl$/prove/;
         return $prove;
+}
+
+# report a uniqe section name
+sub _unique_section_name
+{
+        my ($self, $section_name) = @_;
+
+        my $trail_number = 1;
+        if (defined $self->section_names->{$section_name}
+            and not $section_name =~ m/\d$/)
+        {
+                $section_name .= $trail_number;
+        }
+        while (defined $self->section_names->{$section_name}) {
+                $trail_number++;
+                $section_name =~ s/\d+$/$trail_number/;
+        }
+        $self->section_names->{$section_name} = 1;
+        say STDERR "A: $section_name";
+        #say STDERR Dumper($self->section_names);
+        return $section_name;
 }
 
 # return sections
@@ -28,6 +51,7 @@ sub _parse_tap_into_sections
         my ($self) = @_;
 
         $self->parsed_report->{tap_sections} = [];
+        $self->section_names({});
 
         my $parser = new TAP::Parser ({ tap => $self->tap });
 
@@ -81,7 +105,8 @@ sub _parse_tap_into_sections
                 # looks like filename line from "prove"
                 if ( $is_unknown and $raw =~ $re_prove_section )
                 {
-                        $section{section_name} //= $1;
+                        my $section_name = $self->_unique_section_name( $1 );
+                        $section{section_name} //= $section_name;
                 }
 
                 # looks like artemis meta line
@@ -91,8 +116,10 @@ sub _parse_tap_into_sections
                         my $val = $3;
                         $val =~ s/^\s+//;
                         $val =~ s/\s+$//;
-                        $section{section_name} //= $val if $raw =~ $re_artemis_meta_section;
-
+                        if ($raw =~ $re_artemis_meta_section) {
+                                my $section_name = $self->_unique_section_name( $val );
+                                $section{section_name} //= $section_name;
+                        }
                         $section{section_meta}{$key} = $val;              # section keys
                         $self->parsed_report->{report_meta}{$key} = $val; # also global keys, later entries win
                 }

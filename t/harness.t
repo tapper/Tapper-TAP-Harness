@@ -12,7 +12,7 @@ my $tap = slurp ("t/tap_archive_artemis.tap");
 
 # ============================================================
 
-plan tests => 24;
+plan tests => 30;
 
 my $harness = new Artemis::TAP::Harness( tap => $tap );
 
@@ -55,3 +55,34 @@ my $html = $harness->generate_html;
 is(scalar @{$harness->parsed_report->{tap_sections}}, 10, "count sections"); # check to trigger preparation errors
 
 like($harness->_get_prove, qr|/.*bin.*/prove|, 'looks like prove command');
+
+# ============================================================
+
+$harness = new Artemis::TAP::Harness;
+$harness->section_names({
+                         affe   => 1,
+                         affe0  => 1,
+                         affe1  => 1,
+                         # affe2
+
+                         loewe  => 1,
+                         # loewe0
+
+                         tiger  => 1,
+                         # tiger0
+                         tiger1 => 1,
+                         tiger2 => 1,
+
+                         zomtec  => 1,
+                         zomtec0 => 1,
+                         # zomtec1
+                         zomtec2 => 1,
+                        });
+
+is ($harness->_unique_section_name("affe"),   "affe2",   "unique section name affe2");
+is ($harness->_unique_section_name("loewe"),  "loewe1",  "unique section name loewe1");
+is ($harness->_unique_section_name("tiger"),  "tiger3",  "unique section name tiger3");
+is ($harness->_unique_section_name("zomtec"), "zomtec1", "unique section name zomtec1");
+is ($harness->_unique_section_name("foo"),    "foo",     "unique section name foo");
+is ($harness->_unique_section_name("foo"),    "foo1",    "unique section name foo1");
+
