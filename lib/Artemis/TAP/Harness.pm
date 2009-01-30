@@ -211,6 +211,7 @@ sub _process_suite_meta_information
         my @suite_reportgroup_keys = qw(
                                                reportgroup-arbitrary
                                                reportgroup-testrun
+                                               reportgroup-primary
                                       );
         foreach my $key (@suite_reportgroup_keys)
         {
