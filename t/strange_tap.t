@@ -11,7 +11,7 @@ use Data::Dumper;
 
 my $tap = slurp ("t/tap_archive_much_whitespace.tap");
 
-plan tests => 10;
+plan tests => 11;
 
 # ============================================================
 
@@ -46,3 +46,12 @@ is(scalar @{$harness->parsed_report->{tap_sections}}, 11, "count sections");
 
 my $ctcs_section = $harness->parsed_report->{tap_sections}->[7];
 is ($ctcs_section->{section_name}, 'CTCS-results', "ensure whitespace to dash in section name");
+
+# ============================================================
+
+$tap = slurp ("t/tap_archive_kernbench.tap");
+$harness = new Artemis::TAP::Harness( tap => $tap );
+$harness->evaluate_report();
+my $interrupts_before_section = $harness->parsed_report->{tap_sections}->[1];
+is ($interrupts_before_section->{section_name}, 'stats-proc-interrupts-before', "section name interrupts-before");
+
