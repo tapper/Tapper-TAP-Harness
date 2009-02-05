@@ -9,7 +9,7 @@ use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
 
-our $VERSION = '2.010017';
+our $VERSION = '2.010018';
 
 use Moose;
 
@@ -80,7 +80,6 @@ sub _parse_tap_into_sections
                 # ----- store previous section, start new section -----
 
                 $sections_marked_explicit = 1 if $raw =~ $re_explicit_section_start;
-                print "** EXPLICIT SECTION: ".$raw."\n" if $raw =~ $re_explicit_section_start;
 
                 # start new section
                 if ( $raw =~ $re_explicit_section_start
@@ -90,7 +89,6 @@ sub _parse_tap_into_sections
                             ( not $looks_like_prove_output and $is_plan ) or
                             ( $looks_like_prove_output and $raw =~ $re_prove_section ) ) ) )
                 {
-                        print "** START NEW SECTION: ".$raw."\n";
                         if (keys %section) {
                                 # Store a copy (ie., not \%section) so it doesn't get overwritten in next loop
                                 push @{$self->parsed_report->{tap_sections}}, { %section };
