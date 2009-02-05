@@ -9,7 +9,7 @@ use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
 
-our $VERSION = '2.010016';
+our $VERSION = '2.010017';
 
 use Moose;
 
@@ -55,14 +55,16 @@ sub _parse_tap_into_sections
         my $i = 0;
         my %section;
         my $looks_like_prove_output = 0;
-        my $re_prove_section = qr/^([-_\d\w\/.]*\w)\.{2,}$/;
-        my $re_artemis_meta  = qr/^#\s*(Artemis-)([-\w]+):(.+)$/i;
-        my $re_artemis_meta_section  = qr/^#\s*(Artemis-Section:)\s*(.+)$/i;
+        my $re_prove_section          = qr/^([-_\d\w\/.]*\w)\.{2,}$/;
+        my $re_artemis_meta           = qr/^#\s*(Artemis-)([-\w]+):(.+)$/i;
+        my $re_artemis_meta_section   = qr/^#\s*(Artemis-Section:)\s*(.+)$/i;
+        my $re_explicit_section_start = qr/^#\s*(Artemis-explicit-section-start:)(.*)$/i;
         $self->parsed_report->{report_meta} = {
                                                'suite-name'    => 'unknown',
                                                'suite-version' => 'unknown',
                                                'suite-type'    => 'unknown',
                                               };
+        my $sections_marked_explicit = 0;
 
         while ( my $line = $parser->next )
         {
@@ -77,13 +79,18 @@ sub _parse_tap_into_sections
 
                 # ----- store previous section, start new section -----
 
+                $sections_marked_explicit = 1 if $raw =~ $re_explicit_section_start;
+                print "** EXPLICIT SECTION: ".$raw."\n" if $raw =~ $re_explicit_section_start;
+
                 # start new section
-                if (
-                    $i == 0 or
-                    ( not $looks_like_prove_output and $is_plan ) or
-                    ( $looks_like_prove_output and $raw =~ $re_prove_section )
-                   )
+                if ( $raw =~ $re_explicit_section_start
+                     or
+                     (! $sections_marked_explicit
+                      and ( $i == 0 or
+                            ( not $looks_like_prove_output and $is_plan ) or
+                            ( $looks_like_prove_output and $raw =~ $re_prove_section ) ) ) )
                 {
+                        print "** START NEW SECTION: ".$raw."\n";
                         if (keys %section) {
                                 # Store a copy (ie., not \%section) so it doesn't get overwritten in next loop
                                 push @{$self->parsed_report->{tap_sections}}, { %section };
