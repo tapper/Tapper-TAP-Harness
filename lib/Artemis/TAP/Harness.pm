@@ -9,7 +9,7 @@ use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
 
-our $VERSION = '2.010018';
+our $VERSION = '2.010019';
 
 use Moose;
 
@@ -65,11 +65,13 @@ sub _parse_tap_into_sections
                                                'suite-type'    => 'unknown',
                                               };
         my $sections_marked_explicit = 0;
+        my $already_had_version      = 0;
 
         while ( my $line = $parser->next )
         {
                 my $raw        = $line->raw;
                 my $is_plan    = $line->is_plan;
+                my $is_version = $line->is_version;
                 my $is_unknown = $line->is_unknown;
 
                 # prove section
@@ -80,20 +82,24 @@ sub _parse_tap_into_sections
                 # ----- store previous section, start new section -----
 
                 $sections_marked_explicit = 1 if $raw =~ $re_explicit_section_start;
+                $already_had_version      = 1 if $is_version;
 
+                say STDERR "$i. is_version: $is_version ($raw)";
                 # start new section
                 if ( $raw =~ $re_explicit_section_start
                      or
                      (! $sections_marked_explicit
                       and ( $i == 0 or
-                            ( not $looks_like_prove_output and $is_plan ) or
+                            ( not $looks_like_prove_output and ( ( $is_plan and not $already_had_version ) or $is_version ) ) or
                             ( $looks_like_prove_output and $raw =~ $re_prove_section ) ) ) )
                 {
+                        say STDERR "****************************************";
                         if (keys %section) {
                                 # Store a copy (ie., not \%section) so it doesn't get overwritten in next loop
                                 push @{$self->parsed_report->{tap_sections}}, { %section };
                         }
                         %section = ();
+                        $already_had_version = 0 if ( $is_plan and $already_had_version );
                 }
 
 
@@ -151,10 +157,16 @@ sub _aggregate_sections
 
         my $aggregator = new TAP::Parser::Aggregator;
 
+        my $TAPVERSION = "TAP Version 13";
+
         $aggregator->start;
         foreach my $section (@{$self->parsed_report->{tap_sections}})
         {
-                my $parser = new TAP::Parser ({ tap => $section->{raw} });
+                my $rawtap = $section->{raw};
+                say STDERR "RAWTAP 1: ", $rawtap;
+                $rawtap    = $TAPVERSION."\n".$rawtap unless $rawtap =~ /^TAP Version/ms;
+                say STDERR "RAWTAP 2: ", $rawtap;
+                my $parser = new TAP::Parser ({ tap => $rawtap });
                 $parser->run;
                 $aggregator->add( $section->{section_name} => $parser );
         }
