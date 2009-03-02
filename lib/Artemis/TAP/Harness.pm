@@ -9,7 +9,7 @@ use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
 
-our $VERSION = '2.010019';
+our $VERSION = '2.010020';
 
 use Moose;
 
@@ -299,14 +299,18 @@ sub generate_html
         $self->_aggregate_sections();
         $self->_process_meta_information();
 
-        my $temp = new Directory::Scratch;
-        my $dir  = $temp->mkdir("section");
+        my $temp       = new Directory::Scratch;
+        my $dir        = $temp->mkdir("section");
+        my $TAPVERSION = "TAP Version 13";
 
         my @files = map {
                          my $fname          = "section/".$_->{section_name};
+                         my $rawtap         = $_->{raw};
+                         $rawtap            = $TAPVERSION."\n".$rawtap unless $rawtap =~ /^TAP Version/ms;
+
                          my $script_content = "#! /usr/bin/env perl
 print <<EOTAP
-".$_->{raw}."
+$rawtap
 EOTAP
 ;
 ";
