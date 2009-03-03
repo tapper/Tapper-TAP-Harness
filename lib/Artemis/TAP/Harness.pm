@@ -66,6 +66,7 @@ sub _parse_tap_into_sections
                                               };
         my $sections_marked_explicit = 0;
         my $already_had_version      = 0;
+        my $already_had_plan         = 0;
 
         while ( my $line = $parser->next )
         {
@@ -83,6 +84,7 @@ sub _parse_tap_into_sections
 
                 $sections_marked_explicit = 1 if $raw =~ $re_explicit_section_start;
                 $already_had_version      = 1 if $is_version;
+                $already_had_plan         = 1 if $is_plan;
 
                 #say STDERR "$i. is_version: $is_version ($raw)";
                 # start new section
@@ -90,7 +92,7 @@ sub _parse_tap_into_sections
                      or
                      (! $sections_marked_explicit
                       and ( $i == 0 or
-                            ( not $looks_like_prove_output and ( ( $is_plan and not $already_had_version ) or $is_version ) ) or
+                            ( not $looks_like_prove_output and ( ( $is_plan and not $already_had_version ) or ($is_version and not $already_had_plan)) ) or
                             ( $looks_like_prove_output and $raw =~ $re_prove_section ) ) ) )
                 {
                         #say STDERR "****************************************";
