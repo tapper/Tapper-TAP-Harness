@@ -55,7 +55,7 @@ sub _parse_tap_into_sections
         my $i = 0;
         my %section;
         my $looks_like_prove_output = 0;
-        my $re_prove_section          = qr/^([-_\d\w\/.]*\w)\.{2,}$/;
+        my $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}$/;
         my $re_artemis_meta           = qr/^#\s*(Artemis-)([-\w]+):(.+)$/i;
         my $re_artemis_meta_section   = qr/^#\s*(Artemis-Section:)\s*(.+)$/i;
         my $re_explicit_section_start = qr/^#\s*(Artemis-explicit-section-start:)(.*)$/i;
