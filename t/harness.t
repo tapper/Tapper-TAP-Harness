@@ -19,7 +19,7 @@ plan tests => 34;
 my $harness = new Artemis::TAP::Harness( tap => $tap );
 
 $harness->evaluate_report();
-diag(Dumper($harness->parsed_report->{tap_sections}));
+#diag(Dumper($harness->parsed_report->{tap_sections}));
 
 is(scalar @{$harness->parsed_report->{tap_sections}}, 10, "count sections");
 
@@ -27,9 +27,9 @@ my $first_section = $harness->parsed_report->{tap_sections}->[0];
 
 # ============================================================
 
-diag Dumper();
+#diag Dumper();
 my $dom = new TAP::DOM( tap => "TAP Version 13\n".$harness->parsed_report->{tap_sections}->[3]->{raw} );
-diag(Dumper($dom));
+#diag(Dumper($dom));
 is($dom->{tests_run}, 1, "section 3 tests run");
 ok($dom->{is_good_plan}, "section 3 good plan");
 
@@ -38,10 +38,10 @@ ok($dom->{is_good_plan}, "section 3 good plan");
 my $similar_tap = slurp ("t/tap_archive_artemis_prove3.15.tap");
 my $harness2 = new Artemis::TAP::Harness( tap => $similar_tap );
 $harness2->evaluate_report();
-diag(Dumper($harness2->parsed_report->{tap_sections}));
+#diag(Dumper($harness2->parsed_report->{tap_sections}));
 
 my $dom2 = new TAP::DOM( tap => "TAP Version 13\n".$harness2->parsed_report->{tap_sections}->[3]->{raw} );
-diag(Dumper($dom2));
+#diag(Dumper($dom2));
 is($dom2->{tests_run}, 1, "section 3a tests run");
 ok($dom2->{is_good_plan}, "section 3a good plan");
 
