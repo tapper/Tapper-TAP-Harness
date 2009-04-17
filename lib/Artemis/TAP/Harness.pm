@@ -241,6 +241,52 @@ sub _process_suite_meta_information
         }
 }
 
+
+# Frank Arnold <frank.arnold@amd.com> writes:
+# > Metainfo Host:
+# > Artemis-uptime (neu)
+# >
+# > Xen (alles vorhanden):
+# > Artemis-xen-version
+# > Artemis-xen-changeset
+# > Artemis-xen-dom0-kernel
+# > Artemis-xen-base-os-description
+# > Artemis-xen-guest-description
+# > Artemis-xen-guest-test
+# > Artemis-xen-guest-start
+# > Artemis-xen-guest-flags
+# >
+# > KVM (alles neu):
+# > Artemis-kvm-module-version
+# > Artemis-kvm-userspace-version
+# > Artemis-kvm-kernel
+# > Artemis-kvm-base-os-description
+# > Artemis-kvm-guest-description
+# > Artemis-kvm-guest-test
+# > Artemis-kvm-guest-start
+# > Artemis-kvm-guest-flags
+
+
+# http://bascha:3000/artemis/reports/id/18891
+# http://bascha:3000/artemis/reports/id/18890
+
+# Bei Context zu Metainfo: noch dazu:
+#   uptime
+# aus TAP rausziehen.
+
+
+# xen-version
+# xen-guest-test
+# xen-guest-start
+# kvm-module-version
+# kvm-userspace-version
+# kvm-kernel
+# kvm-base-os-description
+# kvm-guest-description
+# kvm-guest-test
+# kvm-guest-start
+# kvm-guest-flags
+
 sub _process_section_meta_information
 {
         my ($self) = @_;
