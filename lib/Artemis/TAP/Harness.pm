@@ -254,11 +254,22 @@ sub _process_section_meta_information
                               uname
                               osname
                               language-description
+                              xen-version
                               xen-changeset
                               xen-dom0-kernel
                               xen-base-os-description
                               xen-guest-description
+                              xen-guest-test
+                              xen-guest-start
                               xen-guest-flags
+                              kvm-module-version
+                              kvm-userspace-version
+                              kvm-kernel
+                              kvm-base-os-description
+                              kvm-guest-description
+                              kvm-guest-test
+                              kvm-guest-start
+                              kvm-guest-flags
                               flags
                               reportcomment
                             );
