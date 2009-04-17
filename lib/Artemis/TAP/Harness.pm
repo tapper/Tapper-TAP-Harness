@@ -299,6 +299,7 @@ sub _process_section_meta_information
                               lspci
                               uname
                               osname
+                              uptime
                               language-description
                               xen-version
                               xen-changeset
