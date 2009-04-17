@@ -248,31 +248,13 @@ sub _process_section_meta_information
         # section meta
 
         my @section_keys = qw(
-                              ram
-                              cpuinfo
-                              lspci
-                              uname
-                              osname
-                              uptime
-                              language-description
-                              xen-version
-                              xen-changeset
-                              xen-dom0-kernel
-                              xen-base-os-description
-                              xen-guest-description
-                              xen-guest-test
-                              xen-guest-start
-                              xen-guest-flags
-                              kvm-module-version
-                              kvm-userspace-version
-                              kvm-kernel
-                              kvm-base-os-description
-                              kvm-guest-description
-                              kvm-guest-test
-                              kvm-guest-start
-                              kvm-guest-flags
-                              flags
-                              reportcomment
+                                     ram cpuinfo lspci uname osname uptime language-description
+                                     xen-version xen-changeset xen-dom0-kernel xen-base-os-description
+                                     xen-guest-description xen-guest-test xen-guest-start xen-guest-flags
+                                     kvm-module-version kvm-userspace-version kvm-kernel
+                                     kvm-base-os-description kvm-guest-description
+                                     kvm-guest-test kvm-guest-start kvm-guest-flags
+                                     flags reportcomment
                             );
         foreach my $section ( @{$self->parsed_report->{tap_sections}} ) {
                 foreach my $key (@section_keys)
