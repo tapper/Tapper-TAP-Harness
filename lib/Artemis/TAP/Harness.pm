@@ -65,8 +65,8 @@ sub _parse_tap_into_sections
                                                'suite-type'    => 'unknown',
                                               };
         my $sections_marked_explicit = 0;
-        my $already_had_version      = 0;
-        my $already_had_plan         = 0;
+        my $last_line_was_version        = 0;
+        my $last_line_was_plan           = 0;
 
         while ( my $line = $parser->next )
         {
@@ -75,6 +75,7 @@ sub _parse_tap_into_sections
                 my $is_version = $line->is_version;
                 my $is_unknown = $line->is_unknown;
 
+                say STDERR "__".$line->raw;
                 # prove section
                 if ( $is_unknown and $raw =~ $re_prove_section ) {
                         $looks_like_prove_output ||= 1;
@@ -83,25 +84,34 @@ sub _parse_tap_into_sections
                 # ----- store previous section, start new section -----
 
                 $sections_marked_explicit = 1 if $raw =~ $re_explicit_section_start;
-                $already_had_version      = 1 if $is_version;
-                $already_had_plan         = 1 if $is_plan;
 
-                #say STDERR "$i. is_version: $is_version ($raw)";
+                say STDERR "    $i. is_version:              $is_version";
+                say STDERR "    $i. looks_like_prove_output: $looks_like_prove_output";
+                say STDERR "    $i. last_line_was_plan:      $last_line_was_plan";
+                say STDERR "    $i. last_line_was_version:   $last_line_was_version";
+
                 # start new section
                 if ( $raw =~ $re_explicit_section_start
                      or
                      (! $sections_marked_explicit
                       and ( $i == 0 or
-                            ( not $looks_like_prove_output and ( ( $is_plan and not $already_had_version ) or ($is_version and not $already_had_plan)) ) or
+                            ( ! $looks_like_prove_output
+                              and
+                              (
+                               ( $is_plan and not $last_line_was_version ) or
+                               ( $is_version and not $last_line_was_plan )
+                              )
+                            ) or
                             ( $looks_like_prove_output and $raw =~ $re_prove_section ) ) ) )
                 {
+                        say STDERR "____________________________ new section";
+
                         #say STDERR "****************************************";
                         if (keys %section) {
                                 # Store a copy (ie., not \%section) so it doesn't get overwritten in next loop
                                 push @{$self->parsed_report->{tap_sections}}, { %section };
                         }
                         %section = ();
-                        $already_had_version = 0 if ( $is_plan and $already_had_version );
                 }
 
 
@@ -135,6 +145,8 @@ sub _parse_tap_into_sections
                 }
 
                 $i++;
+                $last_line_was_plan    = $is_plan    ? 1 : 0;
+                $last_line_was_version = $is_version ? 1 : 0;
         }
 
         # store last section
@@ -295,7 +307,7 @@ sub generate_html
         $self->_aggregate_sections();
         $self->_process_meta_information();
 
-        my $temp       = new Directory::Scratch;
+        my $temp       = new Directory::Scratch (CLEANUP  => 0);
         my $dir        = $temp->mkdir("section");
         my $TAPVERSION = "TAP Version 13";
 
@@ -307,8 +319,18 @@ sub generate_html
                          my $script_content = $rawtap;
                          my $file           = $temp->touch($fname, $script_content);
 
+                         say STDERR "--------------------------------------------------";
+                         say STDERR $_->{raw};
+                         say STDERR "--------------------------------------------------";
+                         say STDERR $rawtap;
+                         say STDERR "--------------------------------------------------";
+                         say STDERR $script_content;
+                         say STDERR "--------------------------------------------------";
+                         say STDERR "$temp/$fname";
+                         say STDERR "--------------------------------------------------";
+#                          #sleep 10;
+
                          [ "$temp/$fname" => $_->{section_name} ];
-                         #"$temp/$fname";
                         } @{$self->parsed_report->{tap_sections}};
 
         # Currently a TAP::Formatter::* is only usable via the

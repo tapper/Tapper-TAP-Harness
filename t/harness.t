@@ -53,9 +53,10 @@ TODO: {
         my $similar_tap = slurp ("t/tap_archive_artemis_reports_dpath_prove3.15.tap");
         my $harness3 = new Artemis::TAP::Harness( tap => $similar_tap );
         $harness3->evaluate_report();
-        diag(Dumper($harness3->parsed_report->{tap_sections}));
+        print STDERR Dumper($harness3->parsed_report->{tap_sections});
 
-        my $dom3 = new TAP::DOM( tap => "TAP Version 13\n".$harness3->parsed_report->{tap_sections}->[2]->{raw} );
+        my $raw  = $harness3->parsed_report->{tap_sections}->[2]->{raw};
+        my $dom3 = new TAP::DOM( tap => "TAP Version 13\n".$raw );
         #diag(Dumper($dom3));
         is(scalar @{$harness3->parsed_report->{tap_sections}}, 8, "section 3b count sections");
         is($dom3->{tests_run}, 29, "section 3b tests run");
