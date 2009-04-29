@@ -1,6 +1,5 @@
-TAP Version 13
 1..1
-# Artemis-suite-version: 13.020016
+# Artemis-suite-version: 0.020016
 # Artemis-starttime-test-program: 20090205T205807
 # Artemis-machine-name: californium
 # Artemis-suite-name: KernBench
@@ -8,10 +7,9 @@ TAP Version 13
 # Artemis-section: artemis-meta-information
 # Artemis-reportgroup-testrun: 1419
 ok 1 - artemis-meta-data
-1..2
+1..1
 # Artemis-Section: stats-proc-interrupts-before
 ok 1 - /proc/interrupts
-ok 2 - foo
   ---
   0:
     CPU0: 10635
