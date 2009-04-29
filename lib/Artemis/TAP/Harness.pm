@@ -50,7 +50,34 @@ sub _parse_tap_into_sections
         $self->parsed_report->{tap_sections} = [];
         $self->section_names({});
 
-        my $parser = new TAP::Parser ({ tap => $self->tap });
+        my $report_tap = $self->tap;
+
+        say STDERR "============================================================";
+        say STDERR $report_tap;
+        # hot fix TAP errors
+        $report_tap =~ s/^(\s+linetail):\w*$/$1: ~/msg;
+        $report_tap =~ s/^(\s+CPU\d+):\w*$/$1: ~/msg;
+        $report_tap =~ s/^(\s+)Cannot determine clocksource\w*$/$1Cannot_determine_clocksource: 1/msg;
+        $report_tap =~ s/^  ---$
+^  [^\n]+$
+^  \d.\d.\d+[^\n]*$
+^  Average[^\n]*$
+^  Elapsed Time[^\n]*$
+^  User Time[^\n]*$
+^  System Time[^\n]*$
+^  Percent CPU[^\n]*$
+^  Context Switches[^\n]*$
+^  Sleeps\s+\d+.\d+ \(\d+.\d+\)[^\n]*$
+^  \.\.\.$
+/  ---
+  replaced_broken_yaml: 1
+  ...
+/msg;
+
+        say STDERR "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+        say STDERR $report_tap;
+        say STDERR ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+        my $parser = new TAP::Parser ({ tap => $report_tap });
 
         my $i = 0;
         my %section;
@@ -74,6 +101,7 @@ sub _parse_tap_into_sections
                 my $is_plan    = $line->is_plan;
                 my $is_version = $line->is_version;
                 my $is_unknown = $line->is_unknown;
+                my $is_yaml    = $line->is_yaml;
 
                 say STDERR "__".$line->raw;
                 # prove section
@@ -86,6 +114,7 @@ sub _parse_tap_into_sections
                 $sections_marked_explicit = 1 if $raw =~ $re_explicit_section_start;
 
                 say STDERR "    $i. is_version:              $is_version";
+                say STDERR "    $i. is_yaml:                 $is_yaml";
                 say STDERR "    $i. looks_like_prove_output: $looks_like_prove_output";
                 say STDERR "    $i. last_line_was_plan:      $last_line_was_plan";
                 say STDERR "    $i. last_line_was_version:   $last_line_was_version";

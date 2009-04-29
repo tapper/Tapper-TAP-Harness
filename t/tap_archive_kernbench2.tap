@@ -8,10 +8,9 @@ TAP Version 13
 # Artemis-section: artemis-meta-information
 # Artemis-reportgroup-testrun: 1419
 ok 1 - artemis-meta-data
-1..2
+1..1
 # Artemis-Section: stats-proc-interrupts-before
 ok 1 - /proc/interrupts
-ok 2 - foo
   ---
   0:
     CPU0: 10635
@@ -65,7 +64,7 @@ ok 1 - untar of testsuite succeeded.
 1..1
 # Artemis-section: kernbench-testrun
 ok 1 - Run took ntp: 2339s, system: 2459s
-1..1
+1..2
 ok 1 - KernBench
   ---
   Thu Feb  5 21:06:47 CET 2009
@@ -78,6 +77,7 @@ ok 1 - KernBench
   Context Switches 26364.6 (368.087)
   Sleeps 20866.2 (234.006)
   ...
+ok 2 - affe
 1..1
 # Artemis-section: kernbench-results
 ok 1 - KernBench
