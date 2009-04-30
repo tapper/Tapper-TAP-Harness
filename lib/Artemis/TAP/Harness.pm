@@ -9,7 +9,7 @@ use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
 
-our $VERSION = '2.010023';
+our $VERSION = '2.010024';
 
 use Moose;
 
@@ -52,8 +52,8 @@ sub _parse_tap_into_sections
 
         my $report_tap = $self->tap;
 
-        say STDERR "============================================================";
-        say STDERR $report_tap;
+        #say STDERR "============================================================";
+        #say STDERR $report_tap;
         # hot fix TAP errors
         $report_tap =~ s/^(\s+linetail):\w*$/$1: ~/msg;
         $report_tap =~ s/^(\s+CPU\d+):\w*$/$1: ~/msg;
@@ -74,9 +74,9 @@ sub _parse_tap_into_sections
   ...
 /msg;
 
-        say STDERR "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-        say STDERR $report_tap;
-        say STDERR ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+        #say STDERR "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+        #say STDERR $report_tap;
+        #say STDERR ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
         my $parser = new TAP::Parser ({ tap => $report_tap });
 
         my $i = 0;
@@ -103,7 +103,7 @@ sub _parse_tap_into_sections
                 my $is_unknown = $line->is_unknown;
                 my $is_yaml    = $line->is_yaml;
 
-                say STDERR "__".$line->raw;
+                #say STDERR "__".$line->raw;
                 # prove section
                 if ( $is_unknown and $raw =~ $re_prove_section ) {
                         $looks_like_prove_output ||= 1;
@@ -113,11 +113,11 @@ sub _parse_tap_into_sections
 
                 $sections_marked_explicit = 1 if $raw =~ $re_explicit_section_start;
 
-                say STDERR "    $i. is_version:              $is_version";
-                say STDERR "    $i. is_yaml:                 $is_yaml";
-                say STDERR "    $i. looks_like_prove_output: $looks_like_prove_output";
-                say STDERR "    $i. last_line_was_plan:      $last_line_was_plan";
-                say STDERR "    $i. last_line_was_version:   $last_line_was_version";
+                #say STDERR "    $i. is_version:              $is_version";
+                #say STDERR "    $i. is_yaml:                 $is_yaml";
+                #say STDERR "    $i. looks_like_prove_output: $looks_like_prove_output";
+                #say STDERR "    $i. last_line_was_plan:      $last_line_was_plan";
+                #say STDERR "    $i. last_line_was_version:   $last_line_was_version";
 
                 # start new section
                 if ( $raw =~ $re_explicit_section_start
@@ -133,7 +133,7 @@ sub _parse_tap_into_sections
                             ) or
                             ( $looks_like_prove_output and $raw =~ $re_prove_section ) ) ) )
                 {
-                        say STDERR "____________________________ new section";
+                        #say STDERR "____________________________ new section";
 
                         #say STDERR "****************************************";
                         if (keys %section) {
@@ -348,15 +348,15 @@ sub generate_html
                          my $script_content = $rawtap;
                          my $file           = $temp->touch($fname, $script_content);
 
-                         say STDERR "--------------------------------------------------";
-                         say STDERR $_->{raw};
-                         say STDERR "--------------------------------------------------";
-                         say STDERR $rawtap;
-                         say STDERR "--------------------------------------------------";
-                         say STDERR $script_content;
-                         say STDERR "--------------------------------------------------";
-                         say STDERR "$temp/$fname";
-                         say STDERR "--------------------------------------------------";
+#                          say STDERR "--------------------------------------------------";
+#                          say STDERR $_->{raw};
+#                          say STDERR "--------------------------------------------------";
+#                          say STDERR $rawtap;
+#                          say STDERR "--------------------------------------------------";
+#                          say STDERR $script_content;
+#                          say STDERR "--------------------------------------------------";
+#                          say STDERR "$temp/$fname";
+#                          say STDERR "--------------------------------------------------";
 #                          #sleep 10;
 
                          [ "$temp/$fname" => $_->{section_name} ];
