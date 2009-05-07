@@ -9,7 +9,7 @@ use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
 
-our $VERSION = '2.010024';
+our $VERSION = '2.010025';
 
 use Moose;
 
@@ -55,9 +55,11 @@ sub _parse_tap_into_sections
         #say STDERR "============================================================";
         #say STDERR $report_tap;
         # hot fix TAP errors
-        $report_tap =~ s/^(\s+linetail):\w*$/$1: ~/msg;
-        $report_tap =~ s/^(\s+CPU\d+):\w*$/$1: ~/msg;
-        $report_tap =~ s/^(\s+)Cannot determine clocksource\w*$/$1Cannot_determine_clocksource: 1/msg;
+ :
+        $report_tap =~ s/^(\s+acpi_pm)\s*$/$1: ~/msg;
+        $report_tap =~ s/^(\s+Cannot determine clocksource)\s*$/$1: ~/msg;
+        $report_tap =~ s/^(\s+linetail):\s*$/$1: ~/msg;
+        $report_tap =~ s/^(\s+CPU\d+):\s*$/$1: ~/msg;
         $report_tap =~ s/^  ---$
 ^  [^\n]+$
 ^  \d.\d.\d+[^\n]*$
@@ -206,9 +208,7 @@ sub _aggregate_sections
         foreach my $section (@{$self->parsed_report->{tap_sections}})
         {
                 my $rawtap = $section->{raw};
-                #say STDERR "RAWTAP 1: ", $rawtap;
                 $rawtap    = $TAPVERSION."\n".$rawtap unless $rawtap =~ /^TAP Version/ms;
-                #say STDERR "RAWTAP 2: ", $rawtap;
                 my $parser = new TAP::Parser ({ tap => $rawtap });
                 $parser->run;
                 $aggregator->add( $section->{section_name} => $parser );
@@ -344,7 +344,6 @@ sub generate_html
                          my $fname          = "section/".$_->{section_name};
                          my $rawtap         = $_->{raw};
                          $rawtap            = $TAPVERSION."\n".$rawtap unless $rawtap =~ /^TAP Version/ms;
-
                          my $script_content = $rawtap;
                          my $file           = $temp->touch($fname, $script_content);
 
