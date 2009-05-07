@@ -16,8 +16,8 @@ ok 1 - artemis-test-meta
 # Artemis-cpuinfo:                 2 cores [AMD Athlon(tm) 64 X2 Dual Core Processor 6000+]
 # Artemis-ram:                     1887MB
 # Artemis-starttime-test-program:  Fri Jun 13 11:16:35 CEST 2008
-# Artemis-explicit-section-start: 1
 1..1
+# Artemis-explicit-section-start: 1
 # Artemis-Section: t/00-load.t
 ok 1 - use Artemis;
 ok 2 - use Artemis::Db::Handling;
@@ -38,28 +38,26 @@ Subroutine uninitialize redefined at /2home/ss5/perl510/lib/site_perl/5.10.0/Cla
 Subroutine reinitialize redefined at /2home/ss5/perl510/lib/site_perl/5.10.0/Class/C3.pm line 101.
 ok 12 - use Artemis::Schema::TestsDB;
 # Testing Artemis 2.010004, Perl 5.010000, /2home/ss5/perl510/bin/perl
-# Artemis-explicit-section-start: 1
 1..12
+# Artemis-explicit-section-start: 1
 # Artemis-Section: t/artemis_logging_netlogappender.t
 ok 1 - use Artemis::Logging::NetLogAppender;
 ok 2 # SKIP Please fix me!
 ok 3 # SKIP Please fix me!
 ok 4 # SKIP Please fix me!
 ok 5 # SKIP Please fix me!
+1..5
 # Artemis-explicit-section-start: 1
 # Artemis-Section: t/artemis_mcp_builder.t
-1..5
 ok 1 - use Artemis::MCP::Builder;
-# Artemis-explicit-section-start: 1
 1..1
+# Artemis-explicit-section-start: 1
 # Artemis-Section: t/artemis_mcp_runtest.t
 ok 1 - use Artemis::MCP::Runtest;
-ok
 1..1
 # Artemis-explicit-section-start: 1
 # Artemis-Section: t/artemis_model.t
 ok 1 - version count
-ok
 1..1
 # Artemis-explicit-section-start: 1
 # Artemis-Section: t/artemis_systeminstaller.t
@@ -75,7 +73,6 @@ ok 6 - Detected ISO correctly.
 ok 7 - Detected tar.gz correctly.
 ok 8 - Detected tgz correctly.
 ok 9 - Detected tar correctly.
-ok
 1..9
 # Artemis-explicit-section-start: 1
 # Artemis-Section: t/artemis.t
@@ -99,14 +96,12 @@ ok 4 - Subconfig during live environment
 ok 5 - ARTEMIS_LIVE set back
 ok 6 - Subconfig during development
 ok 7 - HARNESS_ACTIVE set back
-ok
 1..7
 # Artemis-explicit-section-start: 1
 # Artemis-Section: t/boilerplate.t
 ok 1 - README contains no boilerplate text
 ok 2 - Changes contains no boilerplate text
 ok 3 - lib/Artemis.pm contains no boilerplate text
-ok
 1..3
 # Artemis-explicit-section-start: 1
 # Artemis-Section: t/experiments.t
@@ -121,7 +116,6 @@ Bummer 2
 Bummer 3
 satz: Ein affe$1 kommt selten allein.
 satz2: Ein affeer kommt selten allein.
-ok
 1..2
 All tests successful.
 Files=10, Tests=42,  2 wallclock secs ( 0.06 usr  0.01 sys +  1.78 cusr  0.16 csys =  2.01 CPU)

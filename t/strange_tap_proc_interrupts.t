@@ -22,7 +22,7 @@ $tap     = slurp ("t/tap_archive_kernbench4.tap");
 $harness = new Artemis::TAP::Harness( tap => $tap );
 $harness->evaluate_report();
 
-#print STDERR Dumper($harness->parsed_report->{tap_sections});
+print STDERR Dumper($harness->parsed_report->{tap_sections});
 # foreach (map { $_->{section_name} }  @{$harness->parsed_report->{tap_sections}})
 # {
 #         diag "Section: $_";
