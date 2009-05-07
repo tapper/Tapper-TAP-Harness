@@ -19,7 +19,7 @@ has section_names => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
 sub _get_prove {
         my $prove = $^X;
-        $prove =~ s/perl$/prove/;
+        $prove =~ s/perl[\d.]*$/prove/;
         return $prove;
 }
 
@@ -374,6 +374,7 @@ sub generate_html
         $html =~ s,<div id="menu">[\t\n\s]*<li>[\t\n\s]*<span id="show-all"><a href="#" title="show all tests">show all</a></span>[\t\n\s]*<span id="show-failed"><a href="#" title="show failed tests only">show failed</a></span>[\t\n\s]*</li>[\t\n\s]*</div>,,msg; # cut navi
         $html =~ s,<th class="time">Time</th>,<th class="time">&nbsp;</th>,msg; # cut "Time" header
 
+        #say STDERR "********** SLEEP"; sleep 10;
         $temp->cleanup;
         return $html;
 }
