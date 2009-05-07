@@ -53,7 +53,7 @@ is ($ctcs_section->{section_name}, 'CTCS-results', "ensure whitespace to dash in
 $tap = slurp ("t/tap_archive_kernbench.tap");
 $harness = new Artemis::TAP::Harness( tap => $tap );
 $harness->evaluate_report();
-diag Dumper($harness->parsed_report->{tap_sections});
+#diag Dumper($harness->parsed_report->{tap_sections});
 is( scalar @{$harness->parsed_report->{tap_sections}}, 13, "kernbench section name interrupts-before count");
 my $interrupts_before_section = $harness->parsed_report->{tap_sections}->[1];
 is ($interrupts_before_section->{section_name}, 'stats-proc-interrupts-before', "kernbench section name interrupts-before");
