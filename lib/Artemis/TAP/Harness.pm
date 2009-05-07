@@ -120,7 +120,7 @@ sub _parse_tap_into_sections
 #                 say STDERR "    $i. last_line_was_version:   $last_line_was_version";
 
                 # start new section
-                if ( $raw =~ $re_explicit_section_start
+                if ( $raw =~ $re_explicit_section_start and ! $last_line_was_version
                      or
                      (! $sections_marked_explicit
                       and ( $i == 0 or
