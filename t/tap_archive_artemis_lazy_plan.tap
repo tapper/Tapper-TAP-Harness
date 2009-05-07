@@ -1,6 +1,9 @@
 # Artemis-explicit-section-start: 1
 # Artemis-Section: t/00-artemis-meta.t
 ok 1 - artemis-test-meta
+ ---
+ some: yaml01
+ ...
 # Artemis-reportgroup-arbitrary:   29365
 # Artemis-reportgroup-testrun:     478
 # Artemis-Suite-Name:              Artemis
@@ -13,13 +16,15 @@ ok 1 - artemis-test-meta
 # Artemis-cpuinfo:                 2 cores [AMD Athlon(tm) 64 X2 Dual Core Processor 6000+]
 # Artemis-ram:                     1887MB
 # Artemis-starttime-test-program:  Fri Jun 13 11:16:35 CEST 2008
-ok
-1..1
 # Artemis-explicit-section-start: 1
+1..1
 # Artemis-Section: t/00-load.t
 ok 1 - use Artemis;
 ok 2 - use Artemis::Db::Handling;
 ok 3 - use Artemis::Installer::Client;
+ ---
+ some: yaml02
+ ...
 ok 4 - use Artemis::Installer::Server;
 ok 5 - use Artemis::MCP;
 ok 6 - use Artemis::MCP::Builder;
@@ -33,23 +38,20 @@ Subroutine uninitialize redefined at /2home/ss5/perl510/lib/site_perl/5.10.0/Cla
 Subroutine reinitialize redefined at /2home/ss5/perl510/lib/site_perl/5.10.0/Class/C3.pm line 101.
 ok 12 - use Artemis::Schema::TestsDB;
 # Testing Artemis 2.010004, Perl 5.010000, /2home/ss5/perl510/bin/perl
-ok
-1..12
 # Artemis-explicit-section-start: 1
+1..12
 # Artemis-Section: t/artemis_logging_netlogappender.t
 ok 1 - use Artemis::Logging::NetLogAppender;
 ok 2 # SKIP Please fix me!
 ok 3 # SKIP Please fix me!
 ok 4 # SKIP Please fix me!
 ok 5 # SKIP Please fix me!
-ok
 # Artemis-explicit-section-start: 1
 # Artemis-Section: t/artemis_mcp_builder.t
 1..5
 ok 1 - use Artemis::MCP::Builder;
-ok
-1..1
 # Artemis-explicit-section-start: 1
+1..1
 # Artemis-Section: t/artemis_mcp_runtest.t
 ok 1 - use Artemis::MCP::Runtest;
 ok
@@ -63,6 +65,9 @@ ok
 # Artemis-Section: t/artemis_systeminstaller.t
 ok 1 - use Artemis::Installer::Client;
 ok 2 - gethostname by host
+ ---
+ some: yaml03
+ ...
 ok 3 # SKIP mocking still failes
 ok 4 # SKIP mocking still failes
 ok 5 # SKIP mocking still failes
@@ -75,6 +80,9 @@ ok
 # Artemis-explicit-section-start: 1
 # Artemis-Section: t/artemis.t
 ok 1 - Subconfig during tests
+ ---
+ some: yaml04
+ ...
 not ok 2 - mcp host # TODO original config values need to be transferred here
 
 #   Failed (TODO) test 'mcp host'
