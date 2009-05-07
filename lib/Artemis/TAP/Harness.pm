@@ -90,7 +90,7 @@ sub _parse_tap_into_sections
                                                'suite-version' => 'unknown',
                                                'suite-type'    => 'unknown',
                                               };
-        my $sections_marked_explicit = 0;
+        my $sections_marked_explicit     = 0;
         my $last_line_was_version        = 0;
         my $last_line_was_plan           = 0;
 
@@ -112,11 +112,12 @@ sub _parse_tap_into_sections
 
                 $sections_marked_explicit = 1 if $raw =~ $re_explicit_section_start;
 
-                #say STDERR "    $i. is_version:              $is_version";
-                #say STDERR "    $i. is_yaml:                 $is_yaml";
-                #say STDERR "    $i. looks_like_prove_output: $looks_like_prove_output";
-                #say STDERR "    $i. last_line_was_plan:      $last_line_was_plan";
-                #say STDERR "    $i. last_line_was_version:   $last_line_was_version";
+#                 say STDERR "    $raw";
+#                 say STDERR "    $i. is_version:              $is_version";
+#                 say STDERR "    $i. is_yaml:                 $is_yaml";
+#                 say STDERR "    $i. looks_like_prove_output: $looks_like_prove_output";
+#                 say STDERR "    $i. last_line_was_plan:      $last_line_was_plan";
+#                 say STDERR "    $i. last_line_was_version:   $last_line_was_version";
 
                 # start new section
                 if ( $raw =~ $re_explicit_section_start
@@ -130,9 +131,13 @@ sub _parse_tap_into_sections
                                ( $is_version and not $last_line_was_plan )
                               )
                             ) or
-                            ( $looks_like_prove_output and $raw =~ $re_prove_section ) ) ) )
+                            ( $looks_like_prove_output and
+                              ! $last_line_was_version and
+                              ! $last_line_was_plan and
+                              $raw =~ $re_prove_section
+                            ) ) ) )
                 {
-                        #say STDERR "____________________________ new section";
+#                         say STDERR "____________________________ new section";
 
                         #say STDERR "****************************************";
                         if (keys %section) {
