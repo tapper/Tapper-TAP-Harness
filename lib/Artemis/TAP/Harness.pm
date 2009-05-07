@@ -63,13 +63,13 @@ sub _parse_tap_into_sections
         $report_tap =~ s/^(\s+Cannot determine clocksource)\s*$/  Cannot_determine_clocksource: ~/msg;
         $report_tap =~ s/^(\s+linetail):\s*$/$1: ~/msg;
         $report_tap =~ s/^(\s+CPU\d+):\s*$/$1: ~/msg;
-        $report_tap =~ s/^(\s+)(\w{3} \w{3} \d+ \d+:\d+:\d+ \w+ \d{4})$/$1date: $2/msg;
-        $report_tap =~ s/^(\s+)(2\.6\.\d+\.\d+[^\n]*)$/$1kernel: $2/msg; # kernel version
+        $report_tap =~ s/^(\s+)(\w{3} \w{3} +\d+ \d+:\d+:\d+ \w+ \d{4})$/$1date: $2/msg;
+        $report_tap =~ s/^(\s+)(2\.6\.\d+[^\n]*)$/$1kernel: $2/msg; # kernel version
         $report_tap =~ s/^(\s+)(Average)\s*([^\n]*)$/$1average: $3/msg;
         $report_tap =~ s/^(\s+)(Elapsed Time)\s*([^\n]*)$/$1elapsed_time: $3/msg;
         $report_tap =~ s/^(\s+)(User Time)\s*([^\n]*)$/$1user_time: $3/msg;
         $report_tap =~ s/^(\s+)(System Time)\s*([^\n]*)$/$1system_time: $3/msg;
-        $report_tap =~ s/^(\s+)(Percent CPU)\s*([^\n]*)$/$1foo: $3/msg;
+        $report_tap =~ s/^(\s+)(Percent CPU)\s*([^\n]*)$/$1percent_cpu: $3/msg;
         $report_tap =~ s/^(\s+)(Context Switches)\s*([^\n]*)$/$1context_switches: $3/msg;
         $report_tap =~ s/^(\s+)(Sleeps)\s*(\d+.\d+ \(\d+.\d+\)[^\n]*)$/$1sleeps: $3/msg;
 
