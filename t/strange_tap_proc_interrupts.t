@@ -10,7 +10,7 @@ use File::Slurp 'slurp';
 use Data::Dumper;
 use Test::Deep;
 
-plan tests => 4;
+plan tests => 5;
 
 my $tap;
 my $harness;
@@ -22,13 +22,13 @@ $tap     = slurp ("t/tap_archive_kernbench4.tap");
 $harness = new Artemis::TAP::Harness( tap => $tap );
 $harness->evaluate_report();
 
-print STDERR Dumper($harness->parsed_report->{tap_sections});
+#print STDERR Dumper($harness->parsed_report->{tap_sections});
 # foreach (map { $_->{section_name} }  @{$harness->parsed_report->{tap_sections}})
 # {
 #         diag "Section: $_";
 # }
 
-is( scalar @{$harness->parsed_report->{tap_sections}}, 18, "kernbench4 section name interrupts-before count");
+is( scalar @{$harness->parsed_report->{tap_sections}}, 19, "kernbench4 section name interrupts-before count");
 cmp_bag ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}],
          [
           qw/
@@ -50,6 +50,7 @@ cmp_bag ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}
                     stats-proc-interrupts-after
                     clocksource
                     uptime
+                    kernbench-results-2
             /
          ],
          "tap sections");
@@ -58,4 +59,7 @@ $interrupts_before_section = $harness->parsed_report->{tap_sections}->[1];
 is ($interrupts_before_section->{section_name}, 'stats-proc-interrupts-before', "kernbench4 section name interrupts-before");
 
 like ($harness->parsed_report->{tap_sections}->[1]->{raw}, qr/linetail: IO-APIC-edge  timer/, "raw contains yaml");
+
+print STDERR Dumper($harness->parsed_report->{tap_sections}->[18]->{raw});
+like ($harness->parsed_report->{tap_sections}->[18]->{raw}, qr/2.6.9-89.ELhugemem/, "raw contains kernel");
 

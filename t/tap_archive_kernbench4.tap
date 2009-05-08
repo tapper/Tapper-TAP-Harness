@@ -150,7 +150,7 @@ ok 1 - KernBench
   Context Switches 28028.4 (244.081)
   Sleeps 24329 (268.935)
   ...
-1..1
+1..2
 # Artemis-section: kernbench-results
 ok 1 - KernBench
   ---
@@ -287,4 +287,18 @@ ok 1 - got uptime
   ---
   uptime: 4692s
   idletime: 551s
+  ...
+1..1
+# Artemis-section: kernbench-results-2
+ok 1 - KernBench
+  ---
+  Fri Oct  7 12:47:54 CEST 2011
+  2.6.9-89.ELhugemem
+  Average Optimal load -j 8 Run (std deviation):
+  Elapsed Time 596.242 (6.49765)
+  User Time 816.746 (8.70691)
+  System Time 357.476 (0.664853)
+  Percent CPU 196.6 (0.894427)
+  Context Switches 38078.6 (494.467)
+  Sleeps 25499.6 (195.756)
   ...
