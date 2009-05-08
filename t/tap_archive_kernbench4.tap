@@ -302,3 +302,9 @@ ok 1 - KernBench
   Context Switches 38078.6 (494.467)
   Sleeps 25499.6 (195.756)
   ...
+1..1
+# Artemis-section: clocksource-2
+ok 1 - Clocksource
+  ---
+  Cannot determine clocksource
+  ...

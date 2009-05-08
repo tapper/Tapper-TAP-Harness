@@ -10,7 +10,7 @@ use File::Slurp 'slurp';
 use Data::Dumper;
 use Test::Deep;
 
-plan tests => 5;
+plan tests => 6;
 
 my $tap;
 my $harness;
@@ -28,7 +28,7 @@ $harness->evaluate_report();
 #         diag "Section: $_";
 # }
 
-is( scalar @{$harness->parsed_report->{tap_sections}}, 19, "kernbench4 section name interrupts-before count");
+is( scalar @{$harness->parsed_report->{tap_sections}}, 20, "kernbench4 section name interrupts-before count");
 cmp_bag ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}],
          [
           qw/
@@ -51,6 +51,7 @@ cmp_bag ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}
                     clocksource
                     uptime
                     kernbench-results-2
+                    clocksource-2
             /
          ],
          "tap sections");
@@ -62,4 +63,7 @@ like ($harness->parsed_report->{tap_sections}->[1]->{raw}, qr/linetail: IO-APIC-
 
 print STDERR Dumper($harness->parsed_report->{tap_sections}->[18]->{raw});
 like ($harness->parsed_report->{tap_sections}->[18]->{raw}, qr/2.6.9-89.ELhugemem/, "raw contains kernel");
+
+print STDERR Dumper($harness->parsed_report->{tap_sections}->[19]->{raw});
+like ($harness->parsed_report->{tap_sections}->[19]->{raw}, qr/Cannot_determine_clocksource: ~/, "raw contains clocksource yaml");
 
