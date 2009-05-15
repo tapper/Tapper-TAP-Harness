@@ -59,6 +59,7 @@ sub _parse_tap_into_sections
         #say STDERR $report_tap;
         # hot fix TAP errors
         $report_tap =~ s/^(\s+jiffies)\s*$/$1: ~/msg;
+        $report_tap =~ s/^(\s+kvm-clock)\s*$/$1: ~/msg;
         $report_tap =~ s/^(\s+acpi_pm)\s*$/$1: ~/msg;
         $report_tap =~ s/^(\s+Cannot determine clocksource)\s*$/  Cannot_determine_clocksource: ~/msg;
         $report_tap =~ s/^(\s+linetail):\s*$/$1: ~/msg;
