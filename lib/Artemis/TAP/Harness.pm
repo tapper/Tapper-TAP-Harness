@@ -210,7 +210,7 @@ sub _aggregate_sections
         $aggregator->start;
         foreach my $section (@{$self->parsed_report->{tap_sections}})
         {
-                my $rawtap = $section->{raw};
+                my $rawtap = $section->{raw} || '';
                 $rawtap    = $TAPVERSION."\n".$rawtap unless $rawtap =~ /^TAP Version/ms;
                 my $parser = new TAP::Parser ({ tap => $rawtap });
                 $parser->run;
