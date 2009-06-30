@@ -85,7 +85,7 @@ sub _parse_tap_into_sections
         my $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}$/;
         my $re_artemis_meta           = qr/^#\s*(Artemis-)([-\w]+):(.+)$/i;
         my $re_artemis_meta_section   = qr/^#\s*(Artemis-Section:)\s*(.+)$/i;
-        my $re_explicit_section_start = qr/^#\s*(Artemis-explicit-section-start:)(.*)$/i;
+        my $re_explicit_section_start = qr/^#\s*(Artemis-explicit-section-start:)\s*(\S*)/i;
         $self->parsed_report->{report_meta} = {
                                                'suite-name'    => 'unknown',
                                                'suite-version' => 'unknown',
@@ -114,11 +114,12 @@ sub _parse_tap_into_sections
                 $sections_marked_explicit = 1 if $raw =~ $re_explicit_section_start;
 
 #                 say STDERR "    $raw";
-#                 say STDERR "    $i. is_version:              $is_version";
-#                 say STDERR "    $i. is_yaml:                 $is_yaml";
-#                 say STDERR "    $i. looks_like_prove_output: $looks_like_prove_output";
-#                 say STDERR "    $i. last_line_was_plan:      $last_line_was_plan";
-#                 say STDERR "    $i. last_line_was_version:   $last_line_was_version";
+#                 say STDERR "    $i. is_version:               $is_version";
+#                 say STDERR "    $i. is_yaml:                  $is_yaml";
+#                 say STDERR "    $i. looks_like_prove_output:  $looks_like_prove_output";
+#                 say STDERR "    $i. last_line_was_plan:       $last_line_was_plan";
+#                 say STDERR "    $i. last_line_was_version:    $last_line_was_version";
+#                 say STDERR "    $i. sections_marked_explicit: $sections_marked_explicit";
 
                 # start new section
                 if ( $raw =~ $re_explicit_section_start and ! $last_line_was_version
