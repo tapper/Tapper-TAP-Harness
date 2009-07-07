@@ -9,7 +9,7 @@ use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
 
-our $VERSION = '2.010028';
+our $VERSION = '2.010029';
 
 use Moose;
 
