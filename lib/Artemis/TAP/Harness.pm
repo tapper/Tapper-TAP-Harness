@@ -294,6 +294,7 @@ sub _process_section_meta_information
 
         my @section_keys = qw(
                                      ram cpuinfo lspci uname osname uptime language-description
+                                     flags changeset description
                                      xen-version xen-changeset xen-dom0-kernel xen-base-os-description
                                      xen-guest-description xen-guest-test xen-guest-start xen-guest-flags
                                      kvm-module-version kvm-userspace-version kvm-kernel
