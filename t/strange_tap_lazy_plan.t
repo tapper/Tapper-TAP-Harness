@@ -53,11 +53,13 @@ is($first_section->{db_section_meta}{'cpuinfo'},                '2 cores [AMD At
 is($first_section->{db_section_meta}{'ram'},                    '1887MB',                                                                              "db meta ram");
 
 $harness = new Artemis::TAP::Harness( tap => $tap );
-my $html = $harness->generate_html;
+$harness->evaluate_report();
 is(scalar @{$harness->parsed_report->{tap_sections}}, 10, "count sections"); # check to trigger preparation errors
-open (XYZ, ">", "xyz.html") or die "Cannot write xyz.html";
-print XYZ $html;
-close XYZ;
+
+# my $html = $harness->generate_html;
+# open (XYZ, ">", "xyz.html") or die "Cannot write xyz.html";
+# print XYZ $html;
+# close XYZ;
 
 like($harness->_get_prove, qr|/.*bin.*/prove|, 'looks like prove command');
 

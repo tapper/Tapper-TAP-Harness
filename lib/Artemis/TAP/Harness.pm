@@ -337,9 +337,7 @@ sub generate_html
 {
         my ($self) = @_;
 
-        $self->_parse_tap_into_sections();
-        $self->_aggregate_sections();
-        $self->_process_meta_information();
+        $self->evaluate_report();
 
         my $temp       = new Directory::Scratch (CLEANUP  => 0);
         my $dir        = $temp->mkdir("section");
