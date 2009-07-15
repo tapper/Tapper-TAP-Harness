@@ -24,3 +24,8 @@ ok - plausible uptime
   uptime: 0:00
   ...
 1..1
+# Artemis-explicit-section-start: 1 -------------------- misc -------------\n
+# Artemis-Section: misc
+ok - misc foo
+ok - misc bar
+1..2

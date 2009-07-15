@@ -42,6 +42,41 @@ sub _unique_section_name
         return $section_name;
 }
 
+# hot fix known TAP errors
+sub _fix_broken_tap {
+        my ($tap) = @_;
+
+        # say STDERR "============================================================";
+        # say STDERR $tap;
+
+        # TAP::Parser chokes on that
+        $tap =~ s/^(\s+---)\s+$/$1/msg;
+
+        # known wrong YAML-in-TAP in database,
+        # usually Kernbench wrapper output
+        $tap =~ s/^(\s+)(jiffies)\s*$/$1Clocksource: $2/msg;
+        $tap =~ s/^(\s+kvm-clock)\s*$/$1: ~/msg;
+        $tap =~ s/^(\s+acpi_pm)\s*$/$1: ~/msg;
+        $tap =~ s/^(\s+Cannot determine clocksource)\s*$/  Cannot_determine_clocksource: ~/msg;
+        $tap =~ s/^(\s+linetail):\s*$/$1: ~/msg;
+        $tap =~ s/^(\s+CPU\d+):\s*$/$1: ~/msg;
+        $tap =~ s/^(\s+)(\w{3} \w{3} +\d+ \d+:\d+:\d+ \w+ \d{4})$/$1date: $2/msg;
+        $tap =~ s/^(\s+)(2\.6\.\d+[^\n]*)$/$1kernel: $2/msg; # kernel version
+        $tap =~ s/^(\s+)(Average)\s*([^\n]*)$/$1average: $3/msg;
+        $tap =~ s/^(\s+)(Elapsed Time)\s*([^\n]*)$/$1elapsed_time: $3/msg;
+        $tap =~ s/^(\s+)(User Time)\s*([^\n]*)$/$1user_time: $3/msg;
+        $tap =~ s/^(\s+)(System Time)\s*([^\n]*)$/$1system_time: $3/msg;
+        $tap =~ s/^(\s+)(Percent CPU)\s*([^\n]*)$/$1percent_cpu: $3/msg;
+        $tap =~ s/^(\s+)(Context Switches)\s*([^\n]*)$/$1context_switches: $3/msg;
+        $tap =~ s/^(\s+)(Sleeps)\s*(\d+.\d+ \(\d+.\d+\)[^\n]*)$/$1sleeps: $3/msg;
+
+        # say STDERR "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
+        # say STDERR $tap;
+        # say STDERR ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+
+        return $tap;
+}
+
 # return sections
 sub _parse_tap_into_sections
 {
@@ -55,28 +90,7 @@ sub _parse_tap_into_sections
         my $TAPVERSION = "TAP Version 13";
         $report_tap    = $TAPVERSION."\n".$report_tap unless $report_tap =~ /^TAP Version/ms;
 
-        #say STDERR "============================================================";
-        #say STDERR $report_tap;
-        # hot fix TAP errors
-        $report_tap =~ s/^(\s+jiffies)\s*$/$1: ~/msg;
-        $report_tap =~ s/^(\s+kvm-clock)\s*$/$1: ~/msg;
-        $report_tap =~ s/^(\s+acpi_pm)\s*$/$1: ~/msg;
-        $report_tap =~ s/^(\s+Cannot determine clocksource)\s*$/  Cannot_determine_clocksource: ~/msg;
-        $report_tap =~ s/^(\s+linetail):\s*$/$1: ~/msg;
-        $report_tap =~ s/^(\s+CPU\d+):\s*$/$1: ~/msg;
-        $report_tap =~ s/^(\s+)(\w{3} \w{3} +\d+ \d+:\d+:\d+ \w+ \d{4})$/$1date: $2/msg;
-        $report_tap =~ s/^(\s+)(2\.6\.\d+[^\n]*)$/$1kernel: $2/msg; # kernel version
-        $report_tap =~ s/^(\s+)(Average)\s*([^\n]*)$/$1average: $3/msg;
-        $report_tap =~ s/^(\s+)(Elapsed Time)\s*([^\n]*)$/$1elapsed_time: $3/msg;
-        $report_tap =~ s/^(\s+)(User Time)\s*([^\n]*)$/$1user_time: $3/msg;
-        $report_tap =~ s/^(\s+)(System Time)\s*([^\n]*)$/$1system_time: $3/msg;
-        $report_tap =~ s/^(\s+)(Percent CPU)\s*([^\n]*)$/$1percent_cpu: $3/msg;
-        $report_tap =~ s/^(\s+)(Context Switches)\s*([^\n]*)$/$1context_switches: $3/msg;
-        $report_tap =~ s/^(\s+)(Sleeps)\s*(\d+.\d+ \(\d+.\d+\)[^\n]*)$/$1sleeps: $3/msg;
-
-#         say STDERR "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-#         say STDERR $report_tap;
-#         say STDERR ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+        $report_tap = _fix_broken_tap($report_tap);
         my $parser = new TAP::Parser ({ tap => $report_tap });
 
         my $i = 0;
