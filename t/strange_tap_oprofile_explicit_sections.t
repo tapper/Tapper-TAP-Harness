@@ -28,7 +28,7 @@ $harness->evaluate_report();
 #         diag "Section: $_";
 # }
 
-is( scalar @{$harness->parsed_report->{tap_sections}}, 4, "oprfile section count");
+is( scalar @{$harness->parsed_report->{tap_sections}}, 4, "oprofile section count");
 cmp_bag ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}],
          [
           qw/
