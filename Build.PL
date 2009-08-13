@@ -14,6 +14,7 @@ my $builder = Module::Build->new
                         'TAP::DOM'    => 0,
                        },
      requires => {
+                  'Moose'                   => 0,
                   'TAP::Parser'             => 0,
                   'TAP::Parser::Aggregator' => 0,
                   'Directory::Scratch'      => 0,
