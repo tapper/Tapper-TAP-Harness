@@ -103,9 +103,9 @@ $interrupts_before_section = $harness->parsed_report->{tap_sections}->[1];
 is ($interrupts_before_section->{section_name}, 'stats-proc-interrupts-before', "kernbench5 section name interrupts-before");
 like ($harness->parsed_report->{tap_sections}->[1]->{raw}, qr/linetail: IO-APIC-edge\s*timer/, "raw contains yaml");
 
-print STDERR Dumper($harness->parsed_report->{tap_sections}->[6]->{raw});
+# print STDERR Dumper($harness->parsed_report->{tap_sections}->[6]->{raw});
 like ($harness->parsed_report->{tap_sections}->[6]->{raw}, qr/2.6.27.7-9-default/, "raw contains kernel");
 
-print STDERR Dumper($harness->parsed_report->{tap_sections}->[10]->{raw});
+# print STDERR Dumper($harness->parsed_report->{tap_sections}->[10]->{raw});
 like ($harness->parsed_report->{tap_sections}->[10]->{raw}, qr/kvm-clock: ~/, "raw contains kvm-clock yaml");
 
