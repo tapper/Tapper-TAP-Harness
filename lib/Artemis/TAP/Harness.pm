@@ -1,7 +1,6 @@
 package Artemis::TAP::Harness;
 
 use 5.010;
-
 use strict;
 use warnings;
 
@@ -9,7 +8,35 @@ use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
 
-our $VERSION = '2.010029';
+our $VERSION = '2.010030';
+our @SUITE_HEADER_KEYS_GENERAL = qw(suite-version
+                            hardwaredb-systems-id
+                            machine-name
+                            machine-description
+                            starttime-test-program
+                            endtime-test-program
+                          );
+
+our @SUITE_HEADER_KEYS_DATE = qw(
+                                        starttime-test-program
+                                        endtime-test-program
+                               );
+our @SUITE_HEADER_KEYS_REPORTGROUP = qw(
+                                               reportgroup-arbitrary
+                                               reportgroup-testrun
+                                               reportgroup-primary
+                                      );
+our @SECTION_HEADER_KEYS_GENERAL = qw(
+                                             ram cpuinfo lspci uname osname uptime language-description
+                                             flags changeset description
+                                             xen-version xen-changeset xen-dom0-kernel xen-base-os-description
+                                             xen-guest-description xen-guest-test xen-guest-start xen-guest-flags
+                                             kvm-module-version kvm-userspace-version kvm-kernel
+                                             kvm-base-os-description kvm-guest-description
+                                             kvm-guest-test kvm-guest-start kvm-guest-flags
+                                             flags reportcomment
+                                    );
+
 
 use Moose;
 
@@ -260,12 +287,7 @@ sub _process_suite_meta_information
 
         # suite meta
 
-        my @suite_keys = qw(suite-version
-                            machine-name
-                            machine-description
-                            starttime-test-program
-                            endtime-test-program
-                          );
+        my @suite_keys = @SUITE_HEADER_KEYS_GENERAL;
         foreach my $key (@suite_keys)
         {
                 my $value = $self->parsed_report->{report_meta}{$key};
@@ -274,10 +296,7 @@ sub _process_suite_meta_information
                 $self->parsed_report->{db_report_meta}{$accessor} = $value if defined $value;
         }
 
-        my @suite_date_keys = qw(
-                                        starttime-test-program
-                                        endtime-test-program
-                               );
+        my @suite_date_keys = @SUITE_HEADER_KEYS_DATE;
         foreach my $key (@suite_date_keys)
         {
                 my $value = $self->parsed_report->{report_meta}{$key};
@@ -286,11 +305,7 @@ sub _process_suite_meta_information
                 $self->parsed_report->{db_report_date_meta}{$accessor} = $value if defined $value;
         }
 
-        my @suite_reportgroup_keys = qw(
-                                               reportgroup-arbitrary
-                                               reportgroup-testrun
-                                               reportgroup-primary
-                                      );
+        my @suite_reportgroup_keys = @SUITE_HEADER_KEYS_REPORTGROUP;
         foreach my $key (@suite_reportgroup_keys)
         {
                 my $value = $self->parsed_report->{report_meta}{$key};
@@ -306,16 +321,7 @@ sub _process_section_meta_information
 
         # section meta
 
-        my @section_keys = qw(
-                                     ram cpuinfo lspci uname osname uptime language-description
-                                     flags changeset description
-                                     xen-version xen-changeset xen-dom0-kernel xen-base-os-description
-                                     xen-guest-description xen-guest-test xen-guest-start xen-guest-flags
-                                     kvm-module-version kvm-userspace-version kvm-kernel
-                                     kvm-base-os-description kvm-guest-description
-                                     kvm-guest-test kvm-guest-start kvm-guest-flags
-                                     flags reportcomment
-                            );
+        my @section_keys = @SECTION_HEADER_KEYS_GENERAL;
         foreach my $section ( @{$self->parsed_report->{tap_sections}} ) {
                 foreach my $key (@section_keys)
                 {
