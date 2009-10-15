@@ -401,7 +401,7 @@ sub generate_html
         # unix shell level
         my $prove = _get_prove();
 
-        my $html = qx( cd $temp/section ; $prove -vm --exec 'cat' --formatter=TAP::Formatter::HTML `find -type f | sort` );
+        my $html = qx( cd $temp/section ; $^X $prove -vm --exec 'cat' --formatter=TAP::Formatter::HTML `find -type f | sort` );
 
         $html = _fix_generated_html( $html );
 
