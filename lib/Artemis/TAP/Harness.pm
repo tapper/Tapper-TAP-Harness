@@ -371,10 +371,10 @@ sub generate_html
 
         $self->evaluate_report();
 
-        my $temp       = new Directory::Scratch (CLEANUP  => 0);
+        my $temp       = new Directory::Scratch (TEMPLATE => 'ATH_XXXXXXXXXXXX',
+                                                 CLEANUP  => 0);
         my $dir        = $temp->mkdir("section");
         my $TAPVERSION = "TAP Version 13";
-
         my @files = map {
                          my $fname          = "section/".$_->{section_name};
                          my $rawtap         = $_->{raw};
@@ -406,7 +406,7 @@ sub generate_html
         $html = _fix_generated_html( $html );
 
         #say STDERR "********** SLEEP"; sleep 10;
-        $temp->cleanup;
+        #$temp->cleanup;
         return $html;
 }
 
