@@ -17,32 +17,30 @@ our @SUITE_HEADER_KEYS_GENERAL = qw(suite-version
                                     endtime-test-program
                                   );
 
-our @SUITE_HEADER_KEYS_DATE = qw(
-                                        starttime-test-program
-                                        endtime-test-program
+our @SUITE_HEADER_KEYS_DATE = qw(starttime-test-program
+                                 endtime-test-program
                                );
-our @SUITE_HEADER_KEYS_REPORTGROUP = qw(
-                                               reportgroup-arbitrary
-                                               reportgroup-testrun
-                                               reportgroup-primary
+
+our @SUITE_HEADER_KEYS_REPORTGROUP = qw(reportgroup-arbitrary
+                                        reportgroup-testrun
+                                        reportgroup-primary
                                       );
-our @SUITE_HEADER_KEYS_REPORTCOMMENT = qw(
-                                                 reportcomment
-                                        );
-our @SECTION_HEADER_KEYS_GENERAL = qw(
-                                             ram cpuinfo bios lspci uname osname uptime language-description
-                                             flags changeset description
-                                             xen-version xen-changeset xen-dom0-kernel xen-base-os-description
-                                             xen-guest-description xen-guest-test xen-guest-start xen-guest-flags
-                                             kvm-module-version kvm-userspace-version kvm-kernel
-                                             kvm-base-os-description kvm-guest-description
-                                             kvm-guest-test kvm-guest-start kvm-guest-flags
-                                             flags
+
+our @SUITE_HEADER_KEYS_REPORTCOMMENT = qw(reportcomment );
+
+our @SECTION_HEADER_KEYS_GENERAL = qw(ram cpuinfo bios lspci uname osname uptime language-description
+                                      flags changeset description
+                                      xen-version xen-changeset xen-dom0-kernel xen-base-os-description
+                                      xen-guest-description xen-guest-test xen-guest-start xen-guest-flags
+                                      kvm-module-version kvm-userspace-version kvm-kernel
+                                      kvm-base-os-description kvm-guest-description
+                                      kvm-guest-test kvm-guest-start kvm-guest-flags
+                                      flags
                                     );
 
 use Moose;
 
-has tap           => ( is => 'rw', isa => 'Str'     );
+has tap           => ( is => 'rw', isa => 'Str' );
 has parsed_report => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 has section_names => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
@@ -336,8 +334,6 @@ sub _process_section_meta_information
                         my $section_name = $section->{section_name};
                         my $value        = $section->{section_meta}{$key};
                         my $accessor     = $key;
-                        #say   STDERR "*** section key /value  : $key / ", ($value // "<NONE>");
-                        # print STDERR "    section meta: ", Dumper($section->{section_meta});
                         $accessor        =~ s/-/_/g;
                         $section->{db_section_meta}{$accessor} = $value if defined $value;
                 }
