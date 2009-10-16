@@ -11,6 +11,7 @@
 # Artemis-cpuinfo: 3x Family: 16, Model: 2, Stepping: 0
 # Artemis-ram: 1883 MB
 # Artemis-uptime: 219 hrs
+# Artemis-reportcomment: KVM Building Done Right!
 ok 1 - artemis-meta-data
 1..11
 # Artemis-section: kvm-userspace

@@ -10,12 +10,12 @@ use Directory::Scratch;
 
 our $VERSION = '2.010032';
 our @SUITE_HEADER_KEYS_GENERAL = qw(suite-version
-                            hardwaredb-systems-id
-                            machine-name
-                            machine-description
-                            starttime-test-program
-                            endtime-test-program
-                          );
+                                    hardwaredb-systems-id
+                                    machine-name
+                                    machine-description
+                                    starttime-test-program
+                                    endtime-test-program
+                                  );
 
 our @SUITE_HEADER_KEYS_DATE = qw(
                                         starttime-test-program
@@ -26,17 +26,19 @@ our @SUITE_HEADER_KEYS_REPORTGROUP = qw(
                                                reportgroup-testrun
                                                reportgroup-primary
                                       );
+our @SUITE_HEADER_KEYS_REPORTCOMMENT = qw(
+                                                 reportcomment
+                                        );
 our @SECTION_HEADER_KEYS_GENERAL = qw(
-                                             ram cpuinfo lspci uname osname uptime language-description
+                                             ram cpuinfo bios lspci uname osname uptime language-description
                                              flags changeset description
                                              xen-version xen-changeset xen-dom0-kernel xen-base-os-description
                                              xen-guest-description xen-guest-test xen-guest-start xen-guest-flags
                                              kvm-module-version kvm-userspace-version kvm-kernel
                                              kvm-base-os-description kvm-guest-description
                                              kvm-guest-test kvm-guest-start kvm-guest-flags
-                                             flags reportcomment
+                                             flags
                                     );
-
 
 use Moose;
 
@@ -131,6 +133,7 @@ sub _parse_tap_into_sections
                                                'suite-name'    => 'unknown',
                                                'suite-version' => 'unknown',
                                                'suite-type'    => 'unknown',
+                                               'reportcomment' => undef,
                                               };
         my $sections_marked_explicit     = 0;
         my $last_line_was_version        = 0;
@@ -287,8 +290,7 @@ sub _process_suite_meta_information
 
         # suite meta
 
-        my @suite_keys = @SUITE_HEADER_KEYS_GENERAL;
-        foreach my $key (@suite_keys)
+        foreach my $key (@SUITE_HEADER_KEYS_GENERAL)
         {
                 my $value = $self->parsed_report->{report_meta}{$key};
                 my $accessor = $key;
@@ -296,8 +298,7 @@ sub _process_suite_meta_information
                 $self->parsed_report->{db_report_meta}{$accessor} = $value if defined $value;
         }
 
-        my @suite_date_keys = @SUITE_HEADER_KEYS_DATE;
-        foreach my $key (@suite_date_keys)
+        foreach my $key (@SUITE_HEADER_KEYS_DATE)
         {
                 my $value = $self->parsed_report->{report_meta}{$key};
                 my $accessor = $key;
@@ -305,13 +306,20 @@ sub _process_suite_meta_information
                 $self->parsed_report->{db_report_date_meta}{$accessor} = $value if defined $value;
         }
 
-        my @suite_reportgroup_keys = @SUITE_HEADER_KEYS_REPORTGROUP;
-        foreach my $key (@suite_reportgroup_keys)
+        foreach my $key (@SUITE_HEADER_KEYS_REPORTGROUP)
         {
                 my $value = $self->parsed_report->{report_meta}{$key};
                 my $accessor = $key;
                 $accessor =~ s/-/_/g;
                 $self->parsed_report->{db_report_reportgroup_meta}{$accessor} = $value if defined $value;
+        }
+
+        foreach my $key (@SUITE_HEADER_KEYS_REPORTCOMMENT)
+        {
+                my $value = $self->parsed_report->{report_meta}{$key};
+                my $accessor = $key;
+                $accessor =~ s/-/_/g;
+                $self->parsed_report->{db_report_reportcomment_meta}{$accessor} = $value if defined $value;
         }
 }
 
@@ -321,13 +329,15 @@ sub _process_section_meta_information
 
         # section meta
 
-        my @section_keys = @SECTION_HEADER_KEYS_GENERAL;
         foreach my $section ( @{$self->parsed_report->{tap_sections}} ) {
-                foreach my $key (@section_keys)
+                foreach my $key (@SECTION_HEADER_KEYS_GENERAL)
                 {
+                        use Data::Dumper;
                         my $section_name = $section->{section_name};
                         my $value        = $section->{section_meta}{$key};
                         my $accessor     = $key;
+                        #say   STDERR "*** section key /value  : $key / ", ($value // "<NONE>");
+                        # print STDERR "    section meta: ", Dumper($section->{section_meta});
                         $accessor        =~ s/-/_/g;
                         $section->{db_section_meta}{$accessor} = $value if defined $value;
                 }

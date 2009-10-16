@@ -28,11 +28,14 @@ is($harness->parsed_report->{report_meta}{'machine-description'},  'PC-Ware', "r
 is($harness->parsed_report->{report_meta}{'cpuinfo'},  '1x Family: 15, Model: 107, Stepping: 1', "report meta cpuinfo");
 is($harness->parsed_report->{report_meta}{'ram'},  '3839 MB', "report meta ram");
 is($harness->parsed_report->{report_meta}{'uptime'},  '21 hrs', "report meta uptime");
+is($harness->parsed_report->{report_meta}{'bios'}, 'American Megatrends Inc., 0201, 10/15/2007', "report meta bios");
 
 # report meta db
-is($harness->parsed_report->{db_report_meta}{machine_name},  'kepek',                             "db report meta machine name");
-is($harness->parsed_report->{db_report_meta}{hardwaredb_systems_id},  4711,                       "db report meta hardwaredb systems id");
-is($harness->parsed_report->{db_report_meta}{machine_description},  'PC-Ware',                    "db report meta machine-description");
+is($harness->parsed_report->{db_report_meta}{machine_name},          'kepek',   "db report meta machine name");
+is($harness->parsed_report->{db_report_meta}{hardwaredb_systems_id}, 4711,      "db report meta hardwaredb systems id");
+is($harness->parsed_report->{db_report_meta}{machine_description},   'PC-Ware', "db report meta machine-description");
+
+is($harness->parsed_report->{db_report_reportcomment_meta}{reportcomment},   'Hot Funky Report', "db reportcomment meta comment");
 
 # sections
 is($harness->parsed_report->{tap_sections}[0]{section_name},'Metainfo',                     "section name 0");
@@ -45,6 +48,7 @@ is($harness->parsed_report->{tap_sections}[1]{section_meta}{'kvm-module-version'
 is($harness->parsed_report->{tap_sections}[1]{section_meta}{'kvm-userspace-version'}, 'kvm-84-488-gee8b55c', "section 1 meta kvm-userspace-version");
 is($harness->parsed_report->{tap_sections}[1]{section_meta}{'kvm-base-os-description'}, 'Fedora release 10 (Cambridge)', "section 1 meta kvm-base-os-description");
 is($harness->parsed_report->{tap_sections}[1]{section_meta}{'kvm-kernel'}, '2.6.27.21-170.2.56.fc10.x86_64 x86_64', "section 1 meta kvm-kernel");
+is($harness->parsed_report->{tap_sections}[1]{section_meta}{'description'}, 'description affe 0', "section 1 meta description");
 
 # kvm meta db
 is($harness->parsed_report->{tap_sections}[1]{db_section_meta}{kvm_module_version}, 'kvm-84-6620-ge3dbe3f', "section 1 meta kvm-module-version");
@@ -57,6 +61,7 @@ is($harness->parsed_report->{tap_sections}[2]{section_meta}{'kvm-guest-descripti
 is($harness->parsed_report->{tap_sections}[2]{section_meta}{'kvm-guest-test'}, 'WinSST-4.7.4', "section 2 meta kvm-guest-test");
 is($harness->parsed_report->{tap_sections}[2]{section_meta}{'kvm-guest-start'}, '2009-04-06 19:52:18', "section 2 meta kvm-guest-start");
 is($harness->parsed_report->{tap_sections}[2]{section_meta}{'kvm-guest-flags'}, '-m 2304 -smp 1', "section 2 meta kvm-guest-flags");
+is($harness->parsed_report->{tap_sections}[2]{section_meta}{'description'}, 'description affe 1', "section 2 meta description");
 
 # ============================================================
 
