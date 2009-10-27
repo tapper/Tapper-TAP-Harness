@@ -59,10 +59,10 @@ if (open my $F, ">", "/tmp/ATH_oprofile.html") {
 }
 
 #print STDERR Dumper($harness->parsed_report->{tap_sections});
-foreach (map { $_->{section_name} }  @{$harness->parsed_report->{tap_sections}})
-{
-        diag "Section: $_";
-}
+# foreach (map { $_->{section_name} }  @{$harness->parsed_report->{tap_sections}})
+# {
+#         diag "Section: $_";
+# }
 
 is( scalar @{$harness->parsed_report->{tap_sections}}, 9, "oprofile section count");
 #                    version.tap
