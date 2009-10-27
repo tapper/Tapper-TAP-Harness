@@ -261,6 +261,7 @@ sub _aggregate_sections
         }
         $aggregator->stop;
 
+        # exit
         foreach (qw(total
                     passed
                     parse_errors
@@ -268,13 +269,12 @@ sub _aggregate_sections
                     todo
                     todo_passed
                     wait
-                    exit
                     failed
                     todo_passed
                   ))
         {
                 no strict 'refs';
-                $self->parsed_report->{stats}{total} = $aggregator->$_;
+                $self->parsed_report->{stats}{$_} = $aggregator->$_;
         }
         $self->parsed_report->{stats}{successgrade}  = $aggregator->get_status;
         $self->parsed_report->{stats}{success_ratio} = sprintf("%02.2f",
