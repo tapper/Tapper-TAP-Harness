@@ -28,10 +28,10 @@ our @SUITE_HEADER_KEYS_REPORTGROUP = qw(reportgroup-arbitrary
 
 our @SUITE_HEADER_KEYS_REPORTCOMMENT = qw(reportcomment );
 
-our @SECTION_HEADER_KEYS_GENERAL = qw(ram cpuinfo bios lspci uname osname uptime language-description
+our @SECTION_HEADER_KEYS_GENERAL = qw(ram cpuinfo bios lspci lsusb uname osname uptime language-description
                                       flags changeset description
                                       xen-version xen-changeset xen-dom0-kernel xen-base-os-description
-                                      xen-guest-description xen-guest-test xen-guest-start xen-guest-flags
+                                      xen-guest-description xen-guest-test xen-guest-start xen-guest-flags xen-hvbits
                                       kvm-module-version kvm-userspace-version kvm-kernel
                                       kvm-base-os-description kvm-guest-description
                                       kvm-guest-test kvm-guest-start kvm-guest-flags
