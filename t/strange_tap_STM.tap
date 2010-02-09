@@ -1,0 +1,78 @@
+# Artemis-explicit-section-start: 1
+# Artemis-suite-name:                  STM_benchmark_tests
+# Artemis-suite-version:               1.001
+# Artemis-machine-name:                mautern
+# Artemis-uname:                   Linux mautern 2.6.31-19-generic #56-Ubuntu SMP Thu Jan 28 02:39:34 UTC 2010 x86_64 GNU/Linux
+# Artemis-osname:                  Ubuntu 9.10
+# Artemis-cpuinfo:                 2 cores [AMD Athlon(tm) 64 X2 Dual Core Processor 5200+]
+# Artemis-ram:                     3963
+# Artemis-starttime-test-program:  Tue, 09 Feb 2010 16:20:36 +0100
+ok - test suite started
+ok - We run on Linux
+ok - Looks like 2.6.x kernel
+ok
+# Bogomips as comment:  5226.88
+  ---
+  Bogomips:  5226.88
+  ...
+ok - 2 cores
+ok - Cores:  1
+# Duration     : 10000
+# Initial size : 256
+# Nb threads   : 2
+# Value range  : 65535
+# Seed         : 0
+# Update rate  : 20
+# int/long/ptr size: 4/8/8
+# Adding 256 entries to set
+# Set size  : 254
+# Creating thread 0
+# Creating thread 1
+# STARTING...
+# STOPPING...
+# Thread 0
+#   #add      : 1854035
+#   #remove   : 1846914
+#   #contains : 14785456
+#   #found    : 57556
+# Thread 1
+#   #add      : 1660994
+#   #remove   : 1654483
+#   #contains : 13259871
+#   #found    : 51663
+# Set size    : 255 (expected: 255)
+# Duration    : 10000 (ms)
+# #txs        : 35061753 (3506175.300000 / s)
+# #read txs   : 28045327 (2804532.700000 / s)
+# #update txs : 7016426 (701642.600000 / s)
+ok - Cores:  2
+# Duration     : 10000
+# Initial size : 256
+# Nb threads   : 2
+# Value range  : 65535
+# Seed         : 0
+# Update rate  : 20
+# int/long/ptr size: 4/8/8
+# Adding 256 entries to set
+# Set size  : 254
+# Creating thread 0
+# Creating thread 1
+# STARTING...
+# STOPPING...
+# Thread 0
+#   #add      : 1854035
+#   #remove   : 1846914
+#   #contains : 14785456
+#   #found    : 57556
+# Thread 1
+#   #add      : 1660994
+#   #remove   : 1654483
+#   #contains : 13259871
+#   #found    : 51663
+# Set size    : 255 (expected: 255)
+# Duration    : 10000 (ms)
+# #txs        : 35061753 (3506175.300000 / s)
+# #read txs   : 28045327 (2804532.700000 / s)
+# #update txs : 7016426 (701642.600000 / s)
+1..7
+# Artemis-explicit-section-start: 1
