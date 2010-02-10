@@ -1,17 +1,11 @@
-# Artemis-explicit-section-start: 1
+# Artemis-Explicit-Section-Start: 1 ---- metainfo ----
 # Artemis-suite-name:                  STM_benchmark_tests
 # Artemis-suite-version:               1.001
 # Artemis-machine-name:                mautern
-# Artemis-uname:                   Linux mautern 2.6.31-19-generic #56-Ubuntu SMP Thu Jan 28 02:39:34 UTC 2010 x86_64 GNU/Linux
-# Artemis-osname:                  Ubuntu 9.10
-# Artemis-cpuinfo:                 2 cores [AMD Athlon(tm) 64 X2 Dual Core Processor 5200+]
-# Artemis-ram:                     3963
-# Artemis-starttime-test-program:  Tue, 09 Feb 2010 16:20:36 +0100
 ok - test suite started
 ok - We run on Linux
 ok - Looks like 2.6.x kernel
-ok
-# Bogomips as comment:  5226.88
+ok - bogomips
   ---
   Bogomips:  5226.88
   ...
@@ -75,4 +69,3 @@ ok - Cores:  2
 # #read txs   : 28045327 (2804532.700000 / s)
 # #update txs : 7016426 (701642.600000 / s)
 1..7
-# Artemis-explicit-section-start: 1
