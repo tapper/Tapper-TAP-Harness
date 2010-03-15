@@ -40,11 +40,8 @@ is( scalar @{$harness->parsed_report->{tap_sections}}, 1, "section count");
 cmp_bag ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}], [ qw/ section-000 / ], "tap sections");
 $html = $harness->generate_html();
 
-{
-        local $TODO = "OSRC BUG#636 - Embedded YAML in explicit-sections and lazy plan do not work";
-        unlike($html, qr/Parse error: More than one plan found in TAP output/, "no parse error: More than one plan found");
-        unlike($html, qr/Parse error: No plan found in TAP output/, "no parse error: No plan found");
-}
+unlike($html, qr/Parse error: More than one plan found in TAP output/, "no parse error: More than one plan found");
+unlike($html, qr/Parse error: No plan found in TAP output/, "no parse error: No plan found");
 
 # write out for investigation
 if (open my $F, ">", "/tmp/ATH_STM.html") { print $F $html; close $F; }
