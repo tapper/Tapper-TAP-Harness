@@ -118,7 +118,7 @@ sub _parse_tap_into_sections
         $report_tap    = $TAPVERSION."\n".$report_tap unless $report_tap =~ /^TAP Version/ms;
 
         $report_tap = _fix_broken_tap($report_tap);
-        my $parser = new TAP::Parser ({ tap => $report_tap });
+        my $parser = new TAP::Parser ({ tap => $report_tap, version => 13 });
 
         my $i = 0;
         my %section;
@@ -413,8 +413,6 @@ sub generate_html
 
         $html = _fix_generated_html( $html );
 
-        #say STDERR "********** SLEEP"; sleep 10;
-        $temp->cleanup;
         return $html;
 }
 

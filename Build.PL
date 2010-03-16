@@ -15,6 +15,7 @@ my $builder = Module::Build->new
                        },
      requires => {
                   'Moose'                   => 0,
+                  'Test::Harness'           => '3.22',
                   'TAP::Parser'             => 0,
                   'TAP::Parser::Aggregator' => 0,
                   'Directory::Scratch'      => 0,
