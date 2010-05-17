@@ -35,6 +35,12 @@ our @SECTION_HEADER_KEYS_GENERAL = qw(ram cpuinfo bios lspci lsusb uname osname 
                                       kvm-module-version kvm-userspace-version kvm-kernel
                                       kvm-base-os-description kvm-guest-description
                                       kvm-guest-test kvm-guest-start kvm-guest-flags
+                                      simnow-svn-version
+                                      simnow-version
+                                      simnow-svn-repository
+                                      simnow-device-interface-version
+                                      simnow-bsd-file
+                                      simnow-image-file
                                       flags
                                     );
 

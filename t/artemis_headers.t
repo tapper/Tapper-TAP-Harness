@@ -108,4 +108,51 @@ is($harness->parsed_report->{tap_sections}[2]{section_meta}{'xen-guest-flags'}, 
 
 # ============================================================
 
+$tap     = slurp ("t/tap_archive_headers_simnow.tap");
+$harness = new Artemis::TAP::Harness( tap => $tap );
+
+$harness->evaluate_report();
+
+is(scalar @{$harness->parsed_report->{tap_sections}}, 5, "count sections");
+
+is($harness->parsed_report->{report_meta}{'suite-name'},    'Daily-Report',   "report meta suite-name");
+is($harness->parsed_report->{report_meta}{'suite-version'}, '0.01',           "report meta suite-version");
+is($harness->parsed_report->{report_meta}{'machine-name'},  'irida',          "report meta machine-name");
+is($harness->parsed_report->{report_meta}{'hardwaredb-systems-id'}, 4712,     "report meta hardwaredb systems id");
+is($harness->parsed_report->{report_meta}{'machine-description'},  'PC-Ware', "report meta machine-description");
+is($harness->parsed_report->{report_meta}{'cpuinfo'},  '1x Family: 15, Model: 107, Stepping: 1', "report meta cpuinfo");
+is($harness->parsed_report->{report_meta}{'ram'},  '3967 MB', "report meta ram");
+is($harness->parsed_report->{report_meta}{'uptime'},  '96 hrs', "report meta uptime");
+
+# sections
+is($harness->parsed_report->{tap_sections}[0]{section_name},'Metainfo',                                 "section name 0");
+is($harness->parsed_report->{tap_sections}[1]{section_name},'SimNow-Metainfo',                          "section name 1");
+is($harness->parsed_report->{tap_sections}[2]{section_name},'guest_1_redhat_rhel4u8_beta_32b_up_qcow',  "section name 2");
+is($harness->parsed_report->{tap_sections}[3]{section_name},'guest_2_redhat_rhel4u8_beta_32b_smp_qcow', "section name 3");
+is($harness->parsed_report->{tap_sections}[4]{section_name},'dom0',                                     "section name 4");
+
+# simnow meta
+is($harness->parsed_report->{tap_sections}[1]{section_meta}{'simnow-version'},                  '4.6.1', "section 1 meta simnow-version");
+is($harness->parsed_report->{tap_sections}[1]{section_meta}{'simnow-svn-version'},              '17050', "section 1 meta simnow-svn-version");
+is($harness->parsed_report->{tap_sections}[1]{section_meta}{'simnow-svn-repository'},           'svn+ssh://svdcsvn1/proj/svn/smn/simnow/trunk', "section 1 meta simnow-svn-repository");
+is($harness->parsed_report->{tap_sections}[1]{section_meta}{'simnow-device-interface-version'}, '16384', "section 1 meta simnow-device-interface-version");
+is($harness->parsed_report->{tap_sections}[1]{section_meta}{'simnow-bsd-file'},                 'vp_bd_phase2', "section 1 meta simnow-bsd-file");
+is($harness->parsed_report->{tap_sections}[1]{section_meta}{'simnow-image-file'},               'openSUSE11.1', "section 1 meta simnow-image-file");
+
+# simnow meta db
+is($harness->parsed_report->{tap_sections}[1]{db_section_meta}{'simnow_version'},                  '4.6.1', "db section 1 meta simnow-version");
+is($harness->parsed_report->{tap_sections}[1]{db_section_meta}{'simnow_svn_version'},              '17050', "db section 1 meta simnow-svn-version");
+is($harness->parsed_report->{tap_sections}[1]{db_section_meta}{'simnow_svn_repository'},           'svn+ssh://svdcsvn1/proj/svn/smn/simnow/trunk', "db section 1 meta simnow-svn-repository");
+is($harness->parsed_report->{tap_sections}[1]{db_section_meta}{'simnow_device_interface_version'}, '16384', "db section 1 meta simnow-device-interface-version");
+is($harness->parsed_report->{tap_sections}[1]{db_section_meta}{'simnow_bsd_file'},                 'vp_bd_phase2', "db section 1 meta simnow-bsd-file");
+is($harness->parsed_report->{tap_sections}[1]{db_section_meta}{'simnow_image_file'},               'openSUSE11.1', "db section 1 meta simnow-image-file");
+
+# xen guest meta
+is($harness->parsed_report->{tap_sections}[2]{section_meta}{'xen-guest-description'}, '001-CTCS', "section 2 meta xen-guest-description");
+is($harness->parsed_report->{tap_sections}[2]{section_meta}{'xen-guest-test'}, 'CTCS-1.3.1pre1', "section 2 meta xen-guest-test");
+is($harness->parsed_report->{tap_sections}[2]{section_meta}{'xen-guest-start'}, '2009-04-06 17:54:57 CEST', "section 2 meta xen-guest-start");
+is($harness->parsed_report->{tap_sections}[2]{section_meta}{'xen-guest-flags'}, 'acpi=1; apic=1; memory=2048; pae=1; shadow_memory=20; timer_mode=2; vcpus=1', "section 2 meta xen-guest-flags");
+
+# ============================================================
+
 done_testing();
