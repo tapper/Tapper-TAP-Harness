@@ -419,6 +419,8 @@ sub generate_html
 
         $html = _fix_generated_html( $html );
 
+        $temp->cleanup; # above CLEANUP=>1 is not enough. Trust me.
+
         return $html;
 }
 
