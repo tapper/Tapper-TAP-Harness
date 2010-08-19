@@ -13,6 +13,7 @@ our @SUITE_HEADER_KEYS_GENERAL = qw(suite-version
                                     hardwaredb-systems-id
                                     machine-name
                                     machine-description
+                                    reportername
                                     starttime-test-program
                                     endtime-test-program
                                   );

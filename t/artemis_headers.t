@@ -23,6 +23,7 @@ is(scalar @{$harness->parsed_report->{tap_sections}}, 4, "count sections");
 is($harness->parsed_report->{report_meta}{'suite-name'},    'Daily-Report',  "report meta suite name");
 is($harness->parsed_report->{report_meta}{'suite-version'}, '0.01',          "report meta suite version");
 is($harness->parsed_report->{report_meta}{'machine-name'},  'kepek',         "report meta machine name");
+is($harness->parsed_report->{report_meta}{'reportername'},  'sschwigo',      "report meta reportername");
 is($harness->parsed_report->{report_meta}{'hardwaredb-systems-id'},  4711,   "report meta hardwaredb systems id");
 is($harness->parsed_report->{report_meta}{'machine-description'},  'PC-Ware', "report meta machine-description");
 is($harness->parsed_report->{report_meta}{'cpuinfo'},  '1x Family: 15, Model: 107, Stepping: 1', "report meta cpuinfo");
@@ -32,6 +33,7 @@ is($harness->parsed_report->{report_meta}{'bios'}, 'American Megatrends Inc., 02
 
 # report meta db
 is($harness->parsed_report->{db_report_meta}{machine_name},          'kepek',   "db report meta machine name");
+is($harness->parsed_report->{db_report_meta}{reportername},          'sschwigo', "db report meta reportername");
 is($harness->parsed_report->{db_report_meta}{hardwaredb_systems_id}, 4711,      "db report meta hardwaredb systems id");
 is($harness->parsed_report->{db_report_meta}{machine_description},   'PC-Ware', "db report meta machine-description");
 
