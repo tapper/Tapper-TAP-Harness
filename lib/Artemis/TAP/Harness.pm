@@ -8,7 +8,7 @@ use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
 
-our $VERSION = '2.010038';
+our $VERSION = '2.010039';
 our @SUITE_HEADER_KEYS_GENERAL = qw(suite-version
                                     hardwaredb-systems-id
                                     machine-name
