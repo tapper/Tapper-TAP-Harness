@@ -288,7 +288,7 @@ ok 1 - got uptime
   uptime: 4692s
   idletime: 551s
   ...
-1..1
+1..2
 # Artemis-section: kernbench-results-2
 ok 1 - KernBench
   ---
@@ -301,6 +301,18 @@ ok 1 - KernBench
   Percent CPU 196.6 (0.894427)
   Context Switches 38078.6 (494.467)
   Sleeps 25499.6 (195.756)
+  ...
+ok 2 - KernBench
+  ---
+  Wed Sep 15 07:48:24 EDT 2010
+  2.6.36-rc4-9c03f162-simnow+
+  Average Half load -j 3 Run (std deviation):
+  Elapsed Time 0 (0)
+  User Time 0 (0)
+  System Time 0 (0)
+  Percent CPU 0 (0)
+  Context Switches 0 (0)
+  Sleeps 2 (0)
   ...
 1..1
 # Artemis-section: clocksource-2

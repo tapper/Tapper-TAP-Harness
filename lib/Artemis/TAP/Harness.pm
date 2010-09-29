@@ -102,7 +102,7 @@ sub _fix_broken_tap {
         $tap =~ s/^(\s+)(System Time)\s*([^\n]*)$/$1system_time: $3/msg;
         $tap =~ s/^(\s+)(Percent CPU)\s*([^\n]*)$/$1percent_cpu: $3/msg;
         $tap =~ s/^(\s+)(Context Switches)\s*([^\n]*)$/$1context_switches: $3/msg;
-        $tap =~ s/^(\s+)(Sleeps)\s*(\d+.\d+ \(\d+.\d+\)[^\n]*)$/$1sleeps: $3/msg;
+        $tap =~ s/^(\s+)(Sleeps)\s*([^\n]*)$/$1sleeps: $3/msg;
 
         # say STDERR "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
         # say STDERR $tap;
