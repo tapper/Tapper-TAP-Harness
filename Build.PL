@@ -9,9 +9,10 @@ my $builder = Module::Build->new
      dist_author         => 'OSRC SysInt Team <osrc-sysint@elbe.amd.com>',
      dist_version_from   => 'lib/Artemis/TAP/Harness.pm',
      build_requires => {
-                        'Test::More'  => 0,
-                        'File::Slurp' => 0,
-                        'TAP::DOM'    => 0,
+                        'Test::More'         => 0,
+                        'Test::Perl::Critic' => 0,
+                        'File::Slurp'        => 0,
+                        'TAP::DOM'           => 0,
                        },
      requires => {
                   'Moose'                   => 0,
