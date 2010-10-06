@@ -280,7 +280,7 @@ sub _aggregate_sections
                     todo_passed
                   ))
         {
-                no strict 'refs';
+                no strict 'refs'; ## no critic
                 $self->parsed_report->{stats}{$_} = $aggregator->$_;
         }
         $self->parsed_report->{stats}{successgrade}  = $aggregator->get_status;
