@@ -52,9 +52,15 @@ our @SECTION_HEADER_KEYS_GENERAL = qw(ram cpuinfo bios lspci lsusb uname osname 
 
 use Moose;
 
-has tap           => ( is => 'rw', isa => 'Str' );
-has parsed_report => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
-has section_names => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
+has tap            => ( is => 'rw', isa => 'Str' );
+has tap_is_archive => ( is => 'rw', isa => 'Int' );
+has parsed_report  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
+has section_names  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
+
+our $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}$/;
+our $re_artemis_meta           = qr/^#\s*(Artemis-)([-\w]+):(.+)$/i;
+our $re_artemis_meta_section   = qr/^#\s*(Artemis-Section:)\s*(.+)$/i;
+our $re_explicit_section_start = qr/^#\s*(Artemis-explicit-section-start:)\s*(\S*)/i;
 
 sub _get_prove {
         my $prove = $^X;
@@ -143,10 +149,6 @@ sub _parse_tap_into_sections_raw
         my $i = 0;
         my %section;
         my $looks_like_prove_output = 0;
-        my $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}$/;
-        my $re_artemis_meta           = qr/^#\s*(Artemis-)([-\w]+):(.+)$/i;
-        my $re_artemis_meta_section   = qr/^#\s*(Artemis-Section:)\s*(.+)$/i;
-        my $re_explicit_section_start = qr/^#\s*(Artemis-explicit-section-start:)\s*(\S*)/i;
         $self->parsed_report->{report_meta} = {
                                                'suite-name'    => 'unknown',
                                                'suite-version' => 'unknown',
@@ -219,13 +221,6 @@ sub _parse_tap_into_sections_raw
                         $section{raw} .= "$raw\n";
                 }
 
-                # looks like filename line from "prove"
-                if ( $is_unknown and $raw =~ $re_prove_section )
-                {
-                        my $section_name = $self->_unique_section_name( $1 );
-                        $section{section_name} //= $section_name;
-                }
-
                 # looks like artemis meta line
                 if ( $line->is_comment and $raw =~ $re_artemis_meta )
                 {
@@ -234,11 +229,17 @@ sub _parse_tap_into_sections_raw
                         $val =~ s/^\s+//;
                         $val =~ s/\s+$//;
                         if ($raw =~ $re_artemis_meta_section) {
-                                my $section_name = $self->_unique_section_name( $val );
-                                $section{section_name} //= $section_name;
+                                $section{section_name} //= $self->_unique_section_name( $val );
                         }
                         $section{section_meta}{$key} = $val;              # section keys
                         $self->parsed_report->{report_meta}{$key} = $val; # also global keys, later entries win
+                }
+
+                # looks like filename line from "prove"
+                if ( $is_unknown and $raw =~ $re_prove_section )
+                {
+                        my $section_name = $self->_unique_section_name( $1 );
+                        $section{section_name} //= $section_name;
                 }
 
                 $i++;
@@ -382,6 +383,7 @@ sub _aggregate_sections
                 $rawtap    = $TAPVERSION."\n".$rawtap unless $rawtap =~ /^TAP Version/ms;
                 my $parser = new TAP::Parser ({ tap => $rawtap });
                 $parser->run;
+                # print STDERR "# " . $section->{section_name} . "\n";
                 $aggregator->add( $section->{section_name} => $parser );
         }
         $aggregator->stop;
