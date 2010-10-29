@@ -19,6 +19,10 @@ requires 'TAP::Parser'             => 0;
 requires 'TAP::Parser::Aggregator' => 0;
 requires 'Directory::Scratch'      => 0;
 requires 'TAP::Formatter::HTML'    => '0.04';
+requires 'YAML::Tiny'              => 0;
+requires 'Archive::Tar'            => 0;
+requires 'IO::Scalar'              => 0;
+requires 'IO::String'              => 0;
 
 WriteAll;
 
