@@ -7,6 +7,11 @@ use warnings;
 use TAP::Parser;
 use TAP::Parser::Aggregator;
 use Directory::Scratch;
+use File::Temp 'tempdir', 'tempfile';
+use YAML::Tiny;
+use Archive::Tar;
+use IO::Scalar;
+use IO::String;
 
 our $VERSION = '2.010039';
 our @SUITE_HEADER_KEYS_GENERAL = qw(suite-version
@@ -111,8 +116,16 @@ sub _fix_broken_tap {
         return $tap;
 }
 
-# return sections
 sub _parse_tap_into_sections
+{
+        my ($self) = shift;
+
+        return $self->_parse_tap_into_sections_archive(@_) if $self->tap_is_archive;
+        return $self->_parse_tap_into_sections_raw(@_);
+}
+
+# return sections
+sub _parse_tap_into_sections_raw
 {
         my ($self) = @_;
 
@@ -235,6 +248,111 @@ sub _parse_tap_into_sections
 
         # store last section
         push @{$self->parsed_report->{tap_sections}}, { %section } if keys %section;
+
+        $self->fix_section_names;
+}
+
+sub _get_tap_sections_from_archive
+{
+        my ($self) = @_;
+
+        # some stacking to enable Archive::Tar read compressed in-memory string
+        my $TARSTR       = IO::String->new($self->tap);
+        my $TARZ         = IO::Zlib->new($TARSTR, "rb");
+        my $tar          = Archive::Tar->new($TARZ);
+
+        my $meta         = YAML::Tiny::Load($tar->get_content("meta.yml"));
+        my @tap_sections = map {
+                                {tap => $tar->get_content($_), filename => $_};
+                               } @{$meta->{file_order}};
+        return @tap_sections;
+}
+
+sub _parse_tap_into_sections_archive
+{
+        my ($self) = @_;
+
+        $self->parsed_report->{tap_sections} = [];
+        $self->section_names({});
+
+        my @tap_sections = $self->_get_tap_sections_from_archive($self->tap);
+
+        my $looks_like_prove_output = 0;
+        $self->parsed_report->{report_meta} = {
+                                               'suite-name'    => 'unknown',
+                                               'suite-version' => 'unknown',
+                                               'suite-type'    => 'unknown',
+                                               'reportcomment' => undef,
+                                              };
+
+        my %section;
+
+        foreach my $tap_file (@tap_sections)
+        {
+
+                my $tap       = $tap_file->{tap};
+                my $filename  = $tap_file->{filename};
+                
+                my $parser = TAP::Parser->new ({ tap => $tap, version => 13 });
+
+                # ----- store previous section, start new section -----
+
+                # start new section
+                if (keys %section)
+                {
+                        # Store a copy (ie., not \%section) so it doesn't get overwritten in next loop
+                        push @{$self->parsed_report->{tap_sections}}, { %section };
+                }
+                %section = ();
+
+                while ( my $line = $parser->next )
+                {
+                        my $raw        = $line->raw;
+                        my $is_plan    = $line->is_plan;
+                        my $is_version = $line->is_version;
+                        my $is_unknown = $line->is_unknown;
+                        my $is_yaml    = $line->is_yaml;
+
+                        # ----- extract some meta information -----
+
+                        # a normal TAP line and not a summary line from "prove"
+                        if ( not $is_unknown )
+                        {
+                                $section{raw} .= "$raw\n";
+                        }
+
+                        my $re_artemis_meta           = qr/^#\s*(Artemis-)([-\w]+):(.+)$/i;
+                        my $re_artemis_meta_section   = qr/^#\s*(Artemis-Section:)\s*(.+)$/i;
+                        # looks like artemis meta line
+                        if ( $line->is_comment and $raw =~ m/^#\s*(Artemis-)([-\w]+):(.+)$/i ) # (
+                        {
+                                # TODO: refactor inner part with _parse_tap_into_sections_raw()
+                                my $key = lc $2;
+                                my $val = $3;
+                                $val =~ s/^\s+//;
+                                $val =~ s/\s+$//;
+                                if ($raw =~ $re_artemis_meta_section)
+                                {
+                                        $section{section_name} = $self->_unique_section_name( $val );
+                                }
+                                $section{section_meta}{$key} = $val; # section keys
+                                $self->parsed_report->{report_meta}{$key} = $val; # also global keys, later entries win
+                        }
+                }
+                $section{section_name} //= $self->_unique_section_name( $filename );
+        }
+
+        # store last section
+        push @{$self->parsed_report->{tap_sections}}, { %section } if keys %section;
+
+        use Data::Dumper;
+        #print STDERR Dumper($self->parsed_report);
+        $self->fix_section_names;
+}
+
+sub fix_section_names
+{
+        my ($self) = @_;
 
         # augment section names
         for (my $i = 0; $i < @{$self->parsed_report->{tap_sections}}; $i++)
