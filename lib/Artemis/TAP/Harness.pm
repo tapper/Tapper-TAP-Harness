@@ -264,7 +264,9 @@ sub _get_tap_sections_from_archive
 
         my $meta         = YAML::Tiny::Load($tar->get_content("meta.yml"));
         my @tap_sections = map {
-                                {tap => $tar->get_content($_), filename => $_};
+                                my $f = $_;
+                                $f =~ s,^\./,,;
+                                { tap => $tar->get_content($f), filename => $f };
                                } @{$meta->{file_order}};
         return @tap_sections;
 }
