@@ -59,4 +59,30 @@ is($first_section->{db_section_meta}{'ram'},                    '993MB',        
 my $html = $harness->generate_html;
 is(scalar @{$harness->parsed_report->{tap_sections}}, 4, "count sections"); # check to trigger preparation errors
 
+# ============================================================
+
+$tap = slurp ("t/tap-archive-2.tgz");
+
+# ============================================================
+
+$harness = Artemis::TAP::Harness->new( tap => $tap, tap_is_archive => 1 );
+
+$harness->evaluate_report();
+#diag(Dumper($harness->parsed_report->{tap_sections}));
+
+is(scalar @{$harness->parsed_report->{tap_sections}}, 4, "autotest / count sections");
+
+$first_section = $harness->parsed_report->{tap_sections}->[0];
+
+# ============================================================
+
+#diag Dumper();
+$dom = TAP::DOM->new( tap => "TAP Version 13\n".$harness->parsed_report->{tap_sections}->[1]->{raw} );
+# diag(Dumper($dom));
+is($dom->{tests_run}, 2, "autotest / section 1 tests run");
+ok($dom->{is_good_plan}, "autotest / section 1 good plan");
+is($dom->{lines}[3]{_children}[0]{data}{"sysinfo-memtotal-in-kb"}, "3951176", "autotest / section 1 TAPv13 yaml data");
+# ============================================================
+
+
 done_testing;
