@@ -12,6 +12,9 @@ ok 1 - artemis-test-meta
 # Artemis-osname:                  Ubuntu 8.04
 # Artemis-cpuinfo:                 2 cores [AMD Athlon(tm) 64 X2 Dual Core Processor 6000+]
 # Artemis-ram:                     1887MB
+# Artemis-ticket-url:              https://affe.tiger.com/bugs/show_bug.cgi?id=901
+# Artemis-wiki-url:                https://affe.tiger.com/wiki/Artemis/autoreport
+# Artemis-planning-id:             foo.bar.artemis.autoreport
 # Artemis-starttime-test-program:  Fri Jun 13 11:16:35 CEST 2008
 ok
 t/00-load.t...........................
