@@ -47,7 +47,7 @@ our @SECTION_HEADER_KEYS_GENERAL = qw(ram cpuinfo bios lspci lsusb uname osname 
                                       simnow-device-interface-version
                                       simnow-bsd-file
                                       simnow-image-file
-                                      flags
+                                      ticket-url wiki-url planning-id
                                     );
 
 use Moose;
