@@ -14,9 +14,7 @@ my $tap = slurp ("t/tap_archive_artemis.tap");
 
 # ============================================================
 
-plan tests => 37;
-
-my $harness = new Artemis::TAP::Harness( tap => $tap );
+my $harness = Artemis::TAP::Harness->new( tap => $tap );
 
 $harness->evaluate_report();
 #diag(Dumper($harness->parsed_report->{tap_sections}));
@@ -28,7 +26,7 @@ my $first_section = $harness->parsed_report->{tap_sections}->[0];
 # ============================================================
 
 #diag Dumper();
-my $dom = new TAP::DOM( tap => "TAP Version 13\n".$harness->parsed_report->{tap_sections}->[3]->{raw} );
+my $dom = TAP::DOM->new( tap => "TAP Version 13\n".$harness->parsed_report->{tap_sections}->[3]->{raw} );
 #diag(Dumper($dom));
 is($dom->{tests_run}, 1, "section 3 tests run");
 ok($dom->{is_good_plan}, "section 3 good plan");
@@ -36,11 +34,11 @@ ok($dom->{is_good_plan}, "section 3 good plan");
 # ============================================================
 
 my $similar_tap = slurp ("t/tap_archive_artemis_prove3.15.tap");
-my $harness2 = new Artemis::TAP::Harness( tap => $similar_tap );
+my $harness2 = Artemis::TAP::Harness->new( tap => $similar_tap );
 $harness2->evaluate_report();
 #diag(Dumper($harness2->parsed_report->{tap_sections}));
 
-my $dom2 = new TAP::DOM( tap => "TAP Version 13\n".$harness2->parsed_report->{tap_sections}->[3]->{raw} );
+my $dom2 = TAP::DOM->new( tap => "TAP Version 13\n".$harness2->parsed_report->{tap_sections}->[3]->{raw} );
 #diag(Dumper($dom2));
 is($dom2->{tests_run}, 1, "section 3a tests run");
 ok($dom2->{is_good_plan}, "section 3a good plan");
@@ -48,12 +46,12 @@ ok($dom2->{is_good_plan}, "section 3a good plan");
 # ============================================================
 
 $similar_tap = slurp ("t/tap_archive_artemis_reports_dpath_prove3.15.tap");
-my $harness3 = new Artemis::TAP::Harness( tap => $similar_tap );
+my $harness3 = Artemis::TAP::Harness->new( tap => $similar_tap );
 $harness3->evaluate_report();
 #print STDERR Dumper($harness3->parsed_report->{tap_sections});
 
 my $raw  = $harness3->parsed_report->{tap_sections}->[2]->{raw};
-my $dom3 = new TAP::DOM( tap => "TAP Version 13\n".$raw );
+my $dom3 = TAP::DOM->new( tap => "TAP Version 13\n".$raw );
 #diag(Dumper($dom3));
 is(scalar @{$harness3->parsed_report->{tap_sections}}, 8, "section 3b count sections");
 
@@ -97,7 +95,7 @@ is($first_section->{db_section_meta}{'ticket_url'},             'https://affe.ti
 is($first_section->{db_section_meta}{'wiki_url'},               'https://affe.tiger.com/wiki/Artemis/autoreport',                                      "db meta wiki url");
 is($first_section->{db_section_meta}{'planning_id'},            'foo.bar.artemis.autoreport',                                                          "db meta planning id");
 
-$harness = new Artemis::TAP::Harness( tap => $tap );
+$harness = Artemis::TAP::Harness->new( tap => $tap );
 my $html = $harness->generate_html;
 is(scalar @{$harness->parsed_report->{tap_sections}}, 10, "count sections"); # check to trigger preparation errors
 
@@ -105,7 +103,7 @@ like($harness->_get_prove, qr|/.*bin.*/prove|, 'looks like prove command');
 
 # ============================================================
 
-$harness = new Artemis::TAP::Harness;
+$harness = Artemis::TAP::Harness->new;
 $harness->section_names({
                          affe   => 1,
                          affe0  => 1,
@@ -133,3 +131,4 @@ is ($harness->_unique_section_name("zomtec"), "zomtec1", "unique section name zo
 is ($harness->_unique_section_name("foo"),    "foo",     "unique section name foo");
 is ($harness->_unique_section_name("foo"),    "foo1",    "unique section name foo1");
 
+done_testing;
