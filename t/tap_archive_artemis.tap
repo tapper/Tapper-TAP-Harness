@@ -15,6 +15,7 @@ ok 1 - artemis-test-meta
 # Artemis-ticket-url:              https://affe.tiger.com/bugs/show_bug.cgi?id=901
 # Artemis-wiki-url:                https://affe.tiger.com/wiki/Artemis/autoreport
 # Artemis-planning-id:             foo.bar.artemis.autoreport
+# Artemis-tags:                    sles10sp2 novell bz901
 # Artemis-starttime-test-program:  Fri Jun 13 11:16:35 CEST 2008
 ok
 t/00-load.t...........................

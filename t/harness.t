@@ -85,6 +85,7 @@ is($first_section->{section_meta}{'ram'},                    '1887MB',          
 is($first_section->{section_meta}{'ticket-url'},             'https://affe.tiger.com/bugs/show_bug.cgi?id=901',                    "report meta ticket url");
 is($first_section->{section_meta}{'wiki-url'},               'https://affe.tiger.com/wiki/Artemis/autoreport',                     "report meta wiki url");
 is($first_section->{section_meta}{'planning-id'},            'foo.bar.artemis.autoreport',                                         "report meta planning id");
+is($first_section->{section_meta}{'tags'},                   'sles10sp2 novell bz901',                                             "report meta tags");
 
 is($first_section->{db_section_meta}{'language_description'},   'Perl 5.010000, /2home/ss5/perl510/bin/perl',                                          "db meta language description");
 is($first_section->{db_section_meta}{'uname'},                  'Linux bascha 2.6.24-18-generic #1 SMP Wed May 28 19:28:38 UTC 2008 x86_64 GNU/Linux', "db meta uname");
@@ -94,6 +95,7 @@ is($first_section->{db_section_meta}{'ram'},                    '1887MB',       
 is($first_section->{db_section_meta}{'ticket_url'},             'https://affe.tiger.com/bugs/show_bug.cgi?id=901',                                     "db meta ticket url");
 is($first_section->{db_section_meta}{'wiki_url'},               'https://affe.tiger.com/wiki/Artemis/autoreport',                                      "db meta wiki url");
 is($first_section->{db_section_meta}{'planning_id'},            'foo.bar.artemis.autoreport',                                                          "db meta planning id");
+is($first_section->{db_section_meta}{'tags'},                   'sles10sp2 novell bz901',                                                              "db meta tags");
 
 $harness = Artemis::TAP::Harness->new( tap => $tap );
 my $html = $harness->generate_html;
