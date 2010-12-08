@@ -54,7 +54,7 @@ our @SECTION_HEADER_KEYS_GENERAL = qw(ram cpuinfo bios lspci lsusb uname osname 
 use Moose;
 
 has tap            => ( is => 'rw', isa => 'Str' );
-has tap_is_archive => ( is => 'rw', isa => 'Int' );
+has tap_is_archive => ( is => 'rw' );
 has parsed_report  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 has section_names  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
