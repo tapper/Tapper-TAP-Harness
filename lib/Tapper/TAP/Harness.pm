@@ -1,4 +1,4 @@
-package Artemis::TAP::Harness;
+package Tapper::TAP::Harness;
 
 use 5.010;
 use strict;
@@ -59,9 +59,9 @@ has parsed_report  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 has section_names  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
 our $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}$/;
-our $re_artemis_meta           = qr/^#\s*(Artemis-)([-\w]+):(.+)$/i;
-our $re_artemis_meta_section   = qr/^#\s*(Artemis-Section:)\s*(.+)$/i;
-our $re_explicit_section_start = qr/^#\s*(Artemis-explicit-section-start:)\s*(\S*)/i;
+our $re_tapper_meta           = qr/^#\s*(Tapper-)([-\w]+):(.+)$/i;
+our $re_tapper_meta_section   = qr/^#\s*(Tapper-Section:)\s*(.+)$/i;
+our $re_explicit_section_start = qr/^#\s*(Tapper-explicit-section-start:)\s*(\S*)/i;
 
 sub _get_prove {
         my $prove = $^X;
@@ -222,14 +222,14 @@ sub _parse_tap_into_sections_raw
                         $section{raw} .= "$raw\n";
                 }
 
-                # looks like artemis meta line
-                if ( $line->is_comment and $raw =~ $re_artemis_meta )
+                # looks like tapper meta line
+                if ( $line->is_comment and $raw =~ $re_tapper_meta )
                 {
                         my $key = lc $2;
                         my $val = $3;
                         $val =~ s/^\s+//;
                         $val =~ s/\s+$//;
-                        if ($raw =~ $re_artemis_meta_section) {
+                        if ($raw =~ $re_tapper_meta_section) {
                                 $section{section_name} //= $self->_unique_section_name( $val );
                         }
                         $section{section_meta}{$key} = $val;              # section keys
@@ -325,17 +325,17 @@ sub _parse_tap_into_sections_archive
                                 $section{raw} .= "$raw\n";
                         }
 
-                        my $re_artemis_meta           = qr/^#\s*(Artemis-)([-\w]+):(.+)$/i;
-                        my $re_artemis_meta_section   = qr/^#\s*(Artemis-Section:)\s*(.+)$/i;
-                        # looks like artemis meta line
-                        if ( $line->is_comment and $raw =~ m/^#\s*(Artemis-)([-\w]+):(.+)$/i ) # (
+                        my $re_tapper_meta           = qr/^#\s*(Tapper-)([-\w]+):(.+)$/i;
+                        my $re_tapper_meta_section   = qr/^#\s*(Tapper-Section:)\s*(.+)$/i;
+                        # looks like tapper meta line
+                        if ( $line->is_comment and $raw =~ m/^#\s*(Tapper-)([-\w]+):(.+)$/i ) # (
                         {
                                 # TODO: refactor inner part with _parse_tap_into_sections_raw()
                                 my $key = lc $2;
                                 my $val = $3;
                                 $val =~ s/^\s+//;
                                 $val =~ s/\s+$//;
-                                if ($raw =~ $re_artemis_meta_section)
+                                if ($raw =~ $re_tapper_meta_section)
                                 {
                                         $section{section_name} = $self->_unique_section_name( $val );
                                 }
@@ -552,12 +552,12 @@ sub generate_html
 
 =head1 NAME
 
-Artemis::TAP::Harness - Artemis specific TAP handling
+Tapper::TAP::Harness - Tapper specific TAP handling
 
 =head1 SYNOPSIS
 
-    use Artemis::TAP::Harness;
-    my $foo = Artemis::TAP::Harness->new();
+    use Tapper::TAP::Harness;
+    my $foo = Tapper::TAP::Harness->new();
     ...
 
 =head1 COPYRIGHT & LICENSE
@@ -569,4 +569,4 @@ This program is released under the following license: restrictive
 
 =cut
 
-1; # End of Artemis::TAP::Harness
+1; # End of Tapper::TAP::Harness

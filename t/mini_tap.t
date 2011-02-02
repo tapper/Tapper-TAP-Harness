@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More;
 
-use Artemis::TAP::Harness;
+use Tapper::TAP::Harness;
 use File::Slurp 'slurp';
 use Data::Dumper;
 
@@ -15,7 +15,7 @@ plan tests => 8;
 
 # ============================================================
 
-my $harness = new Artemis::TAP::Harness( tap => $tap );
+my $harness = new Tapper::TAP::Harness( tap => $tap );
 
 $harness->evaluate_report();
 
@@ -31,7 +31,7 @@ is($first_section->{section_name},                  'section-000', "first sectio
 # ============================================================
 
 $tap = slurp ("t/tap_archive_mini_version.tap");
-$harness = new Artemis::TAP::Harness( tap => $tap );
+$harness = new Tapper::TAP::Harness( tap => $tap );
 
 $harness->evaluate_report();
 

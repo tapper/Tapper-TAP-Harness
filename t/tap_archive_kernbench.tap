@@ -1,14 +1,14 @@
 1..1
-# Artemis-suite-version: 0.2
-# Artemis-starttime-test-program: 20090128T130701
-# Artemis-machine-name: uran
-# Artemis-suite-name: Artemis-KernBench
-# Artemis-reportgroup-arbitrary: 
-# Artemis-section: artemis-meta-information
-# Artemis-reportgroup-testrun: 1381
-ok 1 - artemis-meta-data
+# Tapper-suite-version: 0.2
+# Tapper-starttime-test-program: 20090128T130701
+# Tapper-machine-name: uran
+# Tapper-suite-name: Tapper-KernBench
+# Tapper-reportgroup-arbitrary: 
+# Tapper-section: tapper-meta-information
+# Tapper-reportgroup-testrun: 1381
+ok 1 - tapper-meta-data
 1..1
-# Artemis-Section: stats-proc-interrupts-before
+# Tapper-Section: stats-proc-interrupts-before
 ok 1 - /proc/interrupts
   ---
   0:
@@ -104,13 +104,13 @@ ok 1 - /proc/interrupts
     linetail:
   ...
 1..1
-# Artemis-section: kernel-untar
+# Tapper-section: kernel-untar
 ok 1 - untar of kernel succeeded.
 1..1
-# Artemis-section: kernbench-untar
+# Tapper-section: kernbench-untar
 ok 1 - untar of testsuite succeeded.
 1..1
-# Artemis-section: kernbench-testrun
+# Tapper-section: kernbench-testrun
 ok 1 - Run took ntp: 2855s, system: 2855s
 1..2
 ok 1 - KernBench
@@ -136,7 +136,7 @@ ok 2 - KernBench
   Sleeps 31147.8 (2787.29)
   ...
 1..2
-# Artemis-section: kernbench-results
+# Tapper-section: kernbench-results
 ok 1 - KernBench
   ---
   Wed Jan 28 13:13:49 CET 2009
@@ -160,7 +160,7 @@ ok 2 - KernBench
   Sleeps 31147.8 (2787.29)
   ...
 1..1
-# Artemis-section: kernbench-testrun
+# Tapper-section: kernbench-testrun
 ok 1 - Run took ntp: 2869s, system: 2869s
 1..2
 ok 1 - KernBench
@@ -186,7 +186,7 @@ ok 2 - KernBench
   Sleeps 31200.1 (2745.05)
   ...
 1..2
-# Artemis-section: kernbench-results
+# Tapper-section: kernbench-results
 ok 1 - KernBench
   ---
   Wed Jan 28 14:01:42 CET 2009
@@ -210,7 +210,7 @@ ok 2 - KernBench
   Sleeps 31200.1 (2745.05)
   ...
 1..1
-# Artemis-Section: stats-proc-interrupts-after
+# Tapper-Section: stats-proc-interrupts-after
 ok 1 - /proc/interrupts
   ---
   0:
@@ -306,13 +306,13 @@ ok 1 - /proc/interrupts
     linetail:
   ...
 1..1
-# Artemis-section: clocksource
+# Tapper-section: clocksource
 ok 1 - Clocksource
   ---
   Cannot determine clocksource
   ...
 1..1
-# Artemis-section: uptime
+# Tapper-section: uptime
 ok 1 - got uptime
   ---
   uptime: 5878s

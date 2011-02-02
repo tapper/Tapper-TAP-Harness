@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More;
 
-use Artemis::TAP::Harness;
+use Tapper::TAP::Harness;
 use File::Slurp 'slurp';
 use Data::Dumper;
 use Test::Deep;
@@ -19,7 +19,7 @@ my $interrupts_before_section;
 # ============================================================
 
 $tap     = slurp ("t/tap_archive_oprofile_explicit_sections.tap");
-$harness = new Artemis::TAP::Harness( tap => $tap );
+$harness = new Tapper::TAP::Harness( tap => $tap );
 $harness->evaluate_report();
 
 #print STDERR Dumper($harness->parsed_report->{tap_sections});
@@ -49,7 +49,7 @@ like ($harness->parsed_report->{tap_sections}->[3]->{raw}, qr/misc bar/, "misc r
 # ============================================================
 
 $tap     = slurp ("t/tap_archive_oprofile_reallive.tap");
-$harness = new Artemis::TAP::Harness( tap => $tap );
+$harness = new Tapper::TAP::Harness( tap => $tap );
 $harness->evaluate_report();
 
 my $html = $harness->generate_html();

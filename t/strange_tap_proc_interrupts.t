@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More;
 
-use Artemis::TAP::Harness;
+use Tapper::TAP::Harness;
 use File::Slurp 'slurp';
 use Data::Dumper;
 use Test::Deep;
@@ -19,7 +19,7 @@ my $interrupts_before_section;
 # ============================================================
 
 $tap     = slurp ("t/tap_archive_kernbench4.tap");
-$harness = new Artemis::TAP::Harness( tap => $tap );
+$harness = new Tapper::TAP::Harness( tap => $tap );
 $harness->evaluate_report();
 
 #print STDERR Dumper($harness->parsed_report->{tap_sections});
@@ -32,7 +32,7 @@ is( scalar @{$harness->parsed_report->{tap_sections}}, 20, "kernbench4 section c
 cmp_bag ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}],
          [
           qw/
-                    artemis-meta-information
+                    tapper-meta-information
                     stats-proc-interrupts-before
                     kernel-untar
                     kernbench-untar
@@ -70,7 +70,7 @@ like ($harness->parsed_report->{tap_sections}->[19]->{raw}, qr/Cannot_determine_
 # ============================================================
 
 $tap     = slurp ("t/tap_archive_kernbench5.tap");
-$harness = new Artemis::TAP::Harness( tap => $tap );
+$harness = new Tapper::TAP::Harness( tap => $tap );
 $harness->evaluate_report();
 
 #print STDERR Dumper($harness->parsed_report->{tap_sections});
@@ -83,7 +83,7 @@ is( scalar @{$harness->parsed_report->{tap_sections}}, 12, "kernbench5 section c
 cmp_bag ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}],
          [
           qw/
-                    artemis-meta-information
+                    tapper-meta-information
                     stats-proc-interrupts-before
                     kernel-untar
                     kernbench-untar

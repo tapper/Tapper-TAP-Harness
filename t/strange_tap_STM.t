@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More;
 
-use Artemis::TAP::Harness;
+use Tapper::TAP::Harness;
 use File::Slurp 'slurp';
 use Data::Dumper;
 use Test::Deep;
@@ -19,7 +19,7 @@ my $interrupts_before_section;
 # ============================================================
 
 $tap     = slurp ("t/tap_archive_STM_explicit_section_no_yaml.tap");
-$harness = new Artemis::TAP::Harness( tap => $tap );
+$harness = new Tapper::TAP::Harness( tap => $tap );
 $harness->evaluate_report();
 
 is( scalar @{$harness->parsed_report->{tap_sections}}, 1, "section count");
@@ -33,7 +33,7 @@ unlike($html, qr/Parse error: No plan found in TAP output/, "no parse error: No 
 # ============================================================
 
 $tap     = slurp ("t/tap_archive_STM_explicit_section.tap");
-$harness = new Artemis::TAP::Harness( tap => $tap );
+$harness = new Tapper::TAP::Harness( tap => $tap );
 $harness->evaluate_report();
 
 is( scalar @{$harness->parsed_report->{tap_sections}}, 1, "section count");

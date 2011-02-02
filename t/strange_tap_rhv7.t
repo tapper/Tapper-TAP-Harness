@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More;
 
-use Artemis::TAP::Harness;
+use Tapper::TAP::Harness;
 use File::Slurp 'slurp';
 use Data::Dumper;
 use Test::Deep;
@@ -19,7 +19,7 @@ my $interrupts_before_section;
 # ============================================================
 
 $tap     = slurp ("t/tap_archive_rhv7.tap");
-$harness = new Artemis::TAP::Harness( tap => $tap );
+$harness = new Tapper::TAP::Harness( tap => $tap );
 $harness->evaluate_report();
 
 #print STDERR Dumper($harness->parsed_report->{tap_sections});
@@ -33,7 +33,7 @@ cmp_deeply ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_section
             [
              qw/
                        section-000
-                       artemis-meta-information
+                       tapper-meta-information
                        section-002
                        stats-proc-interrupts-before
                        section-004

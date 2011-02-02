@@ -3,7 +3,7 @@
 use Test::More tests => 1;
 
 BEGIN {
-	use_ok( 'Artemis::TAP::Harness' );
+	use_ok( 'Tapper::TAP::Harness' );
 }
 
-diag( "Testing Artemis::TAP::Harness $Artemis::TAP::Harness::VERSION, Perl $], $^X" );
+diag( "Testing Tapper::TAP::Harness $Tapper::TAP::Harness::VERSION, Perl $], $^X" );

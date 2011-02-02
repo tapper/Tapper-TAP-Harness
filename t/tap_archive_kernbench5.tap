@@ -1,14 +1,14 @@
 1..1
-# Artemis-suite-version: 0.020016
-# Artemis-starttime-test-program: 20090514T115713
-# Artemis-machine-name: bullock-lutetium
-# Artemis-suite-name: KernBench
-# Artemis-reportgroup-arbitrary: 
-# Artemis-section: artemis-meta-information
-# Artemis-reportgroup-testrun: 3373
-ok 1 - artemis-meta-data
+# Tapper-suite-version: 0.020016
+# Tapper-starttime-test-program: 20090514T115713
+# Tapper-machine-name: bullock-lutetium
+# Tapper-suite-name: KernBench
+# Tapper-reportgroup-arbitrary: 
+# Tapper-section: tapper-meta-information
+# Tapper-reportgroup-testrun: 3373
+ok 1 - tapper-meta-data
 1..1
-# Artemis-Section: stats-proc-interrupts-before
+# Tapper-Section: stats-proc-interrupts-before
 ok 1 - /proc/interrupts
   ---
   0:
@@ -118,13 +118,13 @@ ok 1 - /proc/interrupts
     linetail:
   ...
 1..1
-# Artemis-section: kernel-untar
+# Tapper-section: kernel-untar
 ok 1 - untar of kernel succeeded.
 1..1
-# Artemis-section: kernbench-untar
+# Tapper-section: kernbench-untar
 ok 1 - untar of testsuite succeeded.
 1..1
-# Artemis-section: kernbench-testrun
+# Tapper-section: kernbench-testrun
 ok 1 - Run took ntp: 3760s, system: 3759s
 1..1
 ok 1 - KernBench
@@ -140,7 +140,7 @@ ok 1 - KernBench
   Sleeps 32789.2 (145.543)
   ...
 1..1
-# Artemis-section: kernbench-results
+# Tapper-section: kernbench-results
 ok 1 - KernBench
   ---
   Thu May 14 12:32:37 CEST 2009
@@ -154,7 +154,7 @@ ok 1 - KernBench
   Sleeps 32789.2 (145.543)
   ...
 1..4
-# Artemis-Section: dmesg
+# Tapper-Section: dmesg
 ok 1 - dmesg parsed (419 lines)
 not ok 2 - TSC
 # HPET/PMTIMER calibration failed due to SMI disturbance. Using PIT calibration
@@ -164,7 +164,7 @@ not ok 4 - decode_hpp # TODO okay for us
 # Could not get hotplug parameters. Use defaults
 # false positves ignored: 4
 1..171
-# Artemis-Section: var_log_messages
+# Tapper-Section: var_log_messages
 ok 1 - /var/log/messages parsed (1523 lines)
 not ok 2 - TSC
 # HPET/PMTIMER calibration failed due to SMI disturbance. Using PIT calibration
@@ -508,7 +508,7 @@ not ok 171 - SuSEfirewall2 # TODO okay for us
 # May 14 13:05:46 SuSEfirewall2 not active
 # false positves ignored: 4
 1..1
-# Artemis-Section: stats-proc-interrupts-after
+# Tapper-Section: stats-proc-interrupts-after
 ok 1 - /proc/interrupts
   ---
   0:
@@ -618,13 +618,13 @@ ok 1 - /proc/interrupts
     linetail: ~
   ...
 1..1
-# Artemis-section: clocksource
+# Tapper-section: clocksource
 ok 1 - Clocksource
   ---
   kvm-clock
   ...
 1..1
-# Artemis-section: uptime
+# Tapper-section: uptime
 ok 1 - got uptime
   ---
   uptime: 4279s

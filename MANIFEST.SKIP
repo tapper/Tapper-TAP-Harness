@@ -1,5 +1,5 @@
-Artemis-TAP-Harness-*.*.tar.gz
-^Artemis-TAP-Harness-*.*$
+Tapper-TAP-Harness-*.*.tar.gz
+^Tapper-TAP-Harness-*.*$
 _build
 blib
 ^Build$

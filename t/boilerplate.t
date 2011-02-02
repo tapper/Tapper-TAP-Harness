@@ -47,4 +47,4 @@ not_in_file_ok(Changes =>
                "placeholder date/time"       => qr(Date/time)
               );
 
-module_boilerplate_ok('lib/Artemis/TAP/Harness.pm');
+module_boilerplate_ok('lib/Tapper/TAP/Harness.pm');

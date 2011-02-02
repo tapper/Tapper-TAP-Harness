@@ -3,8 +3,8 @@ use warnings;
 
 use inc::Module::Install;
 
-name     'Artemis-TAP-Harness';
-all_from 'lib/Artemis/TAP/Harness.pm';
+name     'Tapper-TAP-Harness';
+all_from 'lib/Tapper/TAP/Harness.pm';
 author   'OSRC SysInt Team <osrc-sysint@elbe.amd.com>';
 license  'freebsd';
 

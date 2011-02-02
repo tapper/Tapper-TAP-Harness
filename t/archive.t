@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More;
 
-use Artemis::TAP::Harness;
+use Tapper::TAP::Harness;
 use File::Slurp 'slurp';
 use Data::Dumper;
 use TAP::DOM;
@@ -14,7 +14,7 @@ my $tap = slurp ("t/tap-archive-1.tgz");
 
 # ============================================================
 
-my $harness = Artemis::TAP::Harness->new( tap => $tap, tap_is_archive => 1 );
+my $harness = Tapper::TAP::Harness->new( tap => $tap, tap_is_archive => 1 );
 
 $harness->evaluate_report();
 #diag(Dumper($harness->parsed_report->{tap_sections}));
@@ -33,15 +33,15 @@ ok($dom->{is_good_plan}, "section 3 good plan");
 
 # ============================================================
 
-is($harness->parsed_report->{report_meta}{'suite-name'},    'Artemis-Test',       "report meta suite name");
+is($harness->parsed_report->{report_meta}{'suite-name'},    'Tapper-Test',       "report meta suite name");
 is($harness->parsed_report->{report_meta}{'suite-version'}, '2.010012',           "report meta suite version");
 is($harness->parsed_report->{report_meta}{'suite-type'},    'software',           "report meta suite type");
 is($harness->parsed_report->{report_meta}{'machine-name'},  'ss5-netbook',        "report meta machine name");
 is($harness->parsed_report->{report_meta}{'starttime-test-program'}, 'Thu, 28 Oct 2010 16:13:27 +0200', "report meta starttime test program");
 
-is($first_section->{section_name},'t/00-artemis-meta.t', "first section name");
+is($first_section->{section_name},'t/00-tapper-meta.t', "first section name");
 
-is($first_section->{section_meta}{'suite-name'},             'Artemis-Test',                                                            "report meta suite name");
+is($first_section->{section_meta}{'suite-name'},             'Tapper-Test',                                                            "report meta suite name");
 is($first_section->{section_meta}{'suite-version'},          '2.010012',                                                           "report meta suite version");
 is($first_section->{section_meta}{'suite-type'},             'software',                                                           "report meta suite type");
 is($first_section->{section_meta}{'language-description'},   'Perl 5.012001, /home/ss5/perl5/perlbrew/perls/perl-5.12.1/bin/perl', "report meta language description");
@@ -65,7 +65,7 @@ $tap = slurp ("t/tap-archive-2.tgz");
 
 # ============================================================
 
-$harness = Artemis::TAP::Harness->new( tap => $tap, tap_is_archive => 1 );
+$harness = Tapper::TAP::Harness->new( tap => $tap, tap_is_archive => 1 );
 
 $harness->evaluate_report();
 #diag(Dumper($harness->parsed_report->{tap_sections}));

@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More;
 
-use Artemis::TAP::Harness;
+use Tapper::TAP::Harness;
 use File::Slurp 'slurp';
 use Data::Dumper;
 use TAP::DOM;
@@ -13,7 +13,7 @@ use TAP::DOM;
 # ============================================================
 
 my $tap     = slurp ("t/tap_archive_headers_kvm.tap");
-my $harness = new Artemis::TAP::Harness( tap => $tap );
+my $harness = new Tapper::TAP::Harness( tap => $tap );
 
 $harness->evaluate_report();
 
@@ -68,7 +68,7 @@ is($harness->parsed_report->{tap_sections}[2]{section_meta}{'description'}, 'des
 # ============================================================
 
 $tap     = slurp ("t/tap_archive_headers_xen.tap");
-$harness = new Artemis::TAP::Harness( tap => $tap );
+$harness = new Tapper::TAP::Harness( tap => $tap );
 
 $harness->evaluate_report();
 
@@ -111,7 +111,7 @@ is($harness->parsed_report->{tap_sections}[2]{section_meta}{'xen-guest-flags'}, 
 # ============================================================
 
 $tap     = slurp ("t/tap_archive_headers_simnow.tap");
-$harness = new Artemis::TAP::Harness( tap => $tap );
+$harness = new Tapper::TAP::Harness( tap => $tap );
 
 $harness->evaluate_report();
 

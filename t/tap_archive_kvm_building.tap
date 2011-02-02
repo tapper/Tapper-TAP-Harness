@@ -1,21 +1,21 @@
 1..1
-# Artemis-section: artemis-meta-information
-# Artemis-suite-name: tbd
-# Artemis-suite-type: tbd
-# Artemis-suite-version: 0.01
-# Artemis-machine-name: mendozza.osrc.amd.com
-# Artemis-machine-description: ASUSTeK Computer INC., M2A-MX, Rev 1.xx
-# Artemis-bios: American Megatrends Inc., 0201, 10/15/2007
-# Artemis-uname: 2.6.27.35-170.2.94.fc10.x86_64 x86_64
-# Artemis-osname: Fedora release 10 (Cambridge)
-# Artemis-cpuinfo: 3x Family: 16, Model: 2, Stepping: 0
-# Artemis-ram: 1883 MB
-# Artemis-uptime: 219 hrs
-# Artemis-reportcomment: KVM Building Done Right!
-ok 1 - artemis-meta-data
+# Tapper-section: tapper-meta-information
+# Tapper-suite-name: tbd
+# Tapper-suite-type: tbd
+# Tapper-suite-version: 0.01
+# Tapper-machine-name: mendozza.osrc.amd.com
+# Tapper-machine-description: ASUSTeK Computer INC., M2A-MX, Rev 1.xx
+# Tapper-bios: American Megatrends Inc., 0201, 10/15/2007
+# Tapper-uname: 2.6.27.35-170.2.94.fc10.x86_64 x86_64
+# Tapper-osname: Fedora release 10 (Cambridge)
+# Tapper-cpuinfo: 3x Family: 16, Model: 2, Stepping: 0
+# Tapper-ram: 1883 MB
+# Tapper-uptime: 219 hrs
+# Tapper-reportcomment: KVM Building Done Right!
+ok 1 - tapper-meta-data
 1..11
-# Artemis-section: kvm-userspace
-# Artemis-description: some rpm-userspace
+# Tapper-section: kvm-userspace
+# Tapper-description: some rpm-userspace
 ok 1 - lock_build_system
 ok 2 - setup_build_root
 ok 3 - update_scm_repo
@@ -30,8 +30,8 @@ not ok 10 - update_repodata # SKIP
 ok 11 - release_build_system
 
 1..11
-# Artemis-section: kvm-kernel
-# Artemis-description: some rpm-kernel
+# Tapper-section: kvm-kernel
+# Tapper-description: some rpm-kernel
 ok 1 - lock_build_system
 ok 2 - setup_build_root
 ok 3 - update_scm_repo

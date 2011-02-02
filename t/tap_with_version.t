@@ -5,7 +5,7 @@ use warnings;
 
 use Test::More;
 
-use Artemis::TAP::Harness;
+use Tapper::TAP::Harness;
 use File::Slurp 'slurp';
 use Data::Dumper;
 
@@ -15,7 +15,7 @@ my $tap = slurp ("t/tap_archive_kvm_migration.tap");
 
 plan tests => 9;
 
-my $harness = new Artemis::TAP::Harness( tap => $tap );
+my $harness = new Tapper::TAP::Harness( tap => $tap );
 
 $harness->evaluate_report();
 
