@@ -13,6 +13,8 @@ build_requires 'Test::Perl::Critic' => 0;
 build_requires 'File::Slurp'        => 0;
 build_requires 'TAP::DOM'           => 0;
 
+author_requires 'Module::Install::WriteAll';
+
 requires 'Moose'                   => 0;
 requires 'Test::Harness'           => '3.22';
 requires 'TAP::Parser'             => 0;
