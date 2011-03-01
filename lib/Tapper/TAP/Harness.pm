@@ -13,7 +13,7 @@ use Archive::Tar;
 use IO::Scalar;
 use IO::String;
 
-our $VERSION = '2.010040';
+our $VERSION = '3.000001';
 our @SUITE_HEADER_KEYS_GENERAL = qw(suite-version
                                     hardwaredb-systems-id
                                     machine-name
