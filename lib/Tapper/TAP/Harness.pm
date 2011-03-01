@@ -562,7 +562,7 @@ Tapper::TAP::Harness - Tapper specific TAP handling
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008 OSRC SysInt Team, all rights reserved.
+Copyright 2008-2011 AMD OSRC Tapper Team, all rights reserved.
 
 This program is released under the following license: restrictive
 
