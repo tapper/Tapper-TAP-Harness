@@ -552,7 +552,7 @@ sub generate_html
 
 =head1 NAME
 
-Tapper::TAP::Harness - Tapper specific TAP handling
+Tapper::TAP::Harness - Tapper - Tapper specific TAP handling
 
 =head1 SYNOPSIS
 
