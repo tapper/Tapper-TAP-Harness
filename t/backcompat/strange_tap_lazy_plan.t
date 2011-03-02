@@ -27,7 +27,7 @@ my $first_section = $harness->parsed_report->{tap_sections}->[0];
 # use Data::Dumper;
 # diag(Dumper($first_section));
 
-is($harness->parsed_report->{report_meta}{'suite-name'},    'Tapper',       "report meta suite name");
+is($harness->parsed_report->{report_meta}{'suite-name'},    'Artemis',       "report meta suite name");
 is($harness->parsed_report->{report_meta}{'suite-version'}, '2.010004',      "report meta suite version");
 is($harness->parsed_report->{report_meta}{'suite-type'},    'software',      "report meta suite type");
 is($harness->parsed_report->{report_meta}{'machine-name'},  'bascha',        "report meta machine name");
@@ -35,9 +35,9 @@ is($harness->parsed_report->{report_meta}{'starttime-test-program'}, 'Fri Jun 13
 is($harness->parsed_report->{report_meta}{'reportgroup-arbitrary'}, '29365', "report meta reportgroup arbitrary");
 is($harness->parsed_report->{report_meta}{'reportgroup-testrun'}, '478',     "report meta reportgroup testrun");
 
-is($first_section->{section_name},'t/00-tapper-meta.t', "first section name");
+is($first_section->{section_name},'t/00-artemis-meta.t', "first section name");
 
-is($first_section->{section_meta}{'suite-name'},             'Tapper',                                                            "report meta suite name");
+is($first_section->{section_meta}{'suite-name'},             'Artemis',                                                            "report meta suite name");
 is($first_section->{section_meta}{'suite-version'},          '2.010004',                                                           "report meta suite version");
 is($first_section->{section_meta}{'suite-type'},             'software',                                                            "report meta suite type");
 is($first_section->{section_meta}{'language-description'},   'Perl 5.010000, /2home/ss5/perl510/bin/perl',                         "report meta language description");

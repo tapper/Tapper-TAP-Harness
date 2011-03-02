@@ -29,7 +29,7 @@ is($harness->parsed_report->{report_meta}{'suite-name'},    'tbd', "report meta 
 is($harness->parsed_report->{report_meta}{'suite-version'}, '0.01', "report meta suite version");
 
 my $sections = $harness->parsed_report->{tap_sections};
-is($sections->[0]->{section_name},'tapper-meta-information', "tapper-meta-information");
+is($sections->[0]->{section_name},'artemis-meta-information', "artemis-meta-information");
 is($sections->[1]->{section_meta}{'description'},   'some rpm-userspace', "section description userspace");
 is($sections->[2]->{section_meta}{'description'},   'some rpm-kernel',    "section description kernel");
 

@@ -4,19 +4,19 @@ Kernel RPM: kernel-2.6.18-128.el5
 v7 version 1.0, release 6
 saved test plan to /var/v7/results.xml
 1..1
-# Tapper-suite-version: 0.010003
-# Tapper-starttime-test-program: 20090710T100918
-# Tapper-machine-name: ruthenium.osrc.amd.com
-# Tapper-suite-name: RHV7
-# Tapper-reportgroup-arbitrary: 
-# Tapper-section: tapper-meta-information
-# Tapper-reportgroup-testrun: 
-ok 1 - tapper-meta-data
+# Artemis-suite-version: 0.010003
+# Artemis-starttime-test-program: 20090710T100918
+# Artemis-machine-name: ruthenium.osrc.amd.com
+# Artemis-suite-name: RHV7
+# Artemis-reportgroup-arbitrary: 
+# Artemis-section: artemis-meta-information
+# Artemis-reportgroup-testrun: 
+ok 1 - artemis-meta-data
 1..1
 # Installing testsuite
 not ok 1 - testsuite install failed
 1..1
-# Tapper-Section: stats-proc-interrupts-before
+# Artemis-Section: stats-proc-interrupts-before
 ok 1 - /proc/interrupts
   ---
   0:
@@ -69,10 +69,10 @@ ok 1 - /proc/interrupts
 # Initialising test suite
 ok 1 - test suite initialised
 1..1
-# Tapper-section: rhv7-run
+# Artemis-section: rhv7-run
 ok 1 - Run took ntp: 0s, hwclock: 0s
 1..11
-# Tapper-section: RHV7-results
+# Artemis-section: RHV7-results
 not ok 1 - info 
   ---
   success: 0
@@ -140,7 +140,7 @@ not ok 11 - audio
   not_run: 0
   ...
 1..34
-# Tapper-Section: dmesg
+# Artemis-Section: dmesg
 ok 1 - dmesg parsed (2553 lines)
 not ok 2 -  # TODO okay for us
 # [<ffffffff8005dfb1>] child_rip+0xa/0x11
@@ -210,7 +210,7 @@ not ok 34 -  # TODO okay for us
 # [<ffffffff8005ae35>] do_notify_resume+0x69a/0x7af
 # false positves ignored: 110
 1..192
-# Tapper-Section: var_log_messages
+# Artemis-Section: var_log_messages
 ok 1 - /var/log/messages parsed (10162 lines)
 not ok 2 -  # TODO okay for us
 # [<ffffffff8005dfb1>] child_rip+0xa/0x11
@@ -596,7 +596,7 @@ not ok 192 -  # TODO okay for us
 #  Jul  8 17:45:45 ruthenium v7/runtests[24422]: storage: begin
 # false positves ignored: 331
 1..1
-# Tapper-Section: stats-proc-interrupts-after
+# Artemis-Section: stats-proc-interrupts-after
 ok 1 - /proc/interrupts
   ---
   0:
@@ -646,13 +646,13 @@ ok 1 - /proc/interrupts
     linetail: ~
   ...
 1..1
-# Tapper-section: clocksource
+# Artemis-section: clocksource
 ok 1 - Clocksource
   ---
   jiffies
   ...
 1..1
-# Tapper-section: uptime
+# Artemis-section: uptime
 ok 1 - got uptime
   ---
   uptime: 162884s

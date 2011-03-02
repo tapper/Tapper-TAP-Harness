@@ -42,7 +42,7 @@ $harness->evaluate_report();
 #print STDERR Dumper($harness->parsed_report->{tap_sections});
 is( scalar @{$harness->parsed_report->{tap_sections}}, 2, "section count");
 my $stuff = $harness->parsed_report->{tap_sections}->[1];
-is ($stuff->{section_name}, 't/tapper_reports_dpath', "section name");
+is ($stuff->{section_name}, 't/artemis_reports_dpath', "section name");
 like ($stuff->{raw}, qr/count ALL plans/ms, "section contains known description 1");
 like ($stuff->{raw}, qr/allow easier/ms, "section contains known description 2");
 like ($stuff->{raw}, qr/foo: bar/ms, "section contains yaml 1");

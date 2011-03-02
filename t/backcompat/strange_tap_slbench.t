@@ -25,7 +25,7 @@ $harness->evaluate_report();
 is( scalar @{$harness->parsed_report->{tap_sections}}, 13, "section count");
 cmp_bag ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}],
          [ qw/
-                     tapper-meta-information
+                     artemis-meta-information
                      stats-proc-interrupts-before
                      SLBench-check_config_file
                      SLBench-check_language

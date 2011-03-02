@@ -1,14 +1,14 @@
 1..1
-# Tapper-suite-version: 0.020016
-# Tapper-starttime-test-program: 19330511T155947
-# Tapper-machine-name: sles10-32bit
-# Tapper-suite-name: KernBench
-# Tapper-reportgroup-arbitrary: 
-# Tapper-section: tapper-meta-information
-# Tapper-reportgroup-testrun: 
-ok 1 - tapper-meta-data
+# Artemis-suite-version: 0.020016
+# Artemis-starttime-test-program: 19330511T155947
+# Artemis-machine-name: sles10-32bit
+# Artemis-suite-name: KernBench
+# Artemis-reportgroup-arbitrary: 
+# Artemis-section: artemis-meta-information
+# Artemis-reportgroup-testrun: 
+ok 1 - artemis-meta-data
 1..1
-# Tapper-Section: stats-proc-interrupts-before
+# Artemis-Section: stats-proc-interrupts-before
 ok 1 - /proc/interrupts
   ---
   0:
@@ -83,13 +83,13 @@ ok 1 - /proc/interrupts
     linetail: ~
   ...
 1..1
-# Tapper-section: kernel-untar
+# Artemis-section: kernel-untar
 ok 1 - untar of kernel succeeded.
 1..1
-# Tapper-section: kernbench-untar
+# Artemis-section: kernbench-untar
 ok 1 - untar of testsuite succeeded.
 1..1
-# Tapper-section: kernbench-testrun
+# Artemis-section: kernbench-testrun
 ok 1 - Run took ntp: 1688s, system: 2195s
 1..1
 ok 1 - KernBench
@@ -105,7 +105,7 @@ ok 1 - KernBench
   Sleeps 25000.2 (263.972)
   ...
 1..1
-# Tapper-section: kernbench-results
+# Artemis-section: kernbench-results
 ok 1 - KernBench
   ---
   Thu May 11 16:13:41 CET 1933
@@ -119,7 +119,7 @@ ok 1 - KernBench
   Sleeps 25000.2 (263.972)
   ...
 1..1
-# Tapper-section: kernbench-testrun
+# Artemis-section: kernbench-testrun
 ok 1 - Run took ntp: 1362s, system: 1682s
 1..1
 ok 1 - KernBench
@@ -135,7 +135,7 @@ ok 1 - KernBench
   Sleeps 24871.8 (464.301)
   ...
 1..1
-# Tapper-section: kernbench-results
+# Artemis-section: kernbench-results
 ok 1 - KernBench
   ---
   Thu May 11 16:43:42 CET 1933
@@ -149,7 +149,7 @@ ok 1 - KernBench
   Sleeps 24871.8 (464.301)
   ...
 1..1
-# Tapper-section: kernbench-testrun
+# Artemis-section: kernbench-testrun
 ok 1 - Run took ntp: 1367s, system: 1686s
 1..1
 ok 1 - KernBench
@@ -165,7 +165,7 @@ ok 1 - KernBench
   Sleeps 25248.2 (284.995)
   ...
 1..1
-# Tapper-section: kernbench-results
+# Artemis-section: kernbench-results
 ok 1 - KernBench
   ---
   Thu May 11 17:11:40 CET 1933
@@ -179,7 +179,7 @@ ok 1 - KernBench
   Sleeps 25248.2 (284.995)
   ...
 1..22
-# Tapper-Section: dmesg
+# Artemis-Section: dmesg
 ok 1 - dmesg parsed (310 lines)
 not ok 2 -  # TODO okay for us
 # not found!
@@ -225,7 +225,7 @@ not ok 22 - ide # TODO fake
 # failed opcode was: unknown
 # false positves ignored: 13
 1..37
-# Tapper-Section: var_log_messages
+# Artemis-Section: var_log_messages
 ok 1 - /var/log/messages parsed (52 lines)
 not ok 2 -  # TODO okay for us
 # not found!
@@ -301,7 +301,7 @@ not ok 37 - 40 sles10-32bit kernel # TODO fake
 # ide: failed opcode was: unknown
 # false positves ignored: 4
 1..1
-# Tapper-Section: stats-proc-interrupts-after
+# Artemis-Section: stats-proc-interrupts-after
 ok 1 - /proc/interrupts
   ---
   0:
@@ -376,13 +376,13 @@ ok 1 - /proc/interrupts
     linetail: ~
   ...
 1..1
-# Tapper-section: clocksource
+# Artemis-section: clocksource
 ok 1 - Clocksource
   ---
   Cannot determine clocksource
   ...
 1..1
-# Tapper-section: uptime
+# Artemis-section: uptime
 ok 1 - got uptime
   ---
   uptime: 5715s

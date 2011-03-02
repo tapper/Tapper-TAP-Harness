@@ -1,14 +1,14 @@
 1..1
-# Tapper-suite-version: 0.010002
-# Tapper-starttime-test-program: 20100309T161611
-# Tapper-machine-name: elemente.osrc.amd.com
-# Tapper-suite-name: SLBench-Benchmark-Runner
-# Tapper-reportgroup-arbitrary: 
-# Tapper-section: tapper-meta-information
-# Tapper-reportgroup-testrun: 
-ok 1 - tapper-meta-data
+# Artemis-suite-version: 0.010002
+# Artemis-starttime-test-program: 20100309T161611
+# Artemis-machine-name: elemente.osrc.amd.com
+# Artemis-suite-name: SLBench-Benchmark-Runner
+# Artemis-reportgroup-arbitrary: 
+# Artemis-section: artemis-meta-information
+# Artemis-reportgroup-testrun: 
+ok 1 - artemis-meta-data
 1..1
-# Tapper-Section: stats-proc-interrupts-before
+# Artemis-Section: stats-proc-interrupts-before
 ok 1 - /proc/interrupts
   ---
   0:
@@ -553,33 +553,33 @@ ok 1 - /proc/interrupts
     linetail: ~
   ...
 1..1
-# Tapper-section: SLBench-check_config_file
+# Artemis-section: SLBench-check_config_file
 ok 1 - Looking for config file.
   ---
-  config_file: /home/tapper/x86_64/lib/python2.6/site-packages/slbench/benchmarks/benchmarks_config.yaml
+  config_file: /home/artemis/x86_64/lib/python2.6/site-packages/slbench/benchmarks/benchmarks_config.yaml
   ...
 1..2
-# Tapper-section: SLBench-check_language
+# Artemis-section: SLBench-check_language
 ok 1 - Looking for language in file.
 ok 2 - Looking for benchmark section in file.
 1..1
-# Tapper-section: SLBench-check_config_file
+# Artemis-section: SLBench-check_config_file
 ok 1 - config file exists
   ---
-  config_file: /home/tapper/x86_64/lib/python2.6/site-packages/slbench/benchmarks/../language_build_config.yaml
+  config_file: /home/artemis/x86_64/lib/python2.6/site-packages/slbench/benchmarks/../language_build_config.yaml
   ...
 1..2
-# Tapper-section: SLBench-check_config_language
+# Artemis-section: SLBench-check_config_language
 ok 1 - found language in file.
   ---
   config_language: python
   ...
 ok 2 - found section in file
 1..68
-# Tapper-section: SLBench-benchmark-run
+# Artemis-section: SLBench-benchmark-run
 ok 1 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: call_method_unknown
   ntp: 159
   system-time: 158
@@ -587,7 +587,7 @@ ok 1 - benchmark run
 
 ok 2 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: call_method_unknown
   ntp: 151
   system-time: 151
@@ -595,7 +595,7 @@ ok 2 - benchmark run
 
 ok 3 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: call_method_unknown
   ntp: 141
   system-time: 140
@@ -603,7 +603,7 @@ ok 3 - benchmark run
 
 ok 4 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: call_method_unknown
   ntp: 149
   system-time: 148
@@ -611,7 +611,7 @@ ok 4 - benchmark run
 
 not ok 5 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: rietveld
   ntp: 22
   system-time: 22
@@ -619,7 +619,7 @@ not ok 5 - benchmark run
 
 ok 6 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: rietveld
   ntp: 111
   system-time: 111
@@ -627,7 +627,7 @@ ok 6 - benchmark run
 
 ok 7 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: rietveld
   ntp: 123
   system-time: 123
@@ -635,7 +635,7 @@ ok 7 - benchmark run
 
 ok 8 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: rietveld
   ntp: 122
   system-time: 122
@@ -643,7 +643,7 @@ ok 8 - benchmark run
 
 ok 9 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: call_simple
   ntp: 125
   system-time: 124
@@ -651,7 +651,7 @@ ok 9 - benchmark run
 
 ok 10 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: call_simple
   ntp: 110
   system-time: 109
@@ -659,7 +659,7 @@ ok 10 - benchmark run
 
 ok 11 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: call_simple
   ntp: 110
   system-time: 109
@@ -667,7 +667,7 @@ ok 11 - benchmark run
 
 ok 12 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: call_simple
   ntp: 116
   system-time: 116
@@ -675,7 +675,7 @@ ok 12 - benchmark run
 
 ok 13 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: call_method
   ntp: 153
   system-time: 152
@@ -683,7 +683,7 @@ ok 13 - benchmark run
 
 ok 14 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: call_method
   ntp: 141
   system-time: 141
@@ -691,7 +691,7 @@ ok 14 - benchmark run
 
 ok 15 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: call_method
   ntp: 134
   system-time: 133
@@ -699,7 +699,7 @@ ok 15 - benchmark run
 
 ok 16 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: call_method
   ntp: 132
   system-time: 132
@@ -707,7 +707,7 @@ ok 16 - benchmark run
 
 ok 17 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: nqueens
   ntp: 49
   system-time: 48
@@ -715,7 +715,7 @@ ok 17 - benchmark run
 
 ok 18 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: nqueens
   ntp: 41
   system-time: 41
@@ -723,7 +723,7 @@ ok 18 - benchmark run
 
 ok 19 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: nqueens
   ntp: 44
   system-time: 44
@@ -731,7 +731,7 @@ ok 19 - benchmark run
 
 ok 20 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: nqueens
   ntp: 37
   system-time: 36
@@ -739,7 +739,7 @@ ok 20 - benchmark run
 
 ok 21 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: spambayes
   ntp: 40
   system-time: 40
@@ -747,7 +747,7 @@ ok 21 - benchmark run
 
 ok 22 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: spambayes
   ntp: 33
   system-time: 33
@@ -755,7 +755,7 @@ ok 22 - benchmark run
 
 ok 23 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: spambayes
   ntp: 41
   system-time: 41
@@ -763,7 +763,7 @@ ok 23 - benchmark run
 
 ok 24 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: spambayes
   ntp: 35
   system-time: 34
@@ -771,7 +771,7 @@ ok 24 - benchmark run
 
 not ok 25 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: float
   ntp: 18
   system-time: 18
@@ -779,7 +779,7 @@ not ok 25 - benchmark run
 
 ok 26 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: float
   ntp: 62
   system-time: 62
@@ -787,7 +787,7 @@ ok 26 - benchmark run
 
 ok 27 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: float
   ntp: 68
   system-time: 67
@@ -795,7 +795,7 @@ ok 27 - benchmark run
 
 ok 28 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: float
   ntp: 66
   system-time: 65
@@ -803,7 +803,7 @@ ok 28 - benchmark run
 
 ok 29 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: django
   ntp: 91
   system-time: 91
@@ -811,7 +811,7 @@ ok 29 - benchmark run
 
 ok 30 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: django
   ntp: 95
   system-time: 94
@@ -819,7 +819,7 @@ ok 30 - benchmark run
 
 ok 31 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: django
   ntp: 88
   system-time: 88
@@ -827,7 +827,7 @@ ok 31 - benchmark run
 
 ok 32 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: django
   ntp: 87
   system-time: 86
@@ -835,7 +835,7 @@ ok 32 - benchmark run
 
 ok 33 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: call_method_slots
   ntp: 150
   system-time: 149
@@ -843,7 +843,7 @@ ok 33 - benchmark run
 
 ok 34 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: call_method_slots
   ntp: 143
   system-time: 143
@@ -851,7 +851,7 @@ ok 34 - benchmark run
 
 ok 35 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: call_method_slots
   ntp: 132
   system-time: 131
@@ -859,7 +859,7 @@ ok 35 - benchmark run
 
 ok 36 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: call_method_slots
   ntp: 133
   system-time: 133
@@ -867,7 +867,7 @@ ok 36 - benchmark run
 
 ok 37 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: richards
   ntp: 49
   system-time: 48
@@ -875,7 +875,7 @@ ok 37 - benchmark run
 
 ok 38 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: richards
   ntp: 36
   system-time: 36
@@ -883,7 +883,7 @@ ok 38 - benchmark run
 
 ok 39 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: richards
   ntp: 37
   system-time: 36
@@ -891,7 +891,7 @@ ok 39 - benchmark run
 
 ok 40 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: richards
   ntp: 29
   system-time: 29
@@ -899,7 +899,7 @@ ok 40 - benchmark run
 
 ok 41 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: bzr_startup
   ntp: 56
   system-time: 56
@@ -907,7 +907,7 @@ ok 41 - benchmark run
 
 ok 42 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: bzr_startup
   ntp: 53
   system-time: 52
@@ -915,7 +915,7 @@ ok 42 - benchmark run
 
 ok 43 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: bzr_startup
   ntp: 63
   system-time: 63
@@ -923,7 +923,7 @@ ok 43 - benchmark run
 
 ok 44 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: bzr_startup
   ntp: 72
   system-time: 71
@@ -931,7 +931,7 @@ ok 44 - benchmark run
 
 ok 45 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: unpack_sequence
   ntp: 33
   system-time: 33
@@ -939,7 +939,7 @@ ok 45 - benchmark run
 
 ok 46 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: unpack_sequence
   ntp: 20
   system-time: 19
@@ -947,7 +947,7 @@ ok 46 - benchmark run
 
 ok 47 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: unpack_sequence
   ntp: 19
   system-time: 19
@@ -955,7 +955,7 @@ ok 47 - benchmark run
 
 ok 48 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: unpack_sequence
   ntp: 27
   system-time: 27
@@ -963,7 +963,7 @@ ok 48 - benchmark run
 
 ok 49 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: hg_startup
   ntp: 74
   system-time: 73
@@ -971,7 +971,7 @@ ok 49 - benchmark run
 
 ok 50 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: hg_startup
   ntp: 90
   system-time: 89
@@ -979,7 +979,7 @@ ok 50 - benchmark run
 
 ok 51 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: hg_startup
   ntp: 94
   system-time: 93
@@ -987,7 +987,7 @@ ok 51 - benchmark run
 
 ok 52 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: hg_startup
   ntp: 109
   system-time: 109
@@ -995,7 +995,7 @@ ok 52 - benchmark run
 
 not ok 53 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: normal_startup
   ntp: 0
   system-time: 0
@@ -1003,7 +1003,7 @@ not ok 53 - benchmark run
 
 not ok 54 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: normal_startup
   ntp: 0
   system-time: 0
@@ -1011,7 +1011,7 @@ not ok 54 - benchmark run
 
 not ok 55 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: normal_startup
   ntp: 0
   system-time: 0
@@ -1019,7 +1019,7 @@ not ok 55 - benchmark run
 
 not ok 56 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: normal_startup
   ntp: 0
   system-time: 0
@@ -1027,7 +1027,7 @@ not ok 56 - benchmark run
 
 not ok 57 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: html5lib_warmup
   ntp: 23
   system-time: 22
@@ -1035,7 +1035,7 @@ not ok 57 - benchmark run
 
 ok 58 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: html5lib_warmup
   ntp: 167
   system-time: 166
@@ -1043,7 +1043,7 @@ ok 58 - benchmark run
 
 ok 59 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: html5lib_warmup
   ntp: 163
   system-time: 163
@@ -1051,7 +1051,7 @@ ok 59 - benchmark run
 
 ok 60 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: html5lib_warmup
   ntp: 165
   system-time: 164
@@ -1059,7 +1059,7 @@ ok 60 - benchmark run
 
 not ok 61 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: html5lib
   ntp: 22
   system-time: 22
@@ -1067,7 +1067,7 @@ not ok 61 - benchmark run
 
 ok 62 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: html5lib
   ntp: 188
   system-time: 187
@@ -1075,7 +1075,7 @@ ok 62 - benchmark run
 
 ok 63 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: html5lib
   ntp: 198
   system-time: 198
@@ -1083,7 +1083,7 @@ ok 63 - benchmark run
 
 ok 64 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: html5lib
   ntp: 202
   system-time: 201
@@ -1091,7 +1091,7 @@ ok 64 - benchmark run
 
 not ok 65 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.4
+  language_version: /opt/artemis/slbench/python/bin/python2.4
   benchmark: nbody
   ntp: 24
   system-time: 23
@@ -1099,7 +1099,7 @@ not ok 65 - benchmark run
 
 not ok 66 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.5
+  language_version: /opt/artemis/slbench/python/bin/python2.5
   benchmark: nbody
   ntp: 10
   system-time: 10
@@ -1107,7 +1107,7 @@ not ok 66 - benchmark run
 
 ok 67 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.6
+  language_version: /opt/artemis/slbench/python/bin/python2.6
   benchmark: nbody
   ntp: 44
   system-time: 43
@@ -1115,14 +1115,14 @@ ok 67 - benchmark run
 
 ok 68 - benchmark run
   ---
-  language_version: /opt/tapper/slbench/python/bin/python2.7
+  language_version: /opt/artemis/slbench/python/bin/python2.7
   benchmark: nbody
   ntp: 52
   system-time: 52
   ...
 
 1..58
-# Tapper-section: SLBench-results
+# Artemis-section: SLBench-results
 ok 1 - benchmark results
   ---
   result_no_0000: 0.913125991821
@@ -1136,7 +1136,7 @@ ok 1 - benchmark results
   result_no_0008: 0.899931192398
   result_no_0009: 0.893357038498
   result_no_0010: 0.899536848068
-  language_binary: /opt/tapper/slbench/python/bin/python2.4
+  language_binary: /opt/artemis/slbench/python/bin/python2.4
   benchmark: call_method_unknown
   language_series: series1
   language_version: 
@@ -1162,7 +1162,7 @@ ok 2 - benchmark results
   result_no_0008: 0.856093883514
   result_no_0009: 0.836684942245
   result_no_0010: 0.835569858551
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: call_method_unknown
   language_series: series1
   language_version: 
@@ -1188,7 +1188,7 @@ ok 3 - benchmark results
   result_no_0008: 0.77042722702
   result_no_0009: 0.769525051117
   result_no_0010: 0.769556999207
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: call_method_unknown
   language_series: series1
   language_version: 
@@ -1353,7 +1353,7 @@ ok 4 - benchmark results
   result_no_0147: 0.774113893509
   result_no_0148: 0.773874044418
   result_no_0149: 0.773468971252
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: call_method_unknown
   language_series: series1
   language_version: 
@@ -1418,7 +1418,7 @@ ok 5 - benchmark results
   result_no_0047: 1.54497218132
   result_no_0048: 1.54996681213
   result_no_0049: 1.55859804153
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: rietveld
   language_series: series1
   language_version: 
@@ -1483,7 +1483,7 @@ ok 6 - benchmark results
   result_no_0047: 1.30437397957
   result_no_0048: 1.30457210541
   result_no_0049: 1.30245518684
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: rietveld
   language_series: series1
   language_version: 
@@ -1548,7 +1548,7 @@ ok 7 - benchmark results
   result_no_0047: 1.28452181816
   result_no_0048: 1.28055000305
   result_no_0049: 1.28028178215
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: rietveld
   language_series: series1
   language_version: 
@@ -1713,7 +1713,7 @@ ok 8 - benchmark results
   result_no_0147: 0.632269859314
   result_no_0148: 0.632243871689
   result_no_0149: 0.633872032166
-  language_binary: /opt/tapper/slbench/python/bin/python2.4
+  language_binary: /opt/artemis/slbench/python/bin/python2.4
   benchmark: call_simple
   language_series: series1
   language_version: 
@@ -1878,7 +1878,7 @@ ok 9 - benchmark results
   result_no_0147: 0.573263883591
   result_no_0148: 0.573559999466
   result_no_0149: 0.573371887207
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: call_simple
   language_series: series1
   language_version: 
@@ -2043,7 +2043,7 @@ ok 10 - benchmark results
   result_no_0147: 0.574790000916
   result_no_0148: 0.572781085968
   result_no_0149: 0.571300029755
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: call_simple
   language_series: series1
   language_version: 
@@ -2208,7 +2208,7 @@ ok 11 - benchmark results
   result_no_0147: 0.617316007614
   result_no_0148: 0.617533922195
   result_no_0149: 0.618027925491
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: call_simple
   language_series: series1
   language_version: 
@@ -2373,7 +2373,7 @@ ok 12 - benchmark results
   result_no_0147: 0.852268218994
   result_no_0148: 0.851923942566
   result_no_0149: 0.853133916855
-  language_binary: /opt/tapper/slbench/python/bin/python2.4
+  language_binary: /opt/artemis/slbench/python/bin/python2.4
   benchmark: call_method
   language_series: series1
   language_version: 
@@ -2538,7 +2538,7 @@ ok 13 - benchmark results
   result_no_0147: 0.778876066208
   result_no_0148: 0.798789978027
   result_no_0149: 0.789107084274
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: call_method
   language_series: series1
   language_version: 
@@ -2703,7 +2703,7 @@ ok 14 - benchmark results
   result_no_0147: 0.740385055542
   result_no_0148: 0.73930811882
   result_no_0149: 0.739034891129
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: call_method
   language_series: series1
   language_version: 
@@ -2868,7 +2868,7 @@ ok 15 - benchmark results
   result_no_0147: 0.728656053543
   result_no_0148: 0.726004123688
   result_no_0149: 0.726226091385
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: call_method
   language_series: series1
   language_version: 
@@ -2933,7 +2933,7 @@ ok 16 - benchmark results
   result_no_0047: 0.47225522995
   result_no_0048: 0.473414897919
   result_no_0049: 0.499574899673
-  language_binary: /opt/tapper/slbench/python/bin/python2.4
+  language_binary: /opt/artemis/slbench/python/bin/python2.4
   benchmark: nqueens
   language_series: series1
   language_version: 
@@ -2998,7 +2998,7 @@ ok 17 - benchmark results
   result_no_0047: 0.585640907288
   result_no_0048: 0.589956998825
   result_no_0049: 0.59263586998
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: nqueens
   language_series: series1
   language_version: 
@@ -3063,7 +3063,7 @@ ok 18 - benchmark results
   result_no_0047: 0.525978088379
   result_no_0048: 0.542396068573
   result_no_0049: 0.524266004562
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: nqueens
   language_series: series1
   language_version: 
@@ -3128,7 +3128,7 @@ ok 19 - benchmark results
   result_no_0047: 0.496916055679
   result_no_0048: 0.490007162094
   result_no_0049: 0.490956068039
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: nqueens
   language_series: series1
   language_version: 
@@ -3193,7 +3193,7 @@ ok 20 - benchmark results
   result_no_0047: 0.380084037781
   result_no_0048: 0.383397817612
   result_no_0049: 0.384271860123
-  language_binary: /opt/tapper/slbench/python/bin/python2.4
+  language_binary: /opt/artemis/slbench/python/bin/python2.4
   benchmark: spambayes
   language_series: series1
   language_version: 
@@ -3258,7 +3258,7 @@ ok 21 - benchmark results
   result_no_0047: 0.399824142456
   result_no_0048: 0.402235984802
   result_no_0049: 0.400238990784
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: spambayes
   language_series: series1
   language_version: 
@@ -3323,7 +3323,7 @@ ok 22 - benchmark results
   result_no_0047: 0.389547109604
   result_no_0048: 0.389112949371
   result_no_0049: 0.391241788864
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: spambayes
   language_series: series1
   language_version: 
@@ -3388,7 +3388,7 @@ ok 23 - benchmark results
   result_no_0047: 0.40479016304
   result_no_0048: 0.413539171219
   result_no_0049: 0.410835981369
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: spambayes
   language_series: series1
   language_version: 
@@ -3653,7 +3653,7 @@ ok 24 - benchmark results
   result_no_0247: 0.199333906174
   result_no_0248: 0.197092056274
   result_no_0249: 0.209939002991
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: float
   language_series: series1
   language_version: 
@@ -3918,7 +3918,7 @@ ok 25 - benchmark results
   result_no_0247: 0.173923969269
   result_no_0248: 0.174526929855
   result_no_0249: 0.181579828262
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: float
   language_series: series1
   language_version: 
@@ -4183,7 +4183,7 @@ ok 26 - benchmark results
   result_no_0247: 0.168991088867
   result_no_0248: 0.16930103302
   result_no_0249: 0.171056985855
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: float
   language_series: series1
   language_version: 
@@ -4248,7 +4248,7 @@ ok 27 - benchmark results
   result_no_0047: 1.27040505409
   result_no_0048: 1.23294782639
   result_no_0049: 1.23574304581
-  language_binary: /opt/tapper/slbench/python/bin/python2.4
+  language_binary: /opt/artemis/slbench/python/bin/python2.4
   benchmark: django
   language_series: series1
   language_version: 
@@ -4313,7 +4313,7 @@ ok 28 - benchmark results
   result_no_0047: 1.29872298241
   result_no_0048: 1.29677581787
   result_no_0049: 1.35090088844
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: django
   language_series: series1
   language_version: 
@@ -4378,7 +4378,7 @@ ok 29 - benchmark results
   result_no_0047: 1.1919760704
   result_no_0048: 1.20841312408
   result_no_0049: 1.19389891624
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: django
   language_series: series1
   language_version: 
@@ -4443,7 +4443,7 @@ ok 30 - benchmark results
   result_no_0047: 1.17666912079
   result_no_0048: 1.17943811417
   result_no_0049: 1.16730713844
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: django
   language_series: series1
   language_version: 
@@ -4608,7 +4608,7 @@ ok 31 - benchmark results
   result_no_0147: 0.832672119141
   result_no_0148: 0.831984043121
   result_no_0149: 0.832825899124
-  language_binary: /opt/tapper/slbench/python/bin/python2.4
+  language_binary: /opt/artemis/slbench/python/bin/python2.4
   benchmark: call_method_slots
   language_series: series1
   language_version: 
@@ -4773,7 +4773,7 @@ ok 32 - benchmark results
   result_no_0147: 0.814976215363
   result_no_0148: 0.80872797966
   result_no_0149: 0.796263933182
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: call_method_slots
   language_series: series1
   language_version: 
@@ -4938,7 +4938,7 @@ ok 33 - benchmark results
   result_no_0147: 0.719392061234
   result_no_0148: 0.720315933228
   result_no_0149: 0.72013092041
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: call_method_slots
   language_series: series1
   language_version: 
@@ -5103,7 +5103,7 @@ ok 34 - benchmark results
   result_no_0147: 0.73521900177
   result_no_0148: 0.735261917114
   result_no_0149: 0.735246181488
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: call_method_slots
   language_series: series1
   language_version: 
@@ -5168,7 +5168,7 @@ ok 35 - benchmark results
   result_no_0047: 0.504544973373
   result_no_0048: 0.489593982697
   result_no_0049: 0.486862897873
-  language_binary: /opt/tapper/slbench/python/bin/python2.4
+  language_binary: /opt/artemis/slbench/python/bin/python2.4
   benchmark: richards
   language_series: series1
   language_version: 
@@ -5233,7 +5233,7 @@ ok 36 - benchmark results
   result_no_0047: 0.502127885818
   result_no_0048: 0.501702070236
   result_no_0049: 0.4962849617
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: richards
   language_series: series1
   language_version: 
@@ -5298,7 +5298,7 @@ ok 37 - benchmark results
   result_no_0047: 0.358178138733
   result_no_0048: 0.357063055038
   result_no_0049: 0.353010892868
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: richards
   language_series: series1
   language_version: 
@@ -5363,7 +5363,7 @@ ok 38 - benchmark results
   result_no_0047: 0.35197687149
   result_no_0048: 0.39777803421
   result_no_0049: 0.35475897789
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: richards
   language_series: series1
   language_version: 
@@ -5478,7 +5478,7 @@ ok 39 - benchmark results
   result_no_0097: 0.167975
   result_no_0098: 0.157976
   result_no_0099: 0.161975
-  language_binary: /opt/tapper/slbench/python/bin/python2.4
+  language_binary: /opt/artemis/slbench/python/bin/python2.4
   benchmark: bzr_startup
   language_series: series1
   language_version: 
@@ -5593,7 +5593,7 @@ ok 40 - benchmark results
   result_no_0097: 0.206968
   result_no_0098: 0.188972
   result_no_0099: 0.203969
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: bzr_startup
   language_series: series1
   language_version: 
@@ -5708,7 +5708,7 @@ ok 41 - benchmark results
   result_no_0097: 0.185972
   result_no_0098: 0.19697
   result_no_0099: 0.188971
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: bzr_startup
   language_series: series1
   language_version: 
@@ -5823,7 +5823,7 @@ ok 42 - benchmark results
   result_no_0097: 0.239964
   result_no_0098: 0.250962
   result_no_0099: 0.242963
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: bzr_startup
   language_series: series1
   language_version: 
@@ -5849,7 +5849,7 @@ ok 43 - benchmark results
   result_no_0008: 0.000231027603149
   result_no_0009: 0.000257015228271
   result_no_0010: 0.000232934951782
-  language_binary: /opt/tapper/slbench/python/bin/python2.4
+  language_binary: /opt/artemis/slbench/python/bin/python2.4
   benchmark: unpack_sequence
   language_series: series1
   language_version: 
@@ -5875,7 +5875,7 @@ ok 44 - benchmark results
   result_no_0008: 0.00023627281189
   result_no_0009: 0.000234842300415
   result_no_0010: 0.000234842300415
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: unpack_sequence
   language_series: series1
   language_version: 
@@ -5901,7 +5901,7 @@ ok 45 - benchmark results
   result_no_0008: 0.000243902206421
   result_no_0009: 0.000245809555054
   result_no_0010: 0.000244140625
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: unpack_sequence
   language_series: series1
   language_version: 
@@ -5927,7 +5927,7 @@ ok 46 - benchmark results
   result_no_0008: 0.000257968902588
   result_no_0009: 0.000258207321167
   result_no_0010: 0.000237703323364
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: unpack_sequence
   language_series: series1
   language_version: 
@@ -5953,7 +5953,7 @@ ok 47 - benchmark results
   result_no_0008: 0.0639900000001
   result_no_0009: 0.0489929999999
   result_no_0010: 0.0539910000002
-  language_binary: /opt/tapper/slbench/python/bin/python2.4
+  language_binary: /opt/artemis/slbench/python/bin/python2.4
   benchmark: hg_startup
   language_series: series1
   language_version: 
@@ -6468,7 +6468,7 @@ ok 48 - benchmark results
   result_no_0497: 0.0549920000003
   result_no_0498: 0.046992
   result_no_0499: 0.0559919999996
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: hg_startup
   language_series: series1
   language_version: 
@@ -6983,7 +6983,7 @@ ok 49 - benchmark results
   result_no_0497: 0.0789879999998
   result_no_0498: 0.0759890000004
   result_no_0499: 0.0689889999999
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: hg_startup
   language_series: series1
   language_version: 
@@ -7498,7 +7498,7 @@ ok 50 - benchmark results
   result_no_0497: 0.0919859999999
   result_no_0498: 0.090987
   result_no_0499: 0.077988
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: hg_startup
   language_series: series1
   language_version: 
@@ -7518,7 +7518,7 @@ ok 51 - benchmark results
   result_no_0002: 32.2369511127
   result_no_0003: 30.1938979626
   result_no_0004: 30.4074208736
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: html5lib_warmup
   language_series: series1
   language_version: 
@@ -7538,7 +7538,7 @@ ok 52 - benchmark results
   result_no_0002: 27.8214390278
   result_no_0003: 28.0576860905
   result_no_0004: 26.7370679379
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: html5lib_warmup
   language_series: series1
   language_version: 
@@ -7558,7 +7558,7 @@ ok 53 - benchmark results
   result_no_0002: 27.904405117
   result_no_0003: 27.6959300041
   result_no_0004: 28.0054299831
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: html5lib_warmup
   language_series: series1
   language_version: 
@@ -7578,7 +7578,7 @@ ok 54 - benchmark results
   result_no_0002: 27.213863
   result_no_0003: 28.276701
   result_no_0004: 26.90591
-  language_binary: /opt/tapper/slbench/python/bin/python2.5
+  language_binary: /opt/artemis/slbench/python/bin/python2.5
   benchmark: html5lib
   language_series: series1
   language_version: 
@@ -7598,7 +7598,7 @@ ok 55 - benchmark results
   result_no_0002: 26.380989
   result_no_0003: 23.852374
   result_no_0004: 29.686487
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: html5lib
   language_series: series1
   language_version: 
@@ -7618,7 +7618,7 @@ ok 56 - benchmark results
   result_no_0002: 27.288851
   result_no_0003: 26.798926
   result_no_0004: 26.911909
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: html5lib
   language_series: series1
   language_version: 
@@ -7683,7 +7683,7 @@ ok 57 - benchmark results
   result_no_0047: 0.649755954742
   result_no_0048: 0.641979932785
   result_no_0049: 0.643096923828
-  language_binary: /opt/tapper/slbench/python/bin/python2.6
+  language_binary: /opt/artemis/slbench/python/bin/python2.6
   benchmark: nbody
   language_series: series1
   language_version: 
@@ -7748,7 +7748,7 @@ ok 58 - benchmark results
   result_no_0047: 0.678331136703
   result_no_0048: 0.678098917007
   result_no_0049: 0.681632995605
-  language_binary: /opt/tapper/slbench/python/bin/python2.7
+  language_binary: /opt/artemis/slbench/python/bin/python2.7
   benchmark: nbody
   language_series: series1
   language_version: 
@@ -7762,7 +7762,7 @@ ok 58 - benchmark results
   ...
 
 1..1
-# Tapper-Section: stats-proc-interrupts-after
+# Artemis-Section: stats-proc-interrupts-after
 ok 1 - /proc/interrupts
   ---
   0:
@@ -8307,7 +8307,7 @@ ok 1 - /proc/interrupts
     linetail: ~
   ...
 1..32
-# Tapper-Section: dmesg
+# Artemis-Section: dmesg
 ok 1 - dmesg parsed (1344 lines)
 not ok 2 - ACPI Warning (tbutils-0246) # TODO okay for us
 # Incorrect checksum in table [OEMB] - 16, should be 15 [20090320]
@@ -8373,7 +8373,7 @@ not ok 32 - python2.4[20837]
 # segfault at 7fff739a7ef8 ip 000000000049efb8 sp 00007fff739a7eb0 error 7 in python2.4[400000+103000]
 # false positves ignored: 1
 1..18
-# Tapper-Section: var_log_messages
+# Artemis-Section: var_log_messages
 ok 1 - /var/log/messages parsed (627 lines)
 not ok 2 - kernel # TODO okay for us
 # Feb 16 09:21:11 Cannot find map file.
@@ -8411,13 +8411,13 @@ not ok 18 - kernel # TODO okay for us
 # Feb 16 19:24:55 [   20.027531] type=1505 audit(1266348289.653:5): operation="profile_load" name="/usr/lib/connman/scripts/dhclient-script" name2="default" pid=1567
 # false positves ignored: 2
 1..1
-# Tapper-section: clocksource
+# Artemis-section: clocksource
 ok 1 - Clocksource
   ---
   Clocksource: Cannot determine clocksource
   ...
 1..1
-# Tapper-section: uptime
+# Artemis-section: uptime
 ok 1 - got uptime
   ---
   uptime: 121084s

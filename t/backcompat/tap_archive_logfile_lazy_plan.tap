@@ -1,11 +1,11 @@
-# Tapper-explicit-section-start: 1
-# Tapper-Section: logfile
-# Tapper-Suite-Name: perfmon
-# Tapper-Suite-Version: 2.07.13
-# Tapper-Machine-Name: sandschaki
-# Tapper-Machine-Description: pc-ware
-# Tapper-Machine-cpuinfo: 1x AMD Athlon(tm) 64 X2 Dual Core Processor 5000+
-# Tapper-Machine-RAM: 4031 MB
+# Artemis-explicit-section-start: 1
+# Artemis-Section: logfile
+# Artemis-Suite-Name: perfmon
+# Artemis-Suite-Version: 2.07.13
+# Artemis-Machine-Name: sandschaki
+# Artemis-Machine-Description: pc-ware
+# Artemis-Machine-cpuinfo: 1x AMD Athlon(tm) 64 X2 Dual Core Processor 5000+
+# Artemis-Machine-RAM: 4031 MB
 # Feb  5 13:06:51 ss5-laptop kernel: [63294.300845] serial 00:09: activated
 # Feb  5 13:06:51 ss5-laptop kernel: [63294.301614] parport_pc 00:0a: activated
 # Feb  5 13:06:51 ss5-laptop kernel: [63294.302402] nsc-ircc 00:0b: activated

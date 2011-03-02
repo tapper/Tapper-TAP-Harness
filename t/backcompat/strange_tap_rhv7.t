@@ -33,7 +33,7 @@ cmp_deeply ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_section
             [
              qw/
                        section-000
-                       tapper-meta-information
+                       artemis-meta-information
                        section-002
                        stats-proc-interrupts-before
                        section-004

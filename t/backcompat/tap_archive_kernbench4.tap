@@ -1,14 +1,14 @@
 1..1
-# Tapper-suite-version: 0.020016
-# Tapper-starttime-test-program: 20091229T225300
-# Tapper-machine-name: localhost
-# Tapper-suite-name: KernBench
-# Tapper-reportgroup-arbitrary: 
-# Tapper-section: tapper-meta-information
-# Tapper-reportgroup-testrun: 3126
-ok 1 - tapper-meta-data
+# Artemis-suite-version: 0.020016
+# Artemis-starttime-test-program: 20091229T225300
+# Artemis-machine-name: localhost
+# Artemis-suite-name: KernBench
+# Artemis-reportgroup-arbitrary: 
+# Artemis-section: artemis-meta-information
+# Artemis-reportgroup-testrun: 3126
+ok 1 - artemis-meta-data
 1..1
-# Tapper-Section: stats-proc-interrupts-before
+# Artemis-Section: stats-proc-interrupts-before
 ok 1 - /proc/interrupts
   ---
   0:
@@ -69,13 +69,13 @@ ok 1 - /proc/interrupts
     linetail:
   ...
 1..1
-# Tapper-section: kernel-untar
+# Artemis-section: kernel-untar
 ok 1 - untar of kernel succeeded.
 1..1
-# Tapper-section: kernbench-untar
+# Artemis-section: kernbench-untar
 ok 1 - untar of testsuite succeeded.
 1..1
-# Tapper-section: kernbench-testrun
+# Artemis-section: kernbench-testrun
 ok 1 - Run took ntp: 1488s, system: 1487s
 1..1
 ok 1 - KernBench
@@ -91,7 +91,7 @@ ok 1 - KernBench
   Sleeps 24493.8 (514.825)
   ...
 1..1
-# Tapper-section: kernbench-results
+# Artemis-section: kernbench-results
 ok 1 - KernBench
   ---
   Tue Dec 29 23:00:26 CET 2009
@@ -105,7 +105,7 @@ ok 1 - KernBench
   Sleeps 24493.8 (514.825)
   ...
 1..1
-# Tapper-section: kernbench-testrun
+# Artemis-section: kernbench-testrun
 ok 1 - Run took ntp: 1480s, system: 1479s
 1..1
 ok 1 - KernBench
@@ -121,7 +121,7 @@ ok 1 - KernBench
   Sleeps 24591.8 (127.58)
   ...
 1..1
-# Tapper-section: kernbench-results
+# Artemis-section: kernbench-results
 ok 1 - KernBench
   ---
   Tue Dec 29 23:25:28 CET 2009
@@ -135,7 +135,7 @@ ok 1 - KernBench
   Sleeps 24591.8 (127.58)
   ...
 1..1
-# Tapper-section: kernbench-testrun
+# Artemis-section: kernbench-testrun
 ok 1 - Run took ntp: 1493s, system: 1492s
 1..1
 ok 1 - KernBench
@@ -151,7 +151,7 @@ ok 1 - KernBench
   Sleeps 24329 (268.935)
   ...
 1..2
-# Tapper-section: kernbench-results
+# Artemis-section: kernbench-results
 ok 1 - KernBench
   ---
   Tue Dec 29 23:50:17 CET 2009
@@ -165,7 +165,7 @@ ok 1 - KernBench
   Sleeps 24329 (268.935)
   ...
 1..8
-# Tapper-Section: dmesg
+# Artemis-Section: dmesg
 ok 1 - dmesg parsed (307 lines)
 not ok 2 -  # TODO okay for us
 # Memory for crash kernel (0x0 to 0x0) notwithin permissible range
@@ -183,7 +183,7 @@ not ok 8 - ibm_acpi # TODO okay for us
 # ec object not found
 # false positves ignored: 14
 1..15
-# Tapper-Section: var_log_messages
+# Artemis-Section: var_log_messages
 ok 1 - /var/log/messages parsed (318 lines)
 not ok 2 -  # TODO okay for us
 # Memory for crash kernel (0x0 to 0x0) notwithin permissible range
@@ -215,7 +215,7 @@ not ok 15 - kernel # TODO okay for us
 # Dec 29 22:52:35 ibm_acpi: ec object not found
 # false positves ignored: 14
 1..1
-# Tapper-Section: stats-proc-interrupts-after
+# Artemis-Section: stats-proc-interrupts-after
 ok 1 - /proc/interrupts
   ---
   0:
@@ -276,20 +276,20 @@ ok 1 - /proc/interrupts
     linetail:
   ...
 1..1
-# Tapper-section: clocksource
+# Artemis-section: clocksource
 ok 1 - Clocksource
   ---
   acpi_pm
   ...
 1..1
-# Tapper-section: uptime
+# Artemis-section: uptime
 ok 1 - got uptime
   ---
   uptime: 4692s
   idletime: 551s
   ...
 1..2
-# Tapper-section: kernbench-results-2
+# Artemis-section: kernbench-results-2
 ok 1 - KernBench
   ---
   Fri Oct  7 12:47:54 CEST 2011
@@ -315,7 +315,7 @@ ok 2 - KernBench
   Sleeps 2 (0)
   ...
 1..1
-# Tapper-section: clocksource-2
+# Artemis-section: clocksource-2
 ok 1 - Clocksource
   ---
   Cannot determine clocksource

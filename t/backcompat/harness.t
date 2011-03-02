@@ -64,7 +64,7 @@ TODO: {
 
 # ============================================================
 
-is($harness->parsed_report->{report_meta}{'suite-name'},    'Tapper',       "report meta suite name");
+is($harness->parsed_report->{report_meta}{'suite-name'},    'Artemis',       "report meta suite name");
 is($harness->parsed_report->{report_meta}{'suite-version'}, '2.010004',      "report meta suite version");
 is($harness->parsed_report->{report_meta}{'suite-type'},    'software',      "report meta suite type");
 is($harness->parsed_report->{report_meta}{'machine-name'},  'bascha',        "report meta machine name");
@@ -72,9 +72,9 @@ is($harness->parsed_report->{report_meta}{'starttime-test-program'}, 'Fri Jun 13
 is($harness->parsed_report->{report_meta}{'reportgroup-arbitrary'}, '29365', "report meta reportgroup arbitrary");
 is($harness->parsed_report->{report_meta}{'reportgroup-testrun'}, '478',     "report meta reportgroup testrun");
 
-is($first_section->{section_name},'t/00-tapper-meta.t', "first section name");
+is($first_section->{section_name},'t/00-artemis-meta.t', "first section name");
 
-is($first_section->{section_meta}{'suite-name'},             'Tapper',                                                            "report meta suite name");
+is($first_section->{section_meta}{'suite-name'},             'Artemis',                                                            "report meta suite name");
 is($first_section->{section_meta}{'suite-version'},          '2.010004',                                                           "report meta suite version");
 is($first_section->{section_meta}{'suite-type'},             'software',                                                            "report meta suite type");
 is($first_section->{section_meta}{'language-description'},   'Perl 5.010000, /2home/ss5/perl510/bin/perl',                         "report meta language description");
@@ -83,8 +83,8 @@ is($first_section->{section_meta}{'osname'},                 'Ubuntu 8.04',     
 is($first_section->{section_meta}{'cpuinfo'},                '2 cores [AMD Athlon(tm) 64 X2 Dual Core Processor 6000+]',           "report meta cpuinfo");
 is($first_section->{section_meta}{'ram'},                    '1887MB',                                                             "report meta ram");
 is($first_section->{section_meta}{'ticket-url'},             'https://affe.tiger.com/bugs/show_bug.cgi?id=901',                    "report meta ticket url");
-is($first_section->{section_meta}{'wiki-url'},               'https://affe.tiger.com/wiki/Tapper/autoreport',                     "report meta wiki url");
-is($first_section->{section_meta}{'planning-id'},            'foo.bar.tapper.autoreport',                                         "report meta planning id");
+is($first_section->{section_meta}{'wiki-url'},               'https://affe.tiger.com/wiki/Artemis/autoreport',                     "report meta wiki url");
+is($first_section->{section_meta}{'planning-id'},            'foo.bar.artemis.autoreport',                                         "report meta planning id");
 is($first_section->{section_meta}{'tags'},                   'sles10sp2 novell bz901',                                             "report meta tags");
 
 is($first_section->{db_section_meta}{'language_description'},   'Perl 5.010000, /2home/ss5/perl510/bin/perl',                                          "db meta language description");
@@ -93,8 +93,8 @@ is($first_section->{db_section_meta}{'osname'},                 'Ubuntu 8.04',  
 is($first_section->{db_section_meta}{'cpuinfo'},                '2 cores [AMD Athlon(tm) 64 X2 Dual Core Processor 6000+]',                            "db meta cpuinfo");
 is($first_section->{db_section_meta}{'ram'},                    '1887MB',                                                                              "db meta ram");
 is($first_section->{db_section_meta}{'ticket_url'},             'https://affe.tiger.com/bugs/show_bug.cgi?id=901',                                     "db meta ticket url");
-is($first_section->{db_section_meta}{'wiki_url'},               'https://affe.tiger.com/wiki/Tapper/autoreport',                                      "db meta wiki url");
-is($first_section->{db_section_meta}{'planning_id'},            'foo.bar.tapper.autoreport',                                                          "db meta planning id");
+is($first_section->{db_section_meta}{'wiki_url'},               'https://affe.tiger.com/wiki/Artemis/autoreport',                                      "db meta wiki url");
+is($first_section->{db_section_meta}{'planning_id'},            'foo.bar.artemis.autoreport',                                                          "db meta planning id");
 is($first_section->{db_section_meta}{'tags'},                   'sles10sp2 novell bz901',                                                              "db meta tags");
 
 $harness = Tapper::TAP::Harness->new( tap => $tap );

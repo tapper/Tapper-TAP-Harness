@@ -32,7 +32,7 @@ is( scalar @{$harness->parsed_report->{tap_sections}}, 20, "kernbench4 section c
 cmp_bag ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}],
          [
           qw/
-                    tapper-meta-information
+                    artemis-meta-information
                     stats-proc-interrupts-before
                     kernel-untar
                     kernbench-untar
@@ -83,7 +83,7 @@ is( scalar @{$harness->parsed_report->{tap_sections}}, 12, "kernbench5 section c
 cmp_bag ([ map { $_->{section_name} } @{$harness->parsed_report->{tap_sections}}],
          [
           qw/
-                    tapper-meta-information
+                    artemis-meta-information
                     stats-proc-interrupts-before
                     kernel-untar
                     kernbench-untar

@@ -1,12 +1,12 @@
 TAP Version 13
 1..2
-# Tapper-Suite-Name: KVM-Migration-Checkpoint
-# Tapper-Suite-version: 0.01
-# Tapper-Machine-Name: $MACHINE
-# Tapper-reportgroup-arbitrary: kvm-0815
-# Tapper-reportgroup-primary: 0
-# Tapper-starttime-test-program: Fri, 08 Aug 2008 14:34:48 +0200
-# Tapper-endtime-test-program:   Fri, 08 Aug 2008 14:36:21 +0200
+# Artemis-Suite-Name: KVM-Migration-Checkpoint
+# Artemis-Suite-version: 0.01
+# Artemis-Machine-Name: $MACHINE
+# Artemis-reportgroup-arbitrary: kvm-0815
+# Artemis-reportgroup-primary: 0
+# Artemis-starttime-test-program: Fri, 08 Aug 2008 14:34:48 +0200
+# Artemis-endtime-test-program:   Fri, 08 Aug 2008 14:36:21 +0200
 ok 1 - details
   ---
   source:

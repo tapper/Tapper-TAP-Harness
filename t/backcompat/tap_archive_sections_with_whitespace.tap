@@ -1,14 +1,14 @@
 1..1
-# Tapper-suite-version: 0.2
-# Tapper-starttime-test-program: 20081029T163911
-# Tapper-machine-name: rhel5u2.64bit
-# Tapper-suite-name: Tapper-CTCS
-# Tapper-reportgroup-arbitrary: None
-# Tapper-section: tapper-meta-information
-# Tapper-reportgroup-testrun: None
-ok 1 - tapper-meta-data
+# Artemis-suite-version: 0.2
+# Artemis-starttime-test-program: 20081029T163911
+# Artemis-machine-name: rhel5u2.64bit
+# Artemis-suite-name: Artemis-CTCS
+# Artemis-reportgroup-arbitrary: None
+# Artemis-section: artemis-meta-information
+# Artemis-reportgroup-testrun: None
+ok 1 - artemis-meta-data
 1..1
-# Tapper-Section: stats-proc-interrupts-before
+# Artemis-Section: stats-proc-interrupts-before
 ok 1 - /proc/interrupts
   ---
   0:
@@ -59,15 +59,15 @@ ok 1 - untar of testsuite succeeded.
 1..1
 ok 1 - untar of kernel succeeded.
 1..1
-# Tapper-section: ctcs-build
+# Artemis-section: ctcs-build
 ok 1 - Build took ntp: 0s, hwclock: 0s
 1..1
-# Tapper-section: ctcs-testrun
+# Artemis-section: ctcs-testrun
 not ok 1 -  Run of ctcs test suite failed. Run took ntp: 1s, hwclock: 0s
 1..1
 ok 1 - Got results
 1..13
-# Tapper-section: CTCS results
+# Artemis-section: CTCS results
 not ok 1 - BBhdaN3
   ---
   expected: 3
@@ -118,7 +118,7 @@ not ok 13 - BBhdaN2
   got: 0
   ...
 1..1
-# Tapper-Section: stats-proc-interrupts-after
+# Artemis-Section: stats-proc-interrupts-after
 ok 1 - /proc/interrupts
   ---
   0:
@@ -165,13 +165,13 @@ ok 1 - /proc/interrupts
     linetail:
   ...
 1..1
-# Tapper-section: clocksource
+# Artemis-section: clocksource
 ok 1 - Clocksource
   ---
   jiffies
   ...
 1..1
-# Tapper-section: uptime
+# Artemis-section: uptime
 ok 1 - got uptime
   ---
   uptime: 633661s

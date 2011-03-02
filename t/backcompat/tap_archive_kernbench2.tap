@@ -1,15 +1,15 @@
 TAP Version 13
 1..1
-# Tapper-suite-version: 13.020016
-# Tapper-starttime-test-program: 20090205T205807
-# Tapper-machine-name: californium
-# Tapper-suite-name: KernBench
-# Tapper-reportgroup-arbitrary: 
-# Tapper-section: tapper-meta-information
-# Tapper-reportgroup-testrun: 1419
-ok 1 - tapper-meta-data
+# Artemis-suite-version: 13.020016
+# Artemis-starttime-test-program: 20090205T205807
+# Artemis-machine-name: californium
+# Artemis-suite-name: KernBench
+# Artemis-reportgroup-arbitrary: 
+# Artemis-section: artemis-meta-information
+# Artemis-reportgroup-testrun: 1419
+ok 1 - artemis-meta-data
 1..1
-# Tapper-Section: stats-proc-interrupts-before
+# Artemis-Section: stats-proc-interrupts-before
 ok 1 - /proc/interrupts
   ---
   0:
@@ -56,13 +56,13 @@ ok 1 - /proc/interrupts
     linetail:
   ...
 1..1
-# Tapper-section: kernel-untar
+# Artemis-section: kernel-untar
 ok 1 - untar of kernel succeeded.
 1..1
-# Tapper-section: kernbench-untar
+# Artemis-section: kernbench-untar
 ok 1 - untar of testsuite succeeded.
 1..1
-# Tapper-section: kernbench-testrun
+# Artemis-section: kernbench-testrun
 ok 1 - Run took ntp: 2339s, system: 2459s
 1..2
 ok 1 - KernBench
@@ -79,7 +79,7 @@ ok 1 - KernBench
   ...
 ok 2 - affe
 1..1
-# Tapper-section: kernbench-results
+# Artemis-section: kernbench-results
 ok 1 - KernBench
   ---
   Thu Feb  5 21:06:47 CET 2009
@@ -93,7 +93,7 @@ ok 1 - KernBench
   Sleeps 20866.2 (234.006)
   ...
 1..1
-# Tapper-section: kernbench-testrun
+# Artemis-section: kernbench-testrun
 ok 1 - Run took ntp: 2184s, system: 2207s
 1..1
 ok 1 - KernBench
@@ -109,7 +109,7 @@ ok 1 - KernBench
   Sleeps 20829.6 (384.487)
   ...
 1..1
-# Tapper-section: kernbench-results
+# Artemis-section: kernbench-results
 ok 1 - KernBench
   ---
   Thu Feb  5 21:47:22 CET 2009
@@ -123,7 +123,7 @@ ok 1 - KernBench
   Sleeps 20829.6 (384.487)
   ...
 1..7
-# Tapper-Section: dmesg
+# Artemis-Section: dmesg
 ok 1 - dmesg parsed (227 lines)
 not ok 2 - 2 not found! # TODO okay for us
 # 
@@ -139,7 +139,7 @@ not ok 7 - 7 powernow-k8: Power state transitions not supported # TODO okay for 
 # 
 # false positves ignored: 1
 1..5
-# Tapper-Section: var_log_messages
+# Artemis-Section: var_log_messages
 ok 1 - /var/log/messages parsed (22 lines)
 not ok 2 - 2 not found! # TODO okay for us
 # 
@@ -163,7 +163,7 @@ not ok 11 - 5 wer state transitions not supported # TODO okay for us
 # Feb  5 20:58:01 powernow-k8: P californium
 # false positves ignored: 1
 1..1
-# Tapper-Section: stats-proc-interrupts-after
+# Artemis-Section: stats-proc-interrupts-after
 ok 1 - /proc/interrupts
   ---
   0:
@@ -210,13 +210,13 @@ ok 1 - /proc/interrupts
     linetail:
   ...
 1..1
-# Tapper-section: clocksource
+# Artemis-section: clocksource
 ok 1 - Clocksource
   ---
   Cannot determine clocksource
   ...
 1..1
-# Tapper-section: uptime
+# Artemis-section: uptime
 ok 1 - got uptime
   ---
   uptime: 4731s
