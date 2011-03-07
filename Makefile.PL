@@ -12,6 +12,7 @@ build_requires 'Test::More'         => 0;
 build_requires 'Test::Perl::Critic' => 0;
 build_requires 'File::Slurp'        => 0;
 build_requires 'TAP::DOM'           => 0;
+build_requires 'Tapper::Test'       => 0;
 
 author_requires 'Module::Install::WriteAll';
 
