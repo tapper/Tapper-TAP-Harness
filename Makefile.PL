@@ -27,5 +27,8 @@ requires 'Archive::Tar'            => 0;
 requires 'IO::Scalar'              => 0;
 requires 'IO::String'              => 0;
 
+repository 'git://github.com/amd/Tapper-TAP-Harness.git';
+bugtracker 'http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Tapper-TAP-Harness';
+
 WriteAll;
 
