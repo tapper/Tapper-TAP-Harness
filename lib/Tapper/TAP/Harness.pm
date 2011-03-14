@@ -13,7 +13,8 @@ use Archive::Tar;
 use IO::Scalar;
 use IO::String;
 
-our $VERSION = '2.010040';
+our $VERSION = '3.000004';
+
 our @SUITE_HEADER_KEYS_GENERAL = qw(suite-version
                                     hardwaredb-systems-id
                                     machine-name
@@ -59,9 +60,9 @@ has parsed_report  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 has section_names  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
 our $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}$/;
-our $re_tapper_meta           = qr/^#\s*(Tapper-)([-\w]+):(.+)$/i;
-our $re_tapper_meta_section   = qr/^#\s*(Tapper-Section:)\s*(.+)$/i;
-our $re_explicit_section_start = qr/^#\s*(Tapper-explicit-section-start:)\s*(\S*)/i;
+our $re_tapper_meta           = qr/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i;
+our $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis)-Section:)\s*(.+)$/i;
+our $re_explicit_section_start = qr/^#\s*((?:Tapper|Artemis)-explicit-section-start:)\s*(\S*)/i;
 
 sub _get_prove {
         my $prove = $^X;
@@ -325,10 +326,10 @@ sub _parse_tap_into_sections_archive
                                 $section{raw} .= "$raw\n";
                         }
 
-                        my $re_tapper_meta           = qr/^#\s*(Tapper-)([-\w]+):(.+)$/i;
-                        my $re_tapper_meta_section   = qr/^#\s*(Tapper-Section:)\s*(.+)$/i;
+                        my $re_tapper_meta           = qr/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i;
+                        my $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis)-Section:)\s*(.+)$/i;
                         # looks like tapper meta line
-                        if ( $line->is_comment and $raw =~ m/^#\s*(Tapper-)([-\w]+):(.+)$/i ) # (
+                        if ( $line->is_comment and $raw =~ m/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i ) # (
                         {
                                 # TODO: refactor inner part with _parse_tap_into_sections_raw()
                                 my $key = lc $2;
@@ -552,7 +553,7 @@ sub generate_html
 
 =head1 NAME
 
-Tapper::TAP::Harness - Tapper specific TAP handling
+Tapper::TAP::Harness - Tapper - Tapper specific TAP handling
 
 =head1 SYNOPSIS
 
@@ -562,9 +563,9 @@ Tapper::TAP::Harness - Tapper specific TAP handling
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2008 OSRC SysInt Team, all rights reserved.
+Copyright 2008-2011 AMD OSRC Tapper Team, all rights reserved.
 
-This program is released under the following license: restrictive
+This program is released under the following license: freebsd
 
 
 =cut

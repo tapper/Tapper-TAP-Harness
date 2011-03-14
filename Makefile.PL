@@ -5,13 +5,16 @@ use inc::Module::Install;
 
 name     'Tapper-TAP-Harness';
 all_from 'lib/Tapper/TAP/Harness.pm';
-author   'OSRC SysInt Team <osrc-sysint@elbe.amd.com>';
+author   'AMD OSRC Tapper Team <tapper@amd64.org>';
 license  'freebsd';
 
 build_requires 'Test::More'         => 0;
 build_requires 'Test::Perl::Critic' => 0;
 build_requires 'File::Slurp'        => 0;
 build_requires 'TAP::DOM'           => 0;
+build_requires 'Tapper::Test'       => 0;
+
+author_requires 'Module::Install::WriteAll';
 
 requires 'Moose'                   => 0;
 requires 'Test::Harness'           => '3.22';
@@ -24,6 +27,9 @@ requires 'Archive::Tar'            => 0;
 requires 'IO::Scalar'              => 0;
 requires 'IO::String'              => 0;
 requires 'IO::Zlib'                => 0;
+
+repository 'git://github.com/amd/Tapper-TAP-Harness.git';
+bugtracker 'http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Tapper-TAP-Harness';
 
 WriteAll;
 
