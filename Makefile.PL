@@ -23,6 +23,7 @@ requires 'YAML::Tiny'              => 0;
 requires 'Archive::Tar'            => 0;
 requires 'IO::Scalar'              => 0;
 requires 'IO::String'              => 0;
+requires 'IO::Zlib'                => 0;
 
 WriteAll;
 
