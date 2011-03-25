@@ -18,7 +18,7 @@ author_requires 'Module::Install::WriteAll';
 
 requires 'Moose'                   => 0;
 requires 'Test::Harness'           => '3.22';
-requires 'TAP::Parser'             => 0;
+requires 'TAP::Parser'             => "3.23";
 requires 'TAP::Parser::Aggregator' => 0;
 requires 'Directory::Scratch'      => 0;
 requires 'TAP::Formatter::HTML'    => '0.04';
