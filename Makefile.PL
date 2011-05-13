@@ -18,10 +18,10 @@ author_requires 'Module::Install::WriteAll';
 
 requires 'Moose'                   => 0;
 requires 'Test::Harness'           => '3.22';
-requires 'TAP::Parser'             => "3.23";
+requires 'TAP::Parser'             => "3.22";
 requires 'TAP::Parser::Aggregator' => 0;
 requires 'Directory::Scratch'      => 0;
-requires 'TAP::Formatter::HTML'    => '0.04';
+requires 'TAP::Formatter::HTML'    => '0.09';
 requires 'YAML::Tiny'              => 0;
 requires 'Archive::Tar'            => "1.76";
 requires 'IO::Scalar'              => 0;
