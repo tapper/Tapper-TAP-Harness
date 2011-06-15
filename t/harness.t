@@ -133,4 +133,7 @@ is ($harness->_unique_section_name("zomtec"), "zomtec1", "unique section name zo
 is ($harness->_unique_section_name("foo"),    "foo",     "unique section name foo");
 is ($harness->_unique_section_name("foo"),    "foo1",    "unique section name foo1");
 
+unlike($html, qr/title="show all tests"/,         "stripped not needed HTML navigation 1");
+unlike($html, qr/title="show failed tests only"/, "stripped not needed HTML navigation 2");
+
 done_testing;
