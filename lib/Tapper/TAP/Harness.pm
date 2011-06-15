@@ -31,6 +31,7 @@ our @SUITE_HEADER_KEYS_DATE = qw(starttime-test-program
 our @SUITE_HEADER_KEYS_REPORTGROUP = qw(reportgroup-arbitrary
                                         reportgroup-testrun
                                         reportgroup-primary
+                                        owner
                                       );
 
 our @SUITE_HEADER_KEYS_REPORTCOMMENT = qw(reportcomment );
