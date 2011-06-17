@@ -133,6 +133,9 @@ sub _parse_tap_into_sections
         return $self->_parse_tap_into_sections_raw(@_);
 }
 
+# prove adds an annoying last summary line, cut that away
+sub fix_last_ok { ${+shift} =~ s/\nok$// }
+
 # return sections
 sub _parse_tap_into_sections_raw
 {
@@ -211,6 +214,7 @@ sub _parse_tap_into_sections_raw
                         #say STDERR "****************************************";
                         if (keys %section) {
                                 # Store a copy (ie., not \%section) so it doesn't get overwritten in next loop
+                                fix_last_ok(\ $section{raw}) if $looks_like_prove_output;
                                 push @{$self->parsed_report->{tap_sections}}, { %section };
                         }
                         %section = ();
@@ -219,8 +223,8 @@ sub _parse_tap_into_sections_raw
 
                 # ----- extract some meta information -----
 
-                # a normal TAP line and not a summary line from "prove"
-                if ( not $is_unknown and not ($looks_like_prove_output and $raw =~ /^ok$/) ) {
+                # a normal TAP line
+                if ( not $is_unknown ) {
                         $section{raw} .= "$raw\n";
                 }
 
@@ -251,6 +255,7 @@ sub _parse_tap_into_sections_raw
         }
 
         # store last section
+        fix_last_ok(\ $section{raw}) if $looks_like_prove_output;
         push @{$self->parsed_report->{tap_sections}}, { %section } if keys %section;
 
         $self->fix_section_names;
