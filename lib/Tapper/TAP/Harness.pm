@@ -60,7 +60,7 @@ has tap_is_archive => ( is => 'rw' );
 has parsed_report  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 has section_names  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
-our $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}$/;
+our $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}\s*$/;
 our $re_tapper_meta           = qr/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i;
 our $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis)-Section:)\s*(.+)$/i;
 our $re_explicit_section_start = qr/^#\s*((?:Tapper|Artemis)-explicit-section-start:)\s*(\S*)/i;
