@@ -55,12 +55,8 @@ my $dom3 = TAP::DOM->new( tap => "TAP Version 13\n".$raw );
 #diag(Dumper($dom3));
 is(scalar @{$harness3->parsed_report->{tap_sections}}, 8, "section 3b count sections");
 
-TODO: {
-        local $TODO = "prove v3.15 output still is not recognized correctly";
-        is($dom3->{tests_run}, 29, "section 3b tests run");
-        ok($dom3->{is_good_plan}, "section 3b good plan");
-
-}
+is($dom3->{tests_run}, 30, "section 3b tests run");
+ok($dom3->{is_good_plan}, "section 3b good plan");
 
 # ============================================================
 

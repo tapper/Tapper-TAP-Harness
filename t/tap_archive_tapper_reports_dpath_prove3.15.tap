@@ -23,7 +23,7 @@ t/tapper_reports_dpath.t ..
 Upgrade not necessary
 Upgrade not necessary
 TAP Version 13
-1..29
+1..30
 ok 1 - report count
 ok 2 - parsed tap - section 0 - tests_planned
 ok 3 - parsed tap - section 1 - tests_planned
@@ -57,6 +57,7 @@ ok 26 - count plans of suite perfmon 1.03
 ok 27 - count plans of suite perfmon 1.02
 ok 28 - count plans of suite perfmon 1.03
 ok 29 - count plans of suite perfmon 1.03
+ok
 ok
 t/boilerplate.t ............ 
 1..3
