@@ -272,9 +272,13 @@ sub _get_tap_sections_from_archive
 
         my $meta         = YAML::Tiny::Load($tar->get_content("meta.yml"));
         my @tap_sections = map {
-                                my $f = $_;
-                                $f =~ s,^\./,,;
-                                { tap => $tar->get_content($f), filename => $f };
+                                my $f1 = $_;                          # original name as-is
+                                my $f2 = $_; $f2 =~ s,^\./,,;         # force no-leading-dot
+                                my $f3 = $_; $f3 = "./$_";            # force    leading-dot
+                                local $Archive::Tar::WARN = 0;
+                                my $tap = $tar->get_content($f1) // $tar->get_content($f2) // $tar->get_content($f3);
+                                $tap = "# Untar Bummer!" if ! defined $tar;
+                                { tap => $tap, filename => $f1 };
                                } @{$meta->{file_order}};
         return @tap_sections;
 }
