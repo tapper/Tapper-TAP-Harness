@@ -1,4 +1,5 @@
 package Tapper::TAP::Harness;
+# ABSTRACT: Tapper - Tapper specific TAP handling
 
 use 5.010;
 use strict;
@@ -13,7 +14,7 @@ use Archive::Tar;
 use IO::Scalar;
 use IO::String;
 
-our $VERSION = '3.000011';
+
 
 our @SUITE_HEADER_KEYS_GENERAL = qw(suite-version
                                     hardwaredb-systems-id
@@ -559,26 +560,5 @@ sub generate_html
 
         return $html;
 }
-
-1;
-
-=head1 NAME
-
-Tapper::TAP::Harness - Tapper - Tapper specific TAP handling
-
-=head1 SYNOPSIS
-
-    use Tapper::TAP::Harness;
-    my $foo = Tapper::TAP::Harness->new();
-    ...
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2008-2011 AMD OSRC Tapper Team, all rights reserved.
-
-This program is released under the following license: freebsd
-
-
-=cut
 
 1; # End of Tapper::TAP::Harness

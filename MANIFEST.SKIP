@@ -1,9 +1,0 @@
-^.git
-Tapper-TAP-Harness-*.*.tar.gz
-^Tapper-TAP-Harness-*.*$
-_build
-blib
-^Build$
-MANIFEST.bak
-xyz*
-^MYMETA.yml$
