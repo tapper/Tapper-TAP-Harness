@@ -134,7 +134,12 @@ sub _parse_tap_into_sections
         return $self->_parse_tap_into_sections_raw(@_);
 }
 
-# prove adds an annoying last summary line, cut that away
+=head2 fix_last_ok
+
+The C<prove> tool adds an annoying last summary line, cut that away.
+
+=cut
+
 sub fix_last_ok { ${+shift} =~ s/\nok$// }
 
 # return sections
@@ -366,6 +371,13 @@ sub _parse_tap_into_sections_archive
         $self->fix_section_names;
 }
 
+=head2 fix_section_names
+
+Create sensible section names that fit further processing,
+eg. substitute whitespace by dashes, fill missing names, etc.
+
+=cut
+
 sub fix_section_names
 {
         my ($self) = @_;
@@ -491,6 +503,13 @@ sub _process_meta_information
 
 }
 
+=head2 evaluate_report
+
+Actually evaluate the content of the incoming report by parsing it,
+aggregate the sections and extract contained meta information.
+
+=cut
+
 sub evaluate_report
 {
         my ($self) = @_;
@@ -513,6 +532,13 @@ sub _fix_generated_html
 
         return $html;
 }
+
+=head2 generate_html
+
+Render TAP through TAP::Formatter::HTML and fix some formatting to fit
+into Tapper.
+
+=cut
 
 sub generate_html
 {
