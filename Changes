@@ -1,6 +1,10 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - handle TAP::Archive sloppyness
+        - tests'n'fixes for prove ok cutting
+        - added 'moreinfo-url' metainfo
+        - added 'owner' metainfo
         - big Dist::Zilla roundhouse kick
 
 2011-04-07  Steffen Schwigon  <steffen.schwigon@amd.com>
