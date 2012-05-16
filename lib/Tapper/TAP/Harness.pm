@@ -308,7 +308,7 @@ sub _parse_tap_into_sections_archive
 
                 my $tap       = $tap_file->{tap};
                 my $filename  = $tap_file->{filename};
-                
+
                 my $parser = TAP::Parser->new ({ tap => $tap, version => 13 });
 
                 # ----- store previous section, start new section -----
