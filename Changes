@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - require TAP::Parser >= 3.22
 
 4.0.1     2012-05-16
         - handle TAP::Archive sloppyness
