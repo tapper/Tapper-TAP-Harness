@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - recognize TAP version case-insensitive
 
 4.0.2     2012-06-07
         - require TAP::Parser >= 3.22
