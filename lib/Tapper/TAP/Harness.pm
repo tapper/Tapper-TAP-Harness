@@ -61,6 +61,12 @@ has tap_is_archive => ( is => 'rw' );
 has parsed_report  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 has section_names  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
+#TODO: this regex matches also other output which doesn't start with a
+#      comment. the issue still ocurses when prove output is used.
+#      maybe the prove regex could be fix with one or more of the following
+#      - prove never starts with whitespace
+#      - prove has more as two dots, even more as 4
+#      - prove always contains a "\.t" directly before the dots in the end
 our $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}\s*$/;
 our $re_tapper_meta           = qr/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i;
 our $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis)-Section:)\s*(.+)$/i;
@@ -175,7 +181,7 @@ sub _parse_tap_into_sections_raw
         my $section_starts_with_prove    = 0;
         my $section_starts_explicit      = 0;
         my $last_line_was_tap            = 0;  # find multiple comments
-        my $passed_none_test_line        = 0;  # find multiple test
+        my $passed_plan_line             = 0;  # lazy plans test
         my $is_prove                     = 0;
 
         # go through every tap line
@@ -234,14 +240,14 @@ sub _parse_tap_into_sections_raw
 
                 # all sections start with TAP, the tapper comments can be in the end
                 # but before the new section
-                if (! $section_starts_with_comment and !$section_starts_with_prove and !$section_starts_explicit) {
+                if (!$section_starts_with_comment and !$section_starts_with_prove and !$section_starts_explicit) {
                     # There could be multiple tests in a row, we need to remember when there
-                    # was not a test
-                    if (!$is_test and $tap_starts_with_tests) {
-                        $passed_none_test_line = 1;
+                    # was the final plan
+                    if ($tap_starts_with_tests and $is_plan) {
+                        $passed_plan_line = 1;
                     }
                     # 1.2
-                    if ($tap_starts_with_tests and $passed_none_test_line and $is_test) {
+                    if ($tap_starts_with_tests and $passed_plan_line and $is_test) {
                         $newsection = 1;
                     }
                     # 2.2 we started with a plan and have a new plan
@@ -278,7 +284,7 @@ sub _parse_tap_into_sections_raw
                 }
 
                 # that has nothing to do with TAP...
-                if ($is_prove) {
+                if ($is_prove and $section_starts_with_prove) {
                     $newsection = 1;
                 }
 
@@ -300,6 +306,7 @@ sub _parse_tap_into_sections_raw
                         # mixing lazy with proper TAP plans is never appropriate and will always
                         # lead to issues
                         $last_line_was_tap            = 0;
+                        $passed_plan_line             = 0;
 
                 }
 
