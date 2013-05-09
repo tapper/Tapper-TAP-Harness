@@ -237,7 +237,7 @@ sub _parse_tap_into_sections_raw
                 if (! $section_starts_with_comment and !$section_starts_with_prove and !$section_starts_explicit) {
                     # There could be multiple tests in a row, we need to remember when there
                     # was not a test
-                    if (!$is_test) {
+                    if (!$is_test and $tap_starts_with_tests) {
                         $passed_none_test_line = 1;
                     }
                     # 1.2
