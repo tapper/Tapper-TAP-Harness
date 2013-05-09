@@ -61,6 +61,12 @@ has tap_is_archive => ( is => 'rw' );
 has parsed_report  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 has section_names  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
+#TODO: this regex matches also other output which doesn't start with a
+#      comment. the issue still ocurses when prove output is used.
+#      maybe the prove regex could be fix with one or more of the following
+#      - prove never starts with whitespace
+#      - prove has more as two dots, even more as 4
+#      - prove always contains a "\.t" directly before the dots in the end
 our $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}\s*$/;
 our $re_tapper_meta           = qr/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i;
 our $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis)-Section:)\s*(.+)$/i;
@@ -152,6 +158,217 @@ sub _parse_tap_into_sections_raw
 
         my $report_tap = $self->tap;
 
+        #TODO: WRONG PLACE... THAT JUST SCREWES UP TESTS
+        #      and it doesn't matter. When we split into section
+        #      it get lost for the later sections...
+        #my $TAPVERSION = "TAP Version 13";
+        #$report_tap    = $TAPVERSION."\n".$report_tap unless $report_tap =~ /^TAP Version/msi;
+
+        $report_tap = _fix_broken_tap($report_tap);
+        my $parser = new TAP::Parser ({ tap => $report_tap, version => 13 });
+
+        my %section = ();
+        $self->parsed_report->{report_meta} = {
+                                               'suite-name'    => 'unknown',
+                                               'suite-version' => 'unknown',
+                                               'suite-type'    => 'unknown',
+                                               'reportcomment' => undef,
+                                              };
+        my $tap_starts_with_plan         = 0;
+        my $tap_starts_with_tests        = 0;
+        my $tap_starts_with_prove        = 0;
+        my $section_starts_with_comment  = 0;
+        my $section_starts_with_prove    = 0;
+        my $section_starts_explicit      = 0;
+        my $last_line_was_tap            = 0;  # find multiple comments
+        my $passed_plan_line             = 0;  # lazy plans test
+        my $is_prove                     = 0;
+
+        # go through every tap line
+        while ( my $line = $parser->next )
+        {
+                # Cases which tell us if there is a new section:
+                # 1. first TAP line is test => end with plan
+                #    1.1 all tapper comments before the first test are matched
+                #    1.2 all tapper comments after plan are matched
+                # 2. first TAP line is a plan => end with new plan
+                #    2.1 tapper comments before plan are matched
+                #    2.2 tapper comments after plan are matched
+                # 3. first TAP line is prove output => end with a prove output
+                #    prove scripts are unique tests, therefore they should not contain multiple
+                #    test sets
+
+                # loop variables
+                my $raw        = $line->raw;
+                my $is_plan    = $line->is_plan;
+                my $is_unknown = $line->is_unknown;
+                my $is_test    = $line->is_test;
+                my $is_comment = $line->is_comment;
+                # prove output
+                if ( $is_unknown and $raw =~ $re_prove_section ) {
+                    $is_prove = 1;
+                } else {
+                    $is_prove = 0;
+                }
+
+
+                # start new section?
+                my $newsection = 0;
+
+                # all sections start with a tapper comment
+                # therefore we have to check every comment if
+                # it is a eligable tapper command
+                if ($section_starts_with_comment) {
+                    # There could be multiple tapper comments in a row, we need to remember when there
+                    # was a none tapper comment
+                    if ($raw !~ $re_tapper_meta) {
+                        $last_line_was_tap = 1;
+                    }
+
+                    # we started with tapper comments and previous line was not a tap
+                    if ($last_line_was_tap and $raw =~ $re_tapper_meta and $raw !~ $re_explicit_section_start) {
+                        #1.1
+                        if ($tap_starts_with_tests) {
+                            $newsection = 1;
+                        }
+                        #2.1
+                        if ($tap_starts_with_plan and $is_plan) {
+                            $newsection = 1;
+                        }
+                    }
+                }
+
+                # all sections start with TAP, the tapper comments can be in the end
+                # but before the new section
+                if (!$section_starts_with_comment and !$section_starts_with_prove and !$section_starts_explicit) {
+                    # There could be multiple tests in a row, we need to remember when there
+                    # was the final plan
+                    if ($tap_starts_with_tests and $is_plan) {
+                        $passed_plan_line = 1;
+                    }
+                    # 1.2
+                    if ($tap_starts_with_tests and $passed_plan_line and $is_test) {
+                        $newsection = 1;
+                    }
+                    # 2.2 we started with a plan and have a new plan
+                    if ($tap_starts_with_plan and $is_plan) {
+                        $newsection = 1;
+                    }
+                }
+
+                # Is first TAP line a test, plan or prove?
+                #   or do we use a lazy plan where the
+                #   plan is after all the tests?
+                if ($tap_starts_with_plan == 0 and $tap_starts_with_tests == 0 and $section_starts_with_prove == 0 and $section_starts_explicit == 0) {
+                    if ($is_plan) {
+                        $tap_starts_with_plan = 1;
+                    } elsif ($is_test) {
+                        $tap_starts_with_tests = 1;
+                    } elsif ($is_prove) {
+                        $section_starts_with_prove = 1;
+                    } elsif ( $raw =~ $re_explicit_section_start) {
+                        $section_starts_explicit = 1;
+                    } elsif ($raw =~ $re_tapper_meta and $raw !~ $re_explicit_section_start) {
+                        # comments can only be tapper comments
+                        # everything else does not make sense before any tap started
+                        $section_starts_with_comment = 1;
+                    }
+                }
+
+                # explicite section introduction
+                # we don't care if the last line was a tap version or not
+                # if the last line was part of this explicit section, the provided syntax
+                # is totally off
+                if ( $raw =~ $re_explicit_section_start) {
+                    $newsection = 1;
+                }
+
+                # that has nothing to do with TAP...
+                if ($is_prove and $section_starts_with_prove) {
+                    $newsection = 1;
+                }
+
+                # did we found a new section?
+                if ($newsection) {
+                        if (keys %section) {
+                                # Store a copy (ie., not \%section) so it doesn't get overwritten in next loop
+                                # TODO: why do we need to clean it up? Shouldn't matter...
+                                #   t/harness-provetap.t and t/harness.t depend on it because
+                                # the tests are sensitive to this
+                                # but we shouldn't need this line et al. Only uncommented due of 
+                                # prove -vl t/*.t
+                                fix_last_ok(\ $section{raw}) if $is_prove;
+                                push @{$self->parsed_report->{tap_sections}}, { %section };
+                        }
+                        # reset section information
+                        %section = ();
+                        # we don't need to reset the other ones because
+                        # mixing lazy with proper TAP plans is never appropriate and will always
+                        # lead to issues
+                        $last_line_was_tap            = 0;
+                        $passed_plan_line             = 0;
+
+                }
+
+
+                # ----- extract some meta information -----
+
+                # a normal TAP line
+                # TODO: does it really matter that if filtering the unknown lines out?
+                if ( not $is_unknown ) {
+                        $section{raw} .= "$raw\n";
+                }
+
+                # looks like tapper meta line
+                #TODO: do we really need to check $re_tapper_meta?
+                if ( $line->is_comment and $raw =~ $re_tapper_meta )
+                {
+                        my $key = lc $2;
+                        my $val = $3;
+                        # cleanup spaces from regex, not the best style to use
+                        # $2 and $3 before
+                        $val =~ s/^\s+//;
+                        $val =~ s/\s+$//;
+                        if ($raw =~ $re_tapper_meta_section) {
+                                $section{section_name} //= $self->_unique_section_name( $val );
+                        }
+                        $section{section_meta}{$key} = $val;              # section keys
+                        $self->parsed_report->{report_meta}{$key} = $val; # also global keys, later entries win
+                }
+
+                # if we have multiple lines from prove, we use
+                # them as section name... this can overwitten later
+                # when there is a explicit tapper comment before the section
+                # is done
+                if ( $is_unknown and $raw =~ $re_prove_section )
+                {
+                        my $section_name = $self->_unique_section_name( $1 );
+                        $section{section_name} //= $section_name;
+                }
+
+        }
+
+        # store last section
+        # TODO: why do we need to clean it up? Shouldn't matter...
+        #fix_last_ok(\ $section{raw}) if $is_prove;
+        push @{$self->parsed_report->{tap_sections}}, { %section } if keys %section;
+
+        $self->fix_section_names;
+}
+
+####################################################
+# TODO: CLEAN UP OLD SECTION, KEPT TO COMPARE IT WITH THE NEW ONE
+####################################################
+# return sections
+sub _parse_tap_into_sections_raw_OLD
+{
+        my ($self) = @_;
+
+        $self->parsed_report->{tap_sections} = [];
+        $self->section_names({});
+
+        my $report_tap = $self->tap;
+
         my $TAPVERSION = "TAP Version 13";
         $report_tap    = $TAPVERSION."\n".$report_tap unless $report_tap =~ /^TAP Version/msi;
 
@@ -189,34 +406,38 @@ sub _parse_tap_into_sections_raw
 
                 $sections_marked_explicit = 1 if $raw =~ $re_explicit_section_start;
 
-#                 say STDERR "    $raw";
-#                 say STDERR "    $i. is_version:               $is_version";
-#                 say STDERR "    $i. is_yaml:                  $is_yaml";
-#                 say STDERR "    $i. looks_like_prove_output:  $looks_like_prove_output";
-#                 say STDERR "    $i. last_line_was_plan:       $last_line_was_plan";
-#                 say STDERR "    $i. last_line_was_version:    $last_line_was_version";
-#                 say STDERR "    $i. sections_marked_explicit: $sections_marked_explicit";
+                # start new section?
+                my $newsection = 0;
+                # explicite section introduction && last line was not version
+                if ( $raw =~ $re_explicit_section_start and ! $last_line_was_version ) {
+                    $newsection = 1;
+                }
+                # section not marked explicit
+                if (! $sections_marked_explicit) {
+                    # but first line of entire tap
+                    if ($i == 0) {
+                        $newsection = 1;
+                    }
+                    # not proven output
+                    if ( ! $looks_like_prove_output ) {
+                        if ( $is_plan and not $last_line_was_version ) {
+                            $newsection = 1;
+                        }
+                        if ( $is_version and not $last_line_was_plan ) {
+                            $newsection = 1;
+                        }
+                    }
+                    if ( $looks_like_prove_output and
+                         ! $last_line_was_version and
+                         ! $last_line_was_plan and
+                         $raw =~ $re_prove_section) {
+                        $newsection = 1;
+                    }
+                }
 
-                # start new section
-                if ( $raw =~ $re_explicit_section_start and ! $last_line_was_version
-                     or
-                     (! $sections_marked_explicit
-                      and ( $i == 0 or
-                            ( ! $looks_like_prove_output
-                              and
-                              (
-                               ( $is_plan and not $last_line_was_version ) or
-                               ( $is_version and not $last_line_was_plan )
-                              )
-                            ) or
-                            ( $looks_like_prove_output and
-                              ! $last_line_was_version and
-                              ! $last_line_was_plan and
-                              $raw =~ $re_prove_section
-                            ) ) ) )
-                {
-#                         say STDERR "____________________________ new section";
-
+                # we have a new section
+                if ($newsection) {
+                        #say STDERR "____________________________ new section";
                         #say STDERR "****************************************";
                         if (keys %section) {
                                 # Store a copy (ie., not \%section) so it doesn't get overwritten in next loop
@@ -235,10 +456,13 @@ sub _parse_tap_into_sections_raw
                 }
 
                 # looks like tapper meta line
+                #TODO: do we really need to check $re_tapper_meta?
                 if ( $line->is_comment and $raw =~ $re_tapper_meta )
                 {
                         my $key = lc $2;
                         my $val = $3;
+                        # TODO: if we need to check for $re_tapper_meta, we don't
+                        #       need the following line
                         $val =~ s/^\s+//;
                         $val =~ s/\s+$//;
                         if ($raw =~ $re_tapper_meta_section) {
@@ -342,10 +566,15 @@ sub _parse_tap_into_sections_archive
                                 $section{raw} .= "$raw\n";
                         }
 
-                        my $re_tapper_meta           = qr/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i;
-                        my $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis)-Section:)\s*(.+)$/i;
+                        # TODO: remove following, it is already defined with "^our $re_tapper_meta" before
+                        #my $re_tapper_meta           = qr/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i;
+                        # TODO: remove following, it is already defined in "^our $re_tapper_meta_section"
+                        #my $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis)-Section:)\s*(.+)$/i;
                         # looks like tapper meta line
-                        if ( $line->is_comment and $raw =~ m/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i ) # (
+                        # TODO: remove the following: above is the following defined
+                        #            our $re_tapper_meta = qr/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i;
+                        #if ( $line->is_comment and $raw =~ m/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i ) # (
+                        if ( $line->is_comment and $raw =~ $re_tapper_meta ) # (
                         {
                                 # TODO: refactor inner part with _parse_tap_into_sections_raw()
                                 my $key = lc $2;
@@ -366,7 +595,8 @@ sub _parse_tap_into_sections_archive
         # store last section
         push @{$self->parsed_report->{tap_sections}}, { %section } if keys %section;
 
-        use Data::Dumper;
+        #TODO: maybe cleaning up the following debugging parts?
+        #use Data::Dumper;
         #print STDERR Dumper($self->parsed_report);
         $self->fix_section_names;
 }
