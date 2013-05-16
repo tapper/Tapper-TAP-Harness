@@ -5,7 +5,7 @@ The following documentation may include too much steps. But it gets the module i
 
 Pre-requirements manual installation
 ------------------------------------
-* perl module Dist::Zilla::PluginBundle::AMD
+* perl module Dist::Zilla::PluginBundle::Tapper
 * cpan or cpanm
 
 Manual installation
