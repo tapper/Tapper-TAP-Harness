@@ -58,7 +58,7 @@ use Moose;
 
 has tap            => ( is => 'rw', isa => 'Str' );
 has tap_is_archive => ( is => 'rw' );
-has parsed_report  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
+has parsed_report  => ( is => 'rw', isa => 'HashRef', default => sub {{tap_sections => []}});
 has section_names  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
 our $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}\s*$/;
@@ -147,8 +147,6 @@ sub _parse_tap_into_sections_raw
 {
         my ($self) = @_;
 
-        $self->parsed_report->{tap_sections} = [];
-        $self->section_names({});
 
         my $report_tap = $self->tap;
 
@@ -292,9 +290,6 @@ sub _get_tap_sections_from_archive
 sub _parse_tap_into_sections_archive
 {
         my ($self) = @_;
-
-        $self->parsed_report->{tap_sections} = [];
-        $self->section_names({});
 
         my @tap_sections = $self->_get_tap_sections_from_archive($self->tap);
 
@@ -513,7 +508,7 @@ aggregate the sections and extract contained meta information.
 sub evaluate_report
 {
         my ($self) = @_;
-
+        return if @{$self->parsed_report->{tap_sections}};
         $self->_parse_tap_into_sections();
         $self->_aggregate_sections();
         $self->_process_meta_information();
