@@ -76,7 +76,7 @@ sub _get_prove {
 sub _unique_section_name
 {
         my ($self, $section_name) = @_;
-
+        return if not defined $section_name;
         my $trail_number = 1;
         if (defined $self->section_names->{$section_name}
             and not $section_name =~ m/\d$/)
@@ -119,11 +119,36 @@ sub _fix_broken_tap {
         return $tap;
 }
 
+sub _parse_tap_into_sections_one_section
+{
+        my ($self) = @_;
+        my @sections = $self->_get_tap_sections_from_single;
+        $self->_collect_meta_from_sections(@sections);
+}
+
+=head2 tap_single_plan
+
+Return true when TAP contains exactly one plan
+
+=cut
+
+sub tap_single_plan
+{
+        my ($self) = @_;
+        return if $self->tap_is_archive;
+        my @plans = ($self->tap) =~ m/(1\.\.\d+)/mg;
+        return(int(@plans) == 1);
+}
+
+
+
 sub _parse_tap_into_sections
 {
-        my ($self) = shift;
+        my ($self) = @_;
 
+        # Order matters
         return $self->_parse_tap_into_sections_archive(@_) if $self->tap_is_archive;
+        return $self->_parse_tap_into_sections_one_section(@_) if $self->tap_single_plan;
         return $self->_parse_tap_into_sections_raw(@_);
 }
 
@@ -269,11 +294,25 @@ sub _get_tap_sections_from_archive
         return @tap_sections;
 }
 
+sub _get_tap_sections_from_single
+{
+        my ($self) = @_;
+        my ($section_name) = ($self->tap) =~ $re_tapper_meta_section;
+        return({ tap => $self->tap, filename => $section_name}) if $section_name;
+        return({ tap => $self->tap});
+}
+
+
 sub _parse_tap_into_sections_archive
 {
         my ($self) = @_;
 
         my @tap_sections = $self->_get_tap_sections_from_archive($self->tap);
+        $self->_collect_meta_from_sections(@tap_sections);
+}
+
+sub _collect_meta_from_sections {
+        my ($self, @tap_sections) = @_;
 
         my $looks_like_prove_output = 0;
         $self->parsed_report->{report_meta} = {
