@@ -62,9 +62,9 @@ has parsed_report  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 has section_names  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
 our $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}\s*$/;
-our $re_tapper_meta           = qr/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i;
-our $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis)-Section:)\s*(.+)$/i;
-our $re_explicit_section_start = qr/^#\s*((?:Tapper|Artemis)-explicit-section-start:)\s*(\S*)/i;
+our $re_tapper_meta           = qr/^#\s*((?:Tapper|Artemis|Test)-)([-\w]+):(.+)$/i;
+our $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis|Test)-Section:)\s*(.+)$/i;
+our $re_explicit_section_start = qr/^#\s*((?:Tapper|Artemis|Test)-explicit-section-start:)\s*(\S*)/i;
 
 sub _get_prove {
         my $prove = $^X;
@@ -342,10 +342,10 @@ sub _parse_tap_into_sections_archive
                                 $section{raw} .= "$raw\n";
                         }
 
-                        my $re_tapper_meta           = qr/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i;
-                        my $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis)-Section:)\s*(.+)$/i;
+                        my $re_tapper_meta           = qr/^#\s*((?:Tapper|Artemis|Test)-)([-\w]+):(.+)$/i;
+                        my $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis|Test)-Section:)\s*(.+)$/i;
                         # looks like tapper meta line
-                        if ( $line->is_comment and $raw =~ m/^#\s*((?:Tapper|Artemis)-)([-\w]+):(.+)$/i ) # (
+                        if ( $line->is_comment and $raw =~ m/^#\s*((?:Tapper|Artemis|Test)-)([-\w]+):(.+)$/i ) # (
                         {
                                 # TODO: refactor inner part with _parse_tap_into_sections_raw()
                                 my $key = lc $2;
