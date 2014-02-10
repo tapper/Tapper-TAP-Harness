@@ -1,0 +1,15 @@
+TAP Version 13
+1..1
+# Tapper-section: .
+# Tapper-Suite-Name: hw_info
+# Tapper-Machine-Name: .
+# Tapper-Reportgroup-Testrun: 2014021001
+# Tapper-moreinfo-url: https://tapper-testing.org
+ok - get memcount data
+  ---
+  BenchmarkAnythingData:
+  -
+    NAME: hw_info.memcount
+    VALUE: 2438400
+  ...
+
