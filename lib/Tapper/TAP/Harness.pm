@@ -247,7 +247,7 @@ sub _parse_tap_into_sections_raw
                         $val =~ s/^\s+//;
                         $val =~ s/\s+$//;
                         if ($raw =~ $re_tapper_meta_section) {
-                                $section{section_name} //= $self->_unique_section_name( $val );
+                                $section{section_name} ||= $self->_unique_section_name( $val );
                         }
                         $section{section_meta}{$key} = $val;              # section keys
                         $self->parsed_report->{report_meta}{$key} = $val; # also global keys, later entries win

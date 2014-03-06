@@ -25,4 +25,17 @@ ok - get memcount data
     NAME: hw_info.memcount
     VALUE: 2438400
   ...
+1..1
+# Tapper-section:
+# Tapper-Suite-Name: test
+# Tapper-Machine-Name: some.machine
+# Tapper-Reportgroup-Testrun: 2014021001
+# Tapper-moreinfo-url: http://tapper-testing.org
+ok - get memcount data
+  ---
+  BenchmarkAnythingData:
+  -
+    NAME: hw_info.memcount
+    VALUE: 2438400
+  ...
 
