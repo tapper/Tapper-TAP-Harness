@@ -58,7 +58,7 @@ use Moose;
 
 has tap            => ( is => 'rw', isa => 'Str' );
 has tap_is_archive => ( is => 'rw' );
-has parsed_report  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
+has parsed_report  => ( is => 'rw', isa => 'HashRef', default => sub {{tap_sections => []}});
 has section_names  => ( is => 'rw', isa => 'HashRef', default => sub {{}} );
 
 our $re_prove_section          = qr/^([-_\d\w\/.]*\w)\s?\.{2,}\s*$/;
@@ -76,7 +76,7 @@ sub _get_prove {
 sub _unique_section_name
 {
         my ($self, $section_name) = @_;
-
+        return if not defined $section_name;
         my $trail_number = 1;
         if (defined $self->section_names->{$section_name}
             and not $section_name =~ m/\d$/)
@@ -94,9 +94,6 @@ sub _unique_section_name
 # hot fix known TAP errors
 sub _fix_broken_tap {
         my ($tap) = @_;
-
-        # say STDERR "============================================================";
-        # say STDERR $tap;
 
         # TAP::Parser chokes on that
         $tap =~ s/^(\s+---)\s+$/$1/msg;
@@ -119,18 +116,39 @@ sub _fix_broken_tap {
         $tap =~ s/^(\s+)(Context Switches)\s*([^\n]*)$/$1context_switches: $3/msg;
         $tap =~ s/^(\s+)(Sleeps)\s*([^\n]*)$/$1sleeps: $3/msg;
 
-        # say STDERR "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<";
-        # say STDERR $tap;
-        # say STDERR ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
-
         return $tap;
 }
 
+sub _parse_tap_into_sections_one_section
+{
+        my ($self) = @_;
+        my @sections = $self->_get_tap_sections_from_single;
+        $self->_collect_meta_from_sections(@sections);
+}
+
+=head2 tap_single_plan
+
+Return true when TAP contains exactly one plan
+
+=cut
+
+sub tap_single_plan
+{
+        my ($self) = @_;
+        return if $self->tap_is_archive;
+        my @plans = ($self->tap) =~ m/(1\.\.\d+)/mg;
+        return(int(@plans) == 1);
+}
+
+
+
 sub _parse_tap_into_sections
 {
-        my ($self) = shift;
+        my ($self) = @_;
 
+        # Order matters
         return $self->_parse_tap_into_sections_archive(@_) if $self->tap_is_archive;
+        return $self->_parse_tap_into_sections_one_section(@_) if $self->tap_single_plan;
         return $self->_parse_tap_into_sections_raw(@_);
 }
 
@@ -147,8 +165,6 @@ sub _parse_tap_into_sections_raw
 {
         my ($self) = @_;
 
-        $self->parsed_report->{tap_sections} = [];
-        $self->section_names({});
 
         my $report_tap = $self->tap;
 
@@ -179,7 +195,6 @@ sub _parse_tap_into_sections_raw
                 my $is_unknown = $line->is_unknown;
                 my $is_yaml    = $line->is_yaml;
 
-                #say STDERR "__".$line->raw;
                 # prove section
                 if ( $is_unknown and $raw =~ $re_prove_section ) {
                         $looks_like_prove_output ||= 1;
@@ -189,13 +204,6 @@ sub _parse_tap_into_sections_raw
 
                 $sections_marked_explicit = 1 if $raw =~ $re_explicit_section_start;
 
-#                 say STDERR "    $raw";
-#                 say STDERR "    $i. is_version:               $is_version";
-#                 say STDERR "    $i. is_yaml:                  $is_yaml";
-#                 say STDERR "    $i. looks_like_prove_output:  $looks_like_prove_output";
-#                 say STDERR "    $i. last_line_was_plan:       $last_line_was_plan";
-#                 say STDERR "    $i. last_line_was_version:    $last_line_was_version";
-#                 say STDERR "    $i. sections_marked_explicit: $sections_marked_explicit";
 
                 # start new section
                 if ( $raw =~ $re_explicit_section_start and ! $last_line_was_version
@@ -215,9 +223,6 @@ sub _parse_tap_into_sections_raw
                               $raw =~ $re_prove_section
                             ) ) ) )
                 {
-#                         say STDERR "____________________________ new section";
-
-                        #say STDERR "****************************************";
                         if (keys %section) {
                                 # Store a copy (ie., not \%section) so it doesn't get overwritten in next loop
                                 fix_last_ok(\ $section{raw}) if $looks_like_prove_output;
@@ -289,14 +294,25 @@ sub _get_tap_sections_from_archive
         return @tap_sections;
 }
 
+sub _get_tap_sections_from_single
+{
+        my ($self) = @_;
+        my ($section_name) = ($self->tap) =~ $re_tapper_meta_section;
+        return({ tap => $self->tap, filename => $section_name}) if $section_name;
+        return({ tap => $self->tap});
+}
+
+
 sub _parse_tap_into_sections_archive
 {
         my ($self) = @_;
 
-        $self->parsed_report->{tap_sections} = [];
-        $self->section_names({});
-
         my @tap_sections = $self->_get_tap_sections_from_archive($self->tap);
+        $self->_collect_meta_from_sections(@tap_sections);
+}
+
+sub _collect_meta_from_sections {
+        my ($self, @tap_sections) = @_;
 
         my $looks_like_prove_output = 0;
         $self->parsed_report->{report_meta} = {
@@ -366,8 +382,6 @@ sub _parse_tap_into_sections_archive
         # store last section
         push @{$self->parsed_report->{tap_sections}}, { %section } if keys %section;
 
-        use Data::Dumper;
-        #print STDERR Dumper($self->parsed_report);
         $self->fix_section_names;
 }
 
@@ -410,7 +424,6 @@ sub _aggregate_sections
                 $rawtap    = $TAPVERSION."\n".$rawtap unless $rawtap =~ /^TAP Version/msi;
                 my $parser = new TAP::Parser ({ tap => $rawtap });
                 $parser->run;
-                # print STDERR "# " . $section->{section_name} . "\n";
                 $aggregator->add( $section->{section_name} => $parser );
         }
         $aggregator->stop;
@@ -484,7 +497,6 @@ sub _process_section_meta_information
         foreach my $section ( @{$self->parsed_report->{tap_sections}} ) {
                 foreach my $key (@SECTION_HEADER_KEYS_GENERAL)
                 {
-                        use Data::Dumper;
                         my $section_name = $section->{section_name};
                         my $value        = $section->{section_meta}{$key};
                         my $accessor     = $key;
@@ -513,7 +525,7 @@ aggregate the sections and extract contained meta information.
 sub evaluate_report
 {
         my ($self) = @_;
-
+        return if @{$self->parsed_report->{tap_sections}};
         $self->_parse_tap_into_sections();
         $self->_aggregate_sections();
         $self->_process_meta_information();
@@ -557,17 +569,6 @@ sub generate_html
                          my $script_content = $rawtap;
                          my $file           = $temp->touch($fname, $script_content);
 
-#                          say STDERR "--------------------------------------------------";
-#                          say STDERR $_->{raw};
-#                          say STDERR "--------------------------------------------------";
-#                          say STDERR $rawtap;
-#                          say STDERR "--------------------------------------------------";
-#                          say STDERR $script_content;
-#                          say STDERR "--------------------------------------------------";
-#                          say STDERR "$temp/$fname";
-#                          say STDERR "--------------------------------------------------";
-#                          #sleep 10;
-
                          [ "$temp/$fname" => $_->{section_name} ];
                         } @{$self->parsed_report->{tap_sections}};
 
@@ -577,7 +578,6 @@ sub generate_html
         my $prove = _get_prove();
 
         my $cmd = qq{cd $temp/section ; $^X $prove -vm --exec 'cat' --formatter=TAP::Formatter::HTML `find -type f | sed -e 's,^\./,,' | sort`};
-        #say STDERR $cmd;
         my $html = qx( $cmd );
 
         $html = _fix_generated_html( $html );
