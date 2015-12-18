@@ -2,6 +2,9 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+5.0.0     2015-12-18
+        - distro maintenance
+
 4.1.2     2015-12-18
         - allow # Test-*: headers in TAP
         - distro maintenance
