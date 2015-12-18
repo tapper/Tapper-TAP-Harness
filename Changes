@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - allow # Test-*: headers in TAP
+        - distro maintenance
 
 4.1.1     2012-11-19
         - dzil pluginbundle TAPPER
