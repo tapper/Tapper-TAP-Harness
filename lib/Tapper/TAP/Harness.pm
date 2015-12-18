@@ -359,6 +359,7 @@ sub _collect_meta_from_sections {
                         }
 
                         my $re_tapper_meta           = qr/^#\s*((?:Tapper|Artemis|Test)-)([-\w]+):(.+)$/i;
+                        my $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis|Test)-Section:)\s*(.+)$/i;
                         # looks like tapper meta line
                         if ( $line->is_comment and $raw =~ m/^#\s*((?:Tapper|Artemis|Test)-)([-\w]+):(.+)$/i ) # (
                         {
