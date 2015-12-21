@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - RT#110450: derive prove's name following found perl's name
+          [reported by Slaven Rezić]
 
 5.0.0     2015-12-18
         - distro maintenance

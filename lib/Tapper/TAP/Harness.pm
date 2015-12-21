@@ -68,7 +68,7 @@ our $re_explicit_section_start = qr/^#\s*((?:Tapper|Artemis|Test)-explicit-secti
 
 sub _get_prove {
         my $prove = $^X;
-        $prove =~ s/perl[\d.]*$/prove/;
+        $prove =~ s/perl([\d.]*)$/prove$1/;
         return $prove;
 }
 
