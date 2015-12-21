@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+5.0.1     2015-12-21
         - RT#110450: derive prove's name following found perl's name
           [reported by Slaven Rezić]
 
