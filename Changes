@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+5.0.2     2016-02-08
         - less intrusive section name canonicalization on dots and
           slashes
         - search for more typical prove paths
