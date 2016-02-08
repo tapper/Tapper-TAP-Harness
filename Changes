@@ -1,6 +1,9 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - less intrusive section name canonicalization on dots and
+          slashes
+        - search for more typical prove paths
 
 5.0.1     2015-12-21
         - RT#110450: derive prove's name following found perl's name
