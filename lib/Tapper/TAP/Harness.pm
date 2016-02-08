@@ -67,9 +67,13 @@ our $re_tapper_meta_section   = qr/^#\s*((?:Tapper|Artemis|Test)-Section:)\s*(\S
 our $re_explicit_section_start = qr/^#\s*((?:Tapper|Artemis|Test)-explicit-section-start:)\s*(\S*)/i;
 
 sub _get_prove {
-        my $prove = $^X;
-        $prove =~ s/perl([\d.]*)$/prove$1/;
-        return $prove;
+        my $prove1;
+        my $prove2;
+        ($prove1 = $^X) =~ s/perl([\d.]*)$/prove$1/;
+        ($prove2 = $^X) =~ s/[^\/]*$/prove/;
+        return $prove1 if -e $prove1;
+        return $prove2 if -e $prove2;
+        return; # undef/fail
 }
 
 # report a uniqe section name
@@ -579,7 +583,7 @@ sub generate_html
         # Currently a TAP::Formatter::* is only usable via the
         # TAP::Harness which in turn is easiest to use externally on
         # unix shell level
-        my $prove = _get_prove();
+        my $prove = _get_prove() or die "Can not find 'prove', searched near $^X";
 
         my $cmd = qq{cd $temp/section ; $^X $prove -vm --exec 'cat' --formatter=TAP::Formatter::HTML `find -type f | sed -e 's,^\./,,' | sort`};
         my $html = qx( $cmd );
