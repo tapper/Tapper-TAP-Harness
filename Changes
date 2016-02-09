@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - skip tests that actually suffer from the linux-specific behaviour
 
 5.0.2     2016-02-08
         - less intrusive section name canonicalization on dots and
