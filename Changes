@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - try more platform agnostic 'find'
 
 5.0.3     2016-02-09
         - skip tests that actually suffer from the linux-specific behaviour

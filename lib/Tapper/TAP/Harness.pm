@@ -585,7 +585,7 @@ sub generate_html
         # unix shell level
         my $prove = _get_prove() or die "Can not find 'prove', searched near $^X";
 
-        my $cmd = qq{cd $temp/section ; $^X $prove -vm --exec 'cat' --formatter=TAP::Formatter::HTML `find -type f | sed -e 's,^\./,,' | sort`};
+        my $cmd = qq{cd $temp/section ; $^X $prove -vm --exec 'cat' --formatter=TAP::Formatter::HTML `find . -type f -print | sed -e 's,^\./,,' | sort`};
         my $html = qx( $cmd );
 
         $html = _fix_generated_html( $html );
