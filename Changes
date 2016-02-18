@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - assert OS type Unix (for using `find` behind the scenes)
 
 5.0.4     2016-02-16
         - try more platform agnostic 'find'
