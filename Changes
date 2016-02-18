@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+5.0.5     2016-02-18
         - assert OS type Unix (for using `find` behind the scenes)
 
 5.0.4     2016-02-16
