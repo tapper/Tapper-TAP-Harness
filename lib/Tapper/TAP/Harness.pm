@@ -50,7 +50,7 @@ our @SECTION_HEADER_KEYS_GENERAL = qw(ram cpuinfo bios lspci lsusb uname osname 
                                       simnow-device-interface-version
                                       simnow-bsd-file
                                       simnow-image-file
-                                      ticket-url wiki-url planning-id moreinfo-url
+                                      ticket-url wiki-url planning-id moreinfo-url codereview-url
                                       tags
                                     );
 

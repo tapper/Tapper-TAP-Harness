@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - added 'codereview-url' metainfo
 
 5.0.5     2016-02-18
         - assert OS type Unix (for using `find` behind the scenes)
