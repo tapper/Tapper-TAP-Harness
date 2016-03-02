@@ -2,6 +2,7 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
         - added 'codereview-url' metainfo
+        - drop 'exit' and 'wait' due to keyword conflicts in db
 
 5.0.5     2016-02-18
         - assert OS type Unix (for using `find` behind the scenes)

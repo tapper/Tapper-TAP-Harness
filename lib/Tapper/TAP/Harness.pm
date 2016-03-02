@@ -432,14 +432,12 @@ sub _aggregate_sections
         }
         $aggregator->stop;
 
-        # exit
         foreach (qw(total
                     passed
                     parse_errors
                     skipped
                     todo
                     todo_passed
-                    wait
                     failed
                     todo_passed
                   ))
