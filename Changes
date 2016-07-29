@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - version bump only to fix dependency errors
 
 5.0.6     2016-03-03
         - added 'codereview-url' metainfo
