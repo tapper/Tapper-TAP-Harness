@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+5.0.8     2022-05-20
         - fix bug in single-tap detection on section splitting
         - fix test with more strict embedded YAML rules
 
