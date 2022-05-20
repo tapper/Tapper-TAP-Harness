@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - fix bug in single-tap detection on section splitting
+        - fix test with more strict embedded YAML rules
 
 5.0.7     2016-07-29
         - version bump only to fix dependency errors
