@@ -140,7 +140,7 @@ sub tap_single_plan
 {
         my ($self) = @_;
         return if $self->tap_is_archive;
-        my @plans = ($self->tap) =~ m/(1\.\.\d+)/mg;
+        my @plans = ($self->tap) =~ m/^(1\.\.\d+)/mg;
         return(int(@plans) == 1);
 }
 
