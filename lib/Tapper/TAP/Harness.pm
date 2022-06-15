@@ -334,6 +334,10 @@ sub _collect_meta_from_sections {
                 my $tap       = $tap_file->{tap};
                 my $filename  = $tap_file->{filename};
 
+                # no empty tap
+                $tap = join "\n", TAP::DOM->new(tap=>"", version=>13, noempty_tap=>1)->to_tap
+                  if !$tap;
+
                 my $parser = TAP::Parser->new ({ tap => $tap, version => 13 });
 
                 # ----- store previous section, start new section -----
