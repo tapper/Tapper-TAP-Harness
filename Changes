@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+        - enforce 'noempty_tap' behaviour, now really
 
 5.0.10    2022-06-15
         - enforce 'noempty_tap' behaviour

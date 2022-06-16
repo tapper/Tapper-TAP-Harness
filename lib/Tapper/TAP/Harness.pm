@@ -13,7 +13,7 @@ use YAML::Tiny;
 use Archive::Tar;
 use IO::Scalar;
 use IO::String;
-
+use TAP::DOM;
 
 
 our @SUITE_HEADER_KEYS_GENERAL = qw(suite-version
@@ -335,7 +335,7 @@ sub _collect_meta_from_sections {
                 my $filename  = $tap_file->{filename};
 
                 # no empty tap
-                $tap = join "\n", TAP::DOM->new(tap=>"", version=>13, noempty_tap=>1)->to_tap
+                $tap = join "\n", grep { defined($_) } TAP::DOM->new(tap=>"", version=>13, noempty_tap=>1)->to_tap
                   if !$tap;
 
                 my $parser = TAP::Parser->new ({ tap => $tap, version => 13 });
